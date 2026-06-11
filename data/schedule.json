@@ -1,0 +1,97 @@
+{
+  "team_id": "Nz7BgbzbxfrhWtft",
+  "schedule_id": "wkh2BQJfxrHuziPq",
+  "season": "2026-summer",
+  "games": [
+    {
+      "game_id": "v60zR28TgfEvcM51",
+      "starts_at": "2026-05-07T00:40:00+00:00",
+      "opponent": "ASHL Green Backs",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "5Ye8tQ3SGmND4TBC",
+      "starts_at": "2026-05-14T02:40:00+00:00",
+      "opponent": "The Choochers",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "ob3ZsBKr94p6fAUx",
+      "starts_at": "2026-05-19T02:20:00+00:00",
+      "opponent": "Slap Nuts",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "C81zLOfLfmZzMRil",
+      "starts_at": "2026-05-26T03:30:00+00:00",
+      "opponent": "ASHL Blue Jackets",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "DP6x68hPfRrqyIf0",
+      "starts_at": "2026-06-01T02:40:00+00:00",
+      "opponent": "Victorious Secret",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "8CfgqGbvvaXowgvW",
+      "starts_at": "2026-06-07T23:30:00+00:00",
+      "opponent": "The Peasants",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "dcLlXKV6P2gm5LGe",
+      "starts_at": "2026-06-10T00:40:00+00:00",
+      "opponent": "Dusters",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "7YmauCw5lST5hGMM",
+      "starts_at": "2026-06-16T03:30:00+00:00",
+      "opponent": "ASHL Blue Jackets",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "HKvhsoejCWJEZ4sb",
+      "starts_at": "2026-06-20T01:50:00+00:00",
+      "opponent": "The Goonies",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    },
+    {
+      "game_id": "xgaswZF1cRl7H9tp",
+      "starts_at": "2026-06-26T01:30:00+00:00",
+      "opponent": "ASHL Green Backs",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": []
+    }
+  ]
+}
