@@ -89,7 +89,9 @@ def upload_episode(game_id):
         }
         resp = requests.post(url, headers=headers, files=files, data=data, timeout=120)
 
-    resp.raise_for_status()
+    if not resp.ok:
+        print(f"  Buzzsprout error {resp.status_code}: {resp.text}")
+        resp.raise_for_status()
     episode_data = resp.json()
     episode_url = episode_data.get("url") or episode_data.get("share_url") or "(check Buzzsprout dashboard)"
     print(f"  Upload successful!")
