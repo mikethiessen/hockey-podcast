@@ -2,7 +2,6 @@ name: Podcast Pipeline
 
 on:
   schedule:
-    # Runs every 15 minutes
     - cron: "*/15 * * * *"
   workflow_dispatch:
     inputs:
@@ -33,25 +32,22 @@ jobs:
 
       - name: Handle manual game_id override
         if: ${{ github.event.inputs.game_id != '' }}
+        id: check
         run: |
           echo "found=true" >> $GITHUB_OUTPUT
           echo "game_id=${{ github.event.inputs.game_id }}" >> $GITHUB_OUTPUT
-        id: manual
 
       - name: Sync schedule and check for completed game
         if: ${{ github.event.inputs.game_id == '' }}
-        id: check
+        id: auto_check
         run: |
           python scripts/sync_schedule.py
           python scripts/check_schedule.py
         continue-on-error: true
 
-      - name: Propagate manual override outputs
-        if: ${{ github.event.inputs.game_id != '' }}
-        id: propagate
-        run: |
-          echo "found=true" >> $GITHUB_OUTPUT
-          echo "game_id=${{ github.event.inputs.game_id }}" >> $GITHUB_OUTPUT
+      - name: Set found=false if no game found
+        if: ${{ github.event.inputs.game_id == '' && steps.auto_check.outcome == 'failure' }}
+        run: echo "found=false" >> $GITHUB_OUTPUT
 
   generate-episode:
     name: Generate episode
@@ -71,7 +67,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          # ffmpeg is required by pydub for mp3 encoding
           sudo apt-get install -y ffmpeg
 
       - name: Generate script
