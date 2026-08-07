@@ -26,7 +26,7 @@
 Each episode should follow this segment order (adjustable via `config/segments.md`):
 
 1. **Cold Open** (~30 sec) — Gord and Casey react to the final score before any context. Sets the tone immediately.
-2. **Game Recap** (~90 sec) — Walk through the game period by period. Who scored, who assisted, when momentum shifted.
+2. **Game Recap** (~30 sec) — Walk through the game period by period. Who scored, who assisted, when momentum shifted.
 3. **Player Spotlight** (~60 sec) — Pick 1-2 standout performers from the stats. Can be positive or negative.
 4. **The Gord Corner** (~30 sec) — Gord gives his "tactical analysis." Always involves a suggestion that would violate ASHL rules, followed by him catching himself.
 5. **Season Storylines** (~60 sec) — How does this game fit into the bigger picture? Reference past episode storylines.
