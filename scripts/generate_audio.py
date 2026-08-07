@@ -82,7 +82,8 @@ def tts_line(text, voice_id, voice_settings, api_key):
     headers = {
         "xi-api-key": api_key,
         "Content-Type": "application/json",
-        "Accept": "audio/mpeg"
+        "Accept": "audio/mpeg",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
     payload = {
         "text": text,
@@ -90,7 +91,9 @@ def tts_line(text, voice_id, voice_settings, api_key):
         "voice_settings": voice_settings
     }
     resp = requests.post(url, json=payload, headers=headers, timeout=30)
-    resp.raise_for_status()
+    if not resp.ok:
+        print(f"  ElevenLabs error {resp.status_code}: {resp.text[:300]}")
+        resp.raise_for_status()
     return resp.content
 
 
