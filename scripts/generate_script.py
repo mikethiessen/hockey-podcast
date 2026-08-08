@@ -37,7 +37,7 @@ def load_past_episodes():
     return past
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players):
+def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -72,6 +72,11 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players):
 
 ---
 
+## Script Variety Guidelines
+{variety}
+
+---
+
 {past_context}
 
 ---
@@ -89,6 +94,9 @@ Write a complete podcast script for this game following all guidelines above.
 
 Requirements:
 - Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take), including any active special segments
+- Casey always opens the Cold Open — this does not change episode to episode
+- Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
+- Do not invent any detail not present in the game stats JSON
 - Target 700-800 words total
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
 
@@ -112,13 +120,14 @@ def generate_script(game_id):
     guidelines = load_file(CONFIG_DIR / "podcast-guidelines.md")
     segments = load_file(CONFIG_DIR / "segments.md")
     players = load_file(CONFIG_DIR / "players.md")
+    variety = load_file(CONFIG_DIR / "variety-guidelines.md")
 
     # Load past episode context
     past_episodes = load_past_episodes()
     print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
 
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players)
+    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
