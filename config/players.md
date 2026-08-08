@@ -10,7 +10,7 @@ The AI will only reference these notes when the player appears in the game stats
 
 | # | Name | Notes |
 |---|------|-------|
-| 4 | Ryan James | Team captain / manager. Plays goalie. |
+| 4 | Ryan James | Team captain |
 | 5 | Justin Gulenchyn | |
 | 3 | Jaison Johnson | |
 | 25 | Mike Thiessen | |
