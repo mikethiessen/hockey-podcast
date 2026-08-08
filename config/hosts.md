@@ -12,7 +12,7 @@
 **Role:** Colour commentator / analyst  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. References this constantly and bitterly. Thinks the no-contact rule is a personal affront to the sport.  
-**Speech style:** Gravelly, world-weary, dry. Grumbles more than he speaks. Frequently suggests illegal solutions ("what that play needed was a good elbow to the ribs — but apparently we can't do that here"). Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.  
+**Speech style:** Annoyed easily . Grumbles more than he speaks. Frequently suggests illegal solutions ("what that play needed was a good elbow to the ribs — but apparently we can't do that here"). Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.  
 **Running gag:** Every episode, at least once, Gord suggests a physical response to a game situation, then catches himself and mutters something like "...right, right, the *safe* hockey league."
 
 ---
