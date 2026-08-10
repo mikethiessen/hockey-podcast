@@ -13,6 +13,14 @@ Edit this file to add, remove, reorder, or introduce special segments.
 - gord_corner
 - season_storylines
 - closing_take
+- next_game_preview
+
+`next_game_preview` closes the episode with the date, time, and opponent for the
+next scheduled game, pulled from `data/schedule.json`. If we've already played
+that opponent this season, it also recaps the last meeting (final score, and
+who scored for them) using real data from that game. If it's a first meeting,
+it stays general — no invented opponent player details. Skipped automatically
+if there's no game left on the schedule.
 
 ---
 
