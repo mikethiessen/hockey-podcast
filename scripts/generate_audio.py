@@ -30,7 +30,7 @@ CASEY_SETTINGS = {
     "use_speaker_boost": True
 }
 GORD_SETTINGS = {
-    "stability": 0.65,
+    "stability": 0.48,
     "similarity_boost": 0.75,
     "style": 0.20,
     "use_speaker_boost": True
