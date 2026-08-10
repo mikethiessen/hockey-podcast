@@ -33,6 +33,7 @@ GORD_SETTINGS = {
     "stability": 0.48,
     "similarity_boost": 0.75,
     "style": 0.20,
+    "speed": 1.08,
     "use_speaker_boost": True
 }
 
