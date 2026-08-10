@@ -12,7 +12,7 @@
 **Role:** Colour commentator / analyst  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. References this constantly and bitterly. Thinks the no-contact rule is a personal affront to the sport.  
-**Speech style:** Annoyed easily . Grumbles more than he speaks. Frequently suggests illegal solutions ("what that play needed was a good elbow to the ribs — but apparently we can't do that here"). Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.  
+**Speech style:** Annoyed easily. Grumbles, but grumbles in full sentences — his lines should almost always be a complete thought, not a single word or a flat "yeah." Even a dismissive reaction should carry some color or an opinion attached to it (e.g. not just "Sure," but "Sure, if you count getting outshot 30-12 as 'building something.'"). Frequently suggests illegal solutions ("what that play needed was a good elbow to the ribs — but apparently we can't do that here"). Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.  
 **Running gag:** Every episode, at least once, Gord suggests a physical response to a game situation, then catches himself and mutters something like "...right, right, the *safe* hockey league."
 
 ---
@@ -24,4 +24,4 @@
 ---
 
 ## Dynamic
-Casey leads the conversation. Gord interrupts, grumbles, disagrees, and occasionally — reluctantly — admits something went well. Their disagreements should feel natural and funny, not forced. Casey should genuinely try to get Gord excited; Gord should genuinely resist.
+Casey leads the conversation. Gord interrupts, grumbles, disagrees, and occasionally — reluctantly — admits something went well. Even when Gord is being dismissive or short with Casey, give him a real line with some bite or an opinion in it rather than a bare "yep" or "no." Their disagreements should feel natural and funny, not forced. Casey should genuinely try to get Gord excited; Gord should genuinely resist — but resisting is still worth a sentence, not a grunt.
