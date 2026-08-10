@@ -7,6 +7,7 @@ then writes the script to data/episodes/{game_id}/script.txt.
 import json
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 import anthropic
 from fetch_stats import get_game_stats
@@ -37,7 +38,77 @@ def load_past_episodes():
     return past
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety):
+def load_schedule():
+    schedule_path = DATA_DIR / "schedule.json"
+    return json.loads(load_file(schedule_path))
+
+
+def get_next_game(schedule, current_game_id):
+    """Find the next game on the schedule after the current one, by date order."""
+    games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    for i, g in enumerate(games):
+        if g["game_id"] == current_game_id:
+            if i + 1 < len(games):
+                return games[i + 1]
+            return None
+    return None
+
+
+def get_prior_meetings(schedule, opponent, before_game_id):
+    """Find past, already-generated games against the same opponent, earlier in the season."""
+    games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    before_index = next((i for i, g in enumerate(games) if g["game_id"] == before_game_id), None)
+    if before_index is None:
+        return []
+
+    prior = []
+    for g in games[:before_index]:
+        if g["opponent"] == opponent and g.get("episode_generated"):
+            try:
+                stats = get_game_stats(g["game_id"])
+                prior.append(stats)
+            except Exception as e:
+                print(f"  Warning: couldn't load prior meeting stats for {g['game_id']}: {e}")
+    return prior
+
+
+def format_next_game_context(next_game, prior_meetings):
+    if not next_game:
+        return "## Next Game Preview\nThis is the last scheduled game of the season. Skip the next_game_preview segment entirely — do not include it in the script.\n"
+
+    dt = datetime.fromisoformat(next_game["starts_at"])
+    date_str = dt.strftime("%A, %B %-d")
+    time_str = dt.strftime("%-I:%M %p UTC")
+    location = "at home" if next_game["home_or_away"] == "home" else "on the road"
+
+    context = "## Next Game Preview\n"
+    context += f"Next game: vs {next_game['opponent']}, {date_str} at {time_str}, {location}.\n\n"
+
+    if prior_meetings:
+        context += "We HAVE played this opponent before this season. Real data from the most recent meeting:\n"
+        latest = prior_meetings[-1]
+        context += f"- Result: {latest['result'].upper()} {latest['our_score']}-{latest['opp_score']}\n"
+        if latest.get("their_goals"):
+            scorers = [g["scorer"] for g in latest["their_goals"] if g.get("scorer")]
+            if scorers:
+                context += f"- Their goal scorers that game: {', '.join(scorers)}\n"
+        context += (
+            "Use this real data to recap the last meeting and/or note which of their "
+            "players to watch for, based ONLY on the scorers listed above. "
+            f"({len(prior_meetings)} prior meeting(s) this season.)\n"
+        )
+    else:
+        context += (
+            "We have NOT played this opponent yet this season — there is no prior meeting "
+            "data and no data on their individual players. Do not invent or guess at their "
+            "roster or best players. Keep the preview focused on the date/time/location and "
+            "general anticipation instead.\n"
+        )
+
+    return context
+
+
+def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -77,6 +148,10 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 
 ---
 
+{next_game_context}
+
+---
+
 {past_context}
 
 ---
@@ -93,10 +168,11 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 Write a complete podcast script for this game following all guidelines above.
 
 Requirements:
-- Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take), including any active special segments
+- Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take → next_game_preview), including any active special segments
 - Casey always opens the Cold Open — this does not change episode to episode
 - Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
-- Do not invent any detail not present in the game stats JSON
+- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if real prior-meeting data is provided — never invent or guess at an opponent's roster or standout players. If there's no next game, omit this segment entirely.
+- Do not invent any detail not present in the game stats JSON or the Next Game Preview data
 - Target 700-800 words total
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
 
@@ -126,8 +202,18 @@ def generate_script(game_id):
     past_episodes = load_past_episodes()
     print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
 
+    # Load next game preview context
+    schedule = load_schedule()
+    next_game = get_next_game(schedule, game_id)
+    prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
+    next_game_context = format_next_game_context(next_game, prior_meetings)
+    if next_game:
+        print(f"  Next game: vs {next_game['opponent']} ({len(prior_meetings)} prior meeting(s) this season).")
+    else:
+        print("  No next game scheduled — skipping next_game_preview.")
+
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety)
+    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
