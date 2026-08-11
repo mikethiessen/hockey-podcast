@@ -16,7 +16,8 @@ TEAM_ID = "Nz7BgbzbxfrhWtft"
 SCHEDULE_ID = "wkh2BQJfxrHuziPq"
 API_URL = f"https://canlan2-api.sportninja.net/v1/schedules/{SCHEDULE_ID}/games"
 SCHEDULE_FILE = os.path.join(os.path.dirname(__file__), "../data/schedule.json")
-WINDOW_MINUTES = 20
+WINDOW_MINUTES = 90  # widened from 20 — GitHub's scheduled cron can slip 40-120+ min,
+                      # so a short window risks missing the game entirely between checks
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
