@@ -1,6 +1,6 @@
 {
   "team_id": "Nz7BgbzbxfrhWtft",
-  "schedule_id": "NC9xfp7yJc3Vm4Ul",
+  "schedule_id": "wkh2BQJfxrHuziPq",
   "season": "2026-summer",
   "games": [
     {
@@ -28,6 +28,16 @@
       "starts_at": "2026-05-19T02:20:00+00:00",
       "opponent": "Slap Nuts",
       "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "zeYfw0wgN6ImbQVR",
+      "starts_at": "2026-05-24T02:40:00+00:00",
+      "opponent": "The Kyle Wellwoods",
+      "home_or_away": "away",
       "episode_generated": false,
       "special_guest": null,
       "milestones": [],
@@ -98,6 +108,56 @@
       "starts_at": "2026-06-26T01:30:00+00:00",
       "opponent": "ASHL Green Backs",
       "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "YyFeRpHdleQqOsvN",
+      "starts_at": "2026-07-01T01:50:00+00:00",
+      "opponent": "Victorious Secret",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "Piwp6nJbLU3KusPl",
+      "starts_at": "2026-07-07T03:30:00+00:00",
+      "opponent": "Slap Nuts",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "qBNJdK4I99ayaihw",
+      "starts_at": "2026-07-14T00:40:00+00:00",
+      "opponent": "The Kyle Wellwoods",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "bsEWFfyUFxeNubzl",
+      "starts_at": "2026-07-21T03:30:00+00:00",
+      "opponent": "Dusters",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "4EuzXuEEagHB6923",
+      "starts_at": "2026-07-31T01:50:00+00:00",
+      "opponent": "ASHL Blue Jackets",
+      "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
       "milestones": [],
