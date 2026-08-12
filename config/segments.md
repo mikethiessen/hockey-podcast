@@ -24,6 +24,31 @@ if there's no game left on the schedule.
 
 ---
 
+## Segment Structure by Game Type
+
+The game is auto-classified from the score margin and overtime flag. Use the
+type to flex the standard segments — same segment list, different emphasis:
+
+- **BLOWOUT_WIN** (won by 4+): Keep `game_recap` brief — the score tells most
+  of the story. Expand `player_spotlight` since a blowout usually means someone
+  had a big game worth dwelling on. `gord_corner` should be short; he's got
+  less to grumble about, though he can still find something.
+- **BLOWOUT_LOSS** (lost by 4+): Keep `game_recap` brief and matter-of-fact —
+  don't dwell on every goal against. Expand `gord_corner` instead; this is
+  where his frustration gets the most room. `player_spotlight` can shrink or
+  focus on the one bright spot rather than a full breakdown.
+- **CLOSE_OR_OVERTIME** (decided by 1 goal, or went to OT): Expand `game_recap`
+  — this is the version of the show where the play-by-play tension matters
+  most. Keep every segment at normal length; don't rush this one.
+- **SHUTOUT_WIN** (opponent scored 0): `player_spotlight` should lead with the
+  goalie's performance before any skater.
+- **SHUTOUT_LOSS** (we scored 0): `game_recap` stays brief; `gord_corner` gets
+  extra room, and there's no offensive standout to spotlight — keep
+  `player_spotlight` short, focused on effort rather than results.
+- **NORMAL**: Standard length and structure for all segments, no adjustment.
+
+---
+
 ## Special Segments (activate per-episode by adding to `active_special_segments` below)
 
 ### guest_coach
