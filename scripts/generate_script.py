@@ -8,6 +8,7 @@ import json
 import os
 import sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import anthropic
 from fetch_stats import get_game_stats
@@ -92,9 +93,10 @@ def format_next_game_context(next_game, prior_meetings):
     if not next_game:
         return "## Next Game Preview\nThis is the last scheduled game of the season. Skip the next_game_preview segment entirely — do not include it in the script.\n"
 
-    dt = datetime.fromisoformat(next_game["starts_at"])
+    dt_utc = datetime.fromisoformat(next_game["starts_at"])
+    dt = dt_utc.astimezone(ZoneInfo("America/Winnipeg"))
     date_str = dt.strftime("%A, %B %-d")
-    time_str = dt.strftime("%-I:%M %p UTC")
+    time_str = dt.strftime("%-I:%M %p %Z")
     location = "at home" if next_game["home_or_away"] == "home" else "on the road"
 
     context = "## Next Game Preview\n"
