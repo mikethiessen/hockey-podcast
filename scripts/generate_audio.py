@@ -43,8 +43,8 @@ SEGMENT_PAUSE_MS = 700
 
 # Intro music: trimmed to this length regardless of the source file's length,
 # then faded out over the last 2 seconds of that trimmed clip
-INTRO_DURATION_MS = 6000
-INTRO_FADE_MS = 2000
+INTRO_DURATION_MS = 9000
+INTRO_FADE_MS = 5000
 # How much the first line of dialogue overlaps the tail of the fading intro.
 # Should be <= INTRO_FADE_MS so dialogue starts while the music is audibly
 # fading, not after it's already silent.
