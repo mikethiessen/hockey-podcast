@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 import anthropic
 from fetch_stats import get_game_stats
+from season_stats import compute_season_stats, format_season_stats
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -123,7 +124,23 @@ def format_next_game_context(next_game, prior_meetings):
     return context
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context):
+def classify_game(stats):
+    """Deterministically classify the game so the model gets a consistent structural cue."""
+    diff = abs(stats["our_score"] - stats["opp_score"])
+    result = stats["result"]
+
+    if stats["opp_score"] == 0 and result == "win":
+        return "SHUTOUT_WIN"
+    if stats["our_score"] == 0 and result == "loss":
+        return "SHUTOUT_LOSS"
+    if stats.get("went_to_overtime") or diff <= 1:
+        return "CLOSE_OR_OVERTIME"
+    if diff >= 4:
+        return "BLOWOUT_WIN" if result == "win" else "BLOWOUT_LOSS"
+    return "NORMAL"
+
+
+def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -150,6 +167,18 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 
 ## Segment Structure
 {segments}
+
+Game Type for this episode: **{game_type}**
+Apply the corresponding rules from the "Segment Structure by Game Type" section above.
+
+---
+
+## Recurring Bits
+{bits}
+
+---
+
+{season_stats_context}
 
 ---
 
@@ -184,8 +213,12 @@ Write a complete podcast script for this game following all guidelines above.
 
 Requirements:
 - Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take → next_game_preview), including any active special segments
+- Apply the Segment Structure by Game Type rule for **{game_type}** — flex segment length/emphasis as instructed, don't change the segment order itself
 - Casey always opens the Cold Open — this does not change episode to episode
+- In game_recap, don't recite exact clock times or walk through every period mechanically by default. Only call out a specific time or period when it's genuinely part of the story — a late-game winner, a goal in the final minute, multiple goals in a short span, a third-period collapse. Otherwise keep the recap focused on what happened and who was involved, not when down to the minute.
+- For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
 - Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
+- Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
 - For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if real prior-meeting data is provided — never invent or guess at an opponent's roster or standout players. If there's no next game, omit this segment entirely.
 - Do not invent any detail not present in the game stats JSON or the Next Game Preview data
 - Target 700-800 words total
@@ -212,6 +245,10 @@ def generate_script(game_id):
     segments = load_file(CONFIG_DIR / "segments.md")
     players = load_file(CONFIG_DIR / "players.md")
     variety = load_file(CONFIG_DIR / "variety-guidelines.md")
+    bits = load_file(CONFIG_DIR / "recurring-bits.md")
+
+    game_type = classify_game(stats)
+    print(f"  Game type: {game_type}")
 
     # Load next game preview context
     schedule = load_schedule()
@@ -230,8 +267,14 @@ def generate_script(game_id):
     else:
         print("  No next game scheduled — skipping next_game_preview.")
 
+    # Compute real season stats (streaks, points leaders, assist pairs, penalty trends)
+    season_stats = compute_season_stats(schedule, game_id)
+    season_stats_context = format_season_stats(season_stats)
+    if season_stats:
+        print(f"  Season stats computed from {season_stats['games_counted']} game(s).")
+
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context)
+    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
