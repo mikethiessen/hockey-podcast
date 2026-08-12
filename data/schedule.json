@@ -48,7 +48,7 @@
       "starts_at": "2026-05-26T03:30:00+00:00",
       "opponent": "ASHL Blue Jackets",
       "home_or_away": "home",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
       "milestones": [],
       "season": "2026-summer"
