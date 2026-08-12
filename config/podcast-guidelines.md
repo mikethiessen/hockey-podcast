@@ -7,7 +7,7 @@
 - Which players were on the roster and marked as playing (`is_playing: true`)
 - Which players were absent (`attendance_status: 1`)
 - Who played goal and how many shots they faced
-- Trends observable from the season game log (win/loss record, recurring scorers, penalty patterns)
+- Trends observable from the season game log: win/loss record, and the computed season stats provided each episode (points leaders, active point streaks, frequent scoring connections, penalty trends) — all derived from real per-game data, never estimated
 - Storylines carried forward from previous episode notes
 - Comparisons between this game and past games (only using data from past game logs)
 
@@ -26,10 +26,10 @@
 Each episode should follow this segment order (adjustable via `config/segments.md`):
 
 1. **Cold Open** (~30 sec) — Gord and Casey react to the final score before any context. Sets the tone immediately.
-2. **Game Recap** (~30 sec) — Walk through the game period by period. Who scored, who assisted, when momentum shifted.
+2. **Game Recap** (~30 sec) — Who scored, who assisted, how the game unfolded. Keep this about *what happened and who was involved*, not a period-by-period or clock-time-by-clock-time recitation — only call out a specific time if it's genuinely part of the story (a last-minute goal, a rapid flurry, a third-period collapse).
 3. **Player Spotlight** (~60 sec) — Pick 1-2 standout performers from the stats. Can be positive or negative.
 4. **The Gord Corner** (~30 sec) — Gord gives his "tactical analysis." Always involves a suggestion that would violate ASHL rules, followed by him catching himself.
-5. **Season Storylines** (~60 sec) — How does this game fit into the bigger picture? Reference past episode storylines.
+5. **Season Storylines** (~60-90 sec) — The heart of the show's long-term identity. Use real, computed season stats (points leaders, active streaks, frequent scoring connections, penalty trends) to build a storyline, not just a one-off recap of tonight. Be creative in *how* a real stat gets presented — but never state a number that isn't in the provided season stats data.
 6. **Closing Take** (~30 sec) — Casey's optimistic outlook for next game. Gord's grumbling counterpoint.
 
 Total target length: ~5 minutes of spoken audio (approximately 700-800 words of script).
