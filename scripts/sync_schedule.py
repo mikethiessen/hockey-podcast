@@ -51,6 +51,8 @@ def main():
     schedule = load_schedule()
     existing_ids = {g["game_id"] for g in schedule["games"]}
 
+    current_season = schedule.get("season")
+
     new_games = []
     for g in vp_games:
         if g["id"] in existing_ids:
@@ -64,7 +66,8 @@ def main():
             "home_or_away": "home" if is_home else "away",
             "episode_generated": False,
             "special_guest": None,
-            "milestones": []
+            "milestones": [],
+            "season": current_season
         })
 
     if new_games:
