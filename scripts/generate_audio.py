@@ -41,6 +41,11 @@ GORD_SETTINGS = {
 LINE_PAUSE_MS = 400
 SEGMENT_PAUSE_MS = 700
 
+# Intro music: trimmed to this length regardless of the source file's length,
+# then faded out over the last 2 seconds of that trimmed clip
+INTRO_DURATION_MS = 6000
+INTRO_FADE_MS = 2000
+
 
 def parse_script(script_path):
     """Parse script into list of (speaker, text) tuples."""
@@ -147,8 +152,11 @@ def generate_audio(game_id):
     if intro_path.exists():
         print("  Prepending intro music...")
         intro = AudioSegment.from_mp3(str(intro_path))
-        # Fade out intro over last 2 seconds
-        intro = intro.fade_out(2000)
+        # Trim to the configured length regardless of the source file's length,
+        # then fade out over the last couple seconds of the trimmed clip
+        if len(intro) > INTRO_DURATION_MS:
+            intro = intro[:INTRO_DURATION_MS]
+        intro = intro.fade_out(min(INTRO_FADE_MS, len(intro)))
         combined = intro + AudioSegment.silent(duration=500) + combined
     else:
         print("  No intro.mp3 found — skipping intro music.")
