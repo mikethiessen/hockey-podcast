@@ -45,6 +45,10 @@ SEGMENT_PAUSE_MS = 700
 # then faded out over the last 2 seconds of that trimmed clip
 INTRO_DURATION_MS = 6000
 INTRO_FADE_MS = 2000
+# How much the first line of dialogue overlaps the tail of the fading intro.
+# Should be <= INTRO_FADE_MS so dialogue starts while the music is audibly
+# fading, not after it's already silent.
+INTRO_OVERLAP_MS = 2000
 
 
 def parse_script(script_path):
@@ -147,17 +151,23 @@ def generate_audio(game_id):
     for seg in segments[1:]:
         combined += seg
 
-    # Prepend intro music if it exists
+    # Prepend intro music, with the first line of dialogue overlapping the
+    # fading tail of the music rather than waiting for it to finish
     intro_path = AUDIO_DIR / "intro.mp3"
     if intro_path.exists():
-        print("  Prepending intro music...")
+        print("  Blending intro music with dialogue...")
         intro = AudioSegment.from_mp3(str(intro_path))
-        # Trim to the configured length regardless of the source file's length,
-        # then fade out over the last couple seconds of the trimmed clip
         if len(intro) > INTRO_DURATION_MS:
             intro = intro[:INTRO_DURATION_MS]
         intro = intro.fade_out(min(INTRO_FADE_MS, len(intro)))
-        combined = intro + AudioSegment.silent(duration=500) + combined
+
+        overlap = min(INTRO_OVERLAP_MS, len(intro), len(combined))
+        total_len = len(intro) + len(combined) - overlap
+
+        blended = AudioSegment.silent(duration=total_len)
+        blended = blended.overlay(intro, position=0)
+        blended = blended.overlay(combined, position=len(intro) - overlap)
+        combined = blended
     else:
         print("  No intro.mp3 found — skipping intro music.")
 
