@@ -122,7 +122,8 @@ def upload_episode(game_id):
             "home_or_away": home_or_away,
             "episode_generated": True,
             "special_guest": None,
-            "milestones": []
+            "milestones": [],
+            "season": schedule.get("season")
         })
         schedule["games"].sort(key=lambda g: g["starts_at"])
         (DATA_DIR / "schedule.json").write_text(json.dumps(schedule, indent=2))
