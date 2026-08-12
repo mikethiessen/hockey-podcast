@@ -10,6 +10,7 @@ import json
 import requests
 from pathlib import Path
 from datetime import datetime
+from fetch_stats import get_game_stats
 
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "data"
@@ -59,14 +60,22 @@ def upload_episode(game_id):
         print(f"ERROR: Audio file not found at {mp3_path}")
         sys.exit(1)
 
-    # Find game details from schedule
+    # Find game details from schedule — fall back to a live API fetch if this
+    # game hasn't been synced into schedule.json yet (e.g. manual game_id runs
+    # skip the sync step, or a newly-added game hasn't been picked up yet)
     schedule = load_schedule()
     game = next((g for g in schedule["games"] if g["game_id"] == game_id), None)
-    if not game:
-        print(f"ERROR: game_id {game_id} not found in schedule.json")
-        sys.exit(1)
+    if game:
+        opponent = game["opponent"]
+        starts_at = game["starts_at"]
+    else:
+        print(f"  Note: game_id {game_id} not in schedule.json — fetching details live instead.")
+        stats = get_game_stats(game_id)
+        opponent = stats["opponent"]
+        starts_at = stats["date"]
+        home_or_away = stats["home_or_away"]
 
-    title = format_episode_title(game["opponent"], game["starts_at"])
+    title = format_episode_title(opponent, starts_at)
     description = get_episode_description(script_path)
 
     print(f"  Title: {title}")
@@ -102,6 +111,22 @@ def upload_episode(game_id):
     result_path = episode_dir / "upload_result.json"
     result_path.write_text(json.dumps(episode_data, indent=2))
     print(f"  Result saved to {result_path}")
+
+    # If this game wasn't in schedule.json (e.g. manual game_id run skipped sync),
+    # add it now so future episodes get correct past-episode/season context.
+    if not game:
+        schedule["games"].append({
+            "game_id": game_id,
+            "starts_at": starts_at,
+            "opponent": opponent,
+            "home_or_away": home_or_away,
+            "episode_generated": True,
+            "special_guest": None,
+            "milestones": []
+        })
+        schedule["games"].sort(key=lambda g: g["starts_at"])
+        (DATA_DIR / "schedule.json").write_text(json.dumps(schedule, indent=2))
+        print(f"  Added {game_id} to schedule.json (was missing) and marked episode_generated.")
 
     return episode_url
 
