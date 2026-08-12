@@ -23,13 +23,16 @@ def load_file(path):
         return f.read()
 
 
-def load_past_episodes():
-    """Load episode summaries from previously generated games."""
+def load_past_episodes(season=None):
+    """Load episode summaries from previously generated games in the same season only,
+    so storylines don't carry over across a season reset."""
     schedule_path = DATA_DIR / "schedule.json"
     schedule = json.loads(load_file(schedule_path))
     past = []
     for game in schedule["games"]:
         if not game.get("episode_generated"):
+            continue
+        if season is not None and game.get("season") != season:
             continue
         summary_path = DATA_DIR / "episodes" / game["game_id"] / "summary.json"
         if summary_path.exists():
@@ -44,8 +47,14 @@ def load_schedule():
 
 
 def get_next_game(schedule, current_game_id):
-    """Find the next game on the schedule after the current one, by date order."""
-    games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    """Find the next game on the schedule after the current one, by date order.
+    Scoped to games in the same season as the current game, so a season's final
+    game doesn't preview next season's opener as if it's a continuation."""
+    all_games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    current = next((g for g in all_games if g["game_id"] == current_game_id), None)
+    current_season = current.get("season") if current else None
+
+    games = [g for g in all_games if g.get("season") == current_season]
     for i, g in enumerate(games):
         if g["game_id"] == current_game_id:
             if i + 1 < len(games):
@@ -55,14 +64,20 @@ def get_next_game(schedule, current_game_id):
 
 
 def get_prior_meetings(schedule, opponent, before_game_id):
-    """Find past, already-generated games against the same opponent, earlier in the season."""
-    games = sorted(schedule["games"], key=lambda g: g["starts_at"])
-    before_index = next((i for i, g in enumerate(games) if g["game_id"] == before_game_id), None)
+    """Find past, already-generated games against the same opponent, earlier in the
+    SAME season — scoped so a rematch next season isn't reported as "already played
+    this season" based on a previous season's meeting."""
+    all_games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    before_index = next((i for i, g in enumerate(all_games) if g["game_id"] == before_game_id), None)
     if before_index is None:
         return []
 
+    current_season = all_games[before_index].get("season")
+
     prior = []
-    for g in games[:before_index]:
+    for g in all_games[:before_index]:
+        if g.get("season") != current_season:
+            continue
         if g["opponent"] == opponent and g.get("episode_generated"):
             try:
                 stats = get_game_stats(g["game_id"])
@@ -198,12 +213,15 @@ def generate_script(game_id):
     players = load_file(CONFIG_DIR / "players.md")
     variety = load_file(CONFIG_DIR / "variety-guidelines.md")
 
-    # Load past episode context
-    past_episodes = load_past_episodes()
-    print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
-
     # Load next game preview context
     schedule = load_schedule()
+    current_entry = next((g for g in schedule["games"] if g["game_id"] == game_id), None)
+    current_season = current_entry.get("season") if current_entry else None
+
+    # Load past episode context (same season only)
+    past_episodes = load_past_episodes(season=current_season)
+    print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
+
     next_game = get_next_game(schedule, game_id)
     prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
     next_game_context = format_next_game_context(next_game, prior_meetings)
