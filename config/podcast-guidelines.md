@@ -25,7 +25,7 @@
 
 Each episode should follow this segment order (adjustable via `config/segments.md`):
 
-1. **Cold Open** (~30 sec) — Gord and Casey react to the final score before any context. Sets the tone immediately.
+1. **Cold Open** (~30 sec) — Casey's very first line welcomes listeners to the show by name (e.g. "Welcome to Ice & Easy!" — vary the exact phrasing episode to episode) before reacting to the final score. This opening line plays under the tail of the intro music, so it needs to work as a clean opener on its own. Gord and Casey then react to the final score before any other context. Sets the tone immediately.
 2. **Game Recap** (~30 sec) — Who scored, who assisted, how the game unfolded. Keep this about *what happened and who was involved*, not a period-by-period or clock-time-by-clock-time recitation — only call out a specific time if it's genuinely part of the story (a last-minute goal, a rapid flurry, a third-period collapse).
 3. **Player Spotlight** (~60 sec) — Pick 1-2 standout performers from the stats. Can be positive or negative.
 4. **The Gord Corner** (~30 sec) — Gord gives his "tactical analysis." Always involves a suggestion that would violate ASHL rules, followed by him catching himself.
