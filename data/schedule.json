@@ -92,6 +92,15 @@
       "episode_generated": false,
       "special_guest": null,
       "milestones": []
+    },
+    {
+      "game_id": "3PRQIvXhWCp6lX2i",
+      "starts_at": "2026-08-11",
+      "opponent": "The Goonies",
+      "home_or_away": "home",
+      "episode_generated": true,
+      "special_guest": null,
+      "milestones": []
     }
   ]
 }
