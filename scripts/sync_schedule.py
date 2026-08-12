@@ -9,7 +9,10 @@ import requests
 from datetime import datetime, timezone
 
 TEAM_ID = "Nz7BgbzbxfrhWtft"
-SCHEDULE_ID = "wkh2BQJfxrHuziPq"
+SCHEDULE_ID = "NC9xfp7yJc3Vm4Ul"  # NOTE: this ID changes when Canlan starts a new
+# schedule/season instance (confirmed Aug 2026 — regular season used wkh2BQJfxrHuziPq,
+# this new one covers playoffs). No auto-discovery endpoint found yet; update manually
+# by grabbing the sn_schedule value from https://canlanstats.sportninja.com/team/{TEAM_ID}
 API_URL = f"https://canlan2-api.sportninja.net/v1/schedules/{SCHEDULE_ID}/games"
 SCHEDULE_FILE = os.path.join(os.path.dirname(__file__), "../data/schedule.json")
 
@@ -19,7 +22,13 @@ HEADERS = {
 
 
 def fetch_division_games():
-    resp = requests.get(API_URL, headers=HEADERS, timeout=15)
+    params = {
+        "page": 1,
+        "order": "asc",
+        "exclude_cancelled_games": 1,
+        "team_id": TEAM_ID,
+    }
+    resp = requests.get(API_URL, headers=HEADERS, params=params, timeout=15)
     resp.raise_for_status()
     return resp.json()["data"]
 
