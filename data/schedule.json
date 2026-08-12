@@ -10,7 +10,8 @@
       "home_or_away": "away",
       "episode_generated": true,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "5Ye8tQ3SGmND4TBC",
@@ -19,7 +20,8 @@
       "home_or_away": "home",
       "episode_generated": true,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "ob3ZsBKr94p6fAUx",
@@ -28,7 +30,8 @@
       "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "C81zLOfLfmZzMRil",
@@ -37,7 +40,8 @@
       "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "DP6x68hPfRrqyIf0",
@@ -46,7 +50,8 @@
       "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "8CfgqGbvvaXowgvW",
@@ -55,7 +60,8 @@
       "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "dcLlXKV6P2gm5LGe",
@@ -64,7 +70,8 @@
       "home_or_away": "away",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "7YmauCw5lST5hGMM",
@@ -73,7 +80,8 @@
       "home_or_away": "home",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "HKvhsoejCWJEZ4sb",
@@ -82,7 +90,8 @@
       "home_or_away": "away",
       "episode_generated": true,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "xgaswZF1cRl7H9tp",
@@ -91,16 +100,28 @@
       "home_or_away": "away",
       "episode_generated": false,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
     },
     {
       "game_id": "3PRQIvXhWCp6lX2i",
-      "starts_at": "2026-08-11",
+      "starts_at": "2026-08-11T00:00:00+00:00",
       "opponent": "The Goonies",
       "home_or_away": "home",
       "episode_generated": true,
       "special_guest": null,
-      "milestones": []
+      "milestones": [],
+      "season": "2026-summer"
+    },
+    {
+      "game_id": "fL5XM4SMMBIj0Uxq",
+      "starts_at": "2026-08-19T03:00:00+00:00",
+      "opponent": "The Goonies",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026-summer"
     }
   ]
 }
