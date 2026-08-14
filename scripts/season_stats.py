@@ -110,6 +110,72 @@ def compute_season_stats(schedule, up_to_game_id):
     }
 
 
+def compute_recent_form(schedule, up_to_game_id, window=5):
+    """Real win/loss form over the last `window` played games this season,
+    up to and including the current game. Used only to nudge the host dynamic
+    dial (Gord's edge / Casey's shine) — never to invent storylines."""
+    all_games = sorted(schedule["games"], key=lambda g: g["starts_at"])
+    current = next((g for g in all_games if g["game_id"] == up_to_game_id), None)
+    if current is None:
+        return None
+    season = current.get("season")
+
+    season_games = [
+        g for g in all_games
+        if g.get("season") == season and g["starts_at"] <= current["starts_at"]
+        and g.get("episode_generated")
+    ]
+
+    results = []
+    for g in season_games:
+        try:
+            s = get_game_stats(g["game_id"])
+            results.append(s["result"])
+        except Exception:
+            continue
+
+    recent = results[-window:]
+    if len(recent) < window:
+        return {"window": recent, "signal": "neutral"}
+
+    wins = recent.count("win")
+    losses = recent.count("loss")
+    if wins >= 4:
+        signal = "hot"
+    elif losses >= 4:
+        signal = "cold"
+    else:
+        signal = "neutral"
+
+    return {"window": recent, "signal": signal}
+
+
+def format_recent_form(recent_form):
+    """Returns an empty string when form is neutral, so the prompt simply
+    omits this section rather than forcing a dial-shift note every episode."""
+    if not recent_form or recent_form["signal"] == "neutral":
+        return ""
+
+    record = ", ".join(r.upper() for r in recent_form["window"])
+
+    if recent_form["signal"] == "hot":
+        note = (
+            f"Recent form is hot (real results, last {len(recent_form['window'])}: {record}). "
+            "Gord's edge can ease slightly and Casey's optimism can feel a touch more "
+            "validated than usual — but only if tonight's game gives a natural opening for it. "
+            "Do not force a dial-shift line in if it doesn't fit."
+        )
+    else:
+        note = (
+            f"Recent form is cold (real results, last {len(recent_form['window'])}: {record}). "
+            "Gord's edge can sharpen slightly and Casey's optimism can strain a bit more than "
+            "usual — but only if tonight's game gives a natural opening for it. Do not force a "
+            "dial-shift line in if it doesn't fit."
+        )
+
+    return "## Recent Form (Host Dynamic)\n" + note + "\n"
+
+
 def format_season_stats(season_stats):
     if not season_stats or season_stats["games_counted"] < 2:
         return (
