@@ -12,7 +12,15 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 import anthropic
 from fetch_stats import get_game_stats
-from season_stats import compute_season_stats, format_season_stats
+from season_stats import compute_season_stats, format_season_stats, compute_recent_form, format_recent_form
+from relationship_log import (
+    load_relationship_log,
+    save_relationship_log,
+    resolve_predictions,
+    match_notable_moments,
+    format_relationship_context,
+    extract_relationship_tags,
+)
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -142,7 +150,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context):
+def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -152,6 +160,9 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
             past_context += f"Storylines: {ep.get('storylines')}\n\n"
     else:
         past_context = "## Past Episodes\nThis is the first episode of the season. No prior context.\n"
+
+    recent_form_block = f"\n---\n\n{recent_form_context}\n" if recent_form_context else ""
+    relationship_block = f"\n---\n\n{relationship_context}\n" if relationship_context else ""
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
@@ -181,7 +192,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 ---
 
 {season_stats_context}
-
+{recent_form_block}{relationship_block}
 ---
 
 ## Player Notes
@@ -224,6 +235,7 @@ Requirements:
 - Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
 - For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if real prior-meeting data is provided — never invent or guess at an opponent's roster or standout players. If there's no next game, omit this segment entirely.
 - Do not invent any detail not present in the game stats JSON or the Next Game Preview data
+- If a Relationship Context section is present above, only use it if it genuinely fits — never force a callback or prediction check-in that doesn't naturally arise from tonight's episode
 - Target 700-800 words total
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
 
@@ -231,7 +243,24 @@ CASEY: [dialogue]
 
 GORD: [dialogue]
 
-Do not include anything before the first CASEY: line or after the last line of dialogue.
+Do not include anything before the first CASEY: line or after the last line of dialogue, EXCEPT for the optional tags described below.
+
+## Optional trailing tags (never spoken, not part of the script)
+
+After the last line of dialogue, you may — only if genuinely earned by this episode, never required — add one or both of the following on their own lines. These are never read aloud; they're stripped before the audio is generated and only used to track the hosts' relationship across the season.
+
+**PREDICTION** — only if a host makes a real, specific, checkable prediction in this episode (not vague hype):
+`PREDICTION: <casey|gord> | <type> | <details>`
+Valid types:
+- `team_result_streak | wins|losses | <window_games e.g. 3>` — e.g. a host predicts the team wins its next 3
+- `player_goal_count | <exact player name from this game's data> | <threshold>` — a host predicts a specific player reaches a goal total this season
+- `player_points_streak | <exact player name> | <threshold>` — a host predicts a player's point streak reaches N games
+- `penalty_trend | <exact player name> | <threshold>` — a host predicts a player's season penalty count reaches N
+
+**MOMENT** — only if something distinct enough happened this episode that a future episode might genuinely want to reference it:
+`MOMENT: <casey|gord> | <one-sentence real summary of what they said, no invented detail> | <{game_type}>`
+
+Omit both entirely if nothing this episode genuinely earns them — this should be rare, not automatic.
 """
 
 
@@ -276,8 +305,25 @@ def generate_script(game_id):
     if season_stats:
         print(f"  Season stats computed from {season_stats['games_counted']} game(s).")
 
+    # Recent form (real results only) — drives the slow host-dynamic dial
+    recent_form = compute_recent_form(schedule, game_id)
+    recent_form_context = format_recent_form(recent_form)
+    if recent_form:
+        print(f"  Recent form signal: {recent_form['signal']}")
+
+    # Relationship log: resolve any real predictions that can now be checked,
+    # and find any real prior moments relevant to tonight's opponent/result type
+    relationship_log = load_relationship_log(current_season)
+    newly_resolved = resolve_predictions(relationship_log, schedule, get_game_stats, compute_season_stats, game_id)
+    moment_matches = match_notable_moments(relationship_log, stats["opponent"], game_type, game_id)
+    relationship_context = format_relationship_context(newly_resolved, moment_matches)
+    if newly_resolved:
+        print(f"  {len(newly_resolved)} prediction(s) newly resolved this episode.")
+    if moment_matches:
+        print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
+
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context)
+    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
@@ -286,7 +332,17 @@ def generate_script(game_id):
         max_tokens=2000,
         messages=[{"role": "user", "content": prompt}]
     )
-    script = message.content[0].text.strip()
+    raw_script = message.content[0].text.strip()
+
+    # Strip any optional PREDICTION:/MOMENT: tags (never spoken) and log them
+    script, new_predictions, new_moments = extract_relationship_tags(raw_script, game_id)
+    if new_predictions:
+        relationship_log["predictions"].extend(new_predictions)
+        print(f"  Logged {len(new_predictions)} new checkable prediction(s).")
+    if new_moments:
+        relationship_log["notable_moments"].extend(new_moments)
+        print(f"  Logged {len(new_moments)} new notable moment(s).")
+    save_relationship_log(relationship_log)
 
     # Save script
     episode_dir = DATA_DIR / "episodes" / game_id
