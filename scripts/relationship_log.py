@@ -58,13 +58,20 @@ def resolve_predictions(log, schedule, get_game_stats_fn, season_stats_fn, up_to
 
         ctype = pred["checkable_type"]
         target = pred["checkable_target"]
+        pred_season = all_games[made_index].get("season")
 
         if ctype == "team_result_streak":
             window = target.get("window_games", 3)
             metric = target.get("metric", "wins")
-            following = all_games[made_index + 1: made_index + 1 + window]
+            # Only consider later games in the SAME season as the prediction —
+            # never let this resolve against a future season's results.
+            same_season_after = [
+                g for g in all_games[made_index + 1:]
+                if g.get("season") == pred_season
+            ]
+            following = same_season_after[:window]
             if len(following) < window or not all(g.get("episode_generated") for g in following):
-                continue  # not enough real games played yet to check this
+                continue  # not enough real games played yet this season to check this
 
             results = []
             for g in following:
