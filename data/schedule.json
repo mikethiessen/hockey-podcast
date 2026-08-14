@@ -58,7 +58,7 @@
       "starts_at": "2026-06-01T02:40:00+00:00",
       "opponent": "Victorious Secret",
       "home_or_away": "home",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
       "milestones": [],
       "season": "2026-summer"

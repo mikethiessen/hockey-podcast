@@ -1,0 +1,26 @@
+{
+  "season": "2026-summer",
+  "predictions": [
+    {
+      "game_id": "DP6x68hPfRrqyIf0",
+      "made_by": "casey",
+      "checkable_type": "player_points_streak",
+      "checkable_target": {
+        "player": "Michael van Reede",
+        "threshold": 6
+      },
+      "resolved": false,
+      "outcome": null
+    }
+  ],
+  "notable_moments": [
+    {
+      "game_id": "DP6x68hPfRrqyIf0",
+      "who": "gord",
+      "summary": "Gord noted that zero penalties in a close, back-and-forth game felt either impressive or suspicious \u2014 he wasn't sure which.",
+      "match_keys": {
+        "score_margin_bucket": "CLOSE_OR_OVERTIME"
+      }
+    }
+  ]
+}
