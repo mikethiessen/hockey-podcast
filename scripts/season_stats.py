@@ -113,7 +113,12 @@ def compute_season_stats(schedule, up_to_game_id):
 def compute_recent_form(schedule, up_to_game_id, window=5):
     """Real win/loss form over the last `window` played games this season,
     up to and including the current game. Used only to nudge the host dynamic
-    dial (Gord's edge / Casey's shine) — never to invent storylines."""
+    dial (Gord's edge / Casey's shine) — never to invent storylines.
+
+    Mirrors compute_season_stats' approach: tries real game data for every
+    season game up to and including tonight (not gated on the episode_generated
+    flag, since that only tracks whether a *podcast episode* was produced, not
+    whether the game itself has real results available)."""
     all_games = sorted(schedule["games"], key=lambda g: g["starts_at"])
     current = next((g for g in all_games if g["game_id"] == up_to_game_id), None)
     if current is None:
@@ -123,7 +128,6 @@ def compute_recent_form(schedule, up_to_game_id, window=5):
     season_games = [
         g for g in all_games
         if g.get("season") == season and g["starts_at"] <= current["starts_at"]
-        and g.get("episode_generated")
     ]
 
     results = []
