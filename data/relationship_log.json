@@ -21,6 +21,14 @@
       "match_keys": {
         "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
+    },
+    {
+      "game_id": "8CfgqGbvvaXowgvW",
+      "who": "casey",
+      "summary": "Casey acknowledged without spin that the 5-1 home loss was genuinely rough before pivoting to McCallister's 4-game point streak as the one real positive from the night.",
+      "match_keys": {
+        "score_margin_bucket": "BLOWOUT_LOSS"
+      }
     }
   ]
 }
