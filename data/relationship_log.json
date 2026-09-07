@@ -29,6 +29,14 @@
       "match_keys": {
         "score_margin_bucket": "BLOWOUT_LOSS"
       }
+    },
+    {
+      "game_id": "fL5XM4SMMBIj0Uxq",
+      "who": "casey",
+      "summary": "Casey dropped his usual silver-lining framing and flatly acknowledged the Goonies have beaten the Village People all three times they've met this season, calling it \"a statement they're making about us.\"",
+      "match_keys": {
+        "score_margin_bucket": "BLOWOUT_LOSS"
+      }
     }
   ]
 }
