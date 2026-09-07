@@ -15,8 +15,8 @@ jobs:
     name: Check for completed game
     runs-on: ubuntu-latest
     outputs:
-      found: ${{ steps.check.outputs.found }}
-      game_id: ${{ steps.check.outputs.game_id }}
+      found: ${{ steps.result.outputs.found }}
+      game_id: ${{ steps.result.outputs.game_id }}
 
     steps:
       - name: Checkout repo
@@ -48,6 +48,18 @@ jobs:
       - name: Set found=false if no game found
         if: ${{ github.event.inputs.game_id == '' && steps.auto_check.outcome == 'failure' }}
         run: echo "found=false" >> $GITHUB_OUTPUT
+
+      - name: Determine result
+        id: result
+        # steps.check only runs on manual override; steps.auto_check only runs on
+        # auto-detect. This step always runs and picks up whichever one actually
+        # set outputs, so job-level outputs work correctly on BOTH paths.
+        # (Previously the job outputs pointed only at steps.check, which meant
+        # auto-detected runs could never report found=true, no matter what
+        # check_schedule.py found.)
+        run: |
+          echo "found=${{ steps.check.outputs.found || steps.auto_check.outputs.found || 'false' }}" >> $GITHUB_OUTPUT
+          echo "game_id=${{ steps.check.outputs.game_id || steps.auto_check.outputs.game_id || '' }}" >> $GITHUB_OUTPUT
 
   generate-episode:
     name: Generate episode
