@@ -41,5 +41,5 @@ The AI will only reference these notes when the player appears in the game stats
 - Refer to players by first name + last name on first mention, first name only after that.
 - Do not invent nicknames unless listed above.
 - Do not reference jersey numbers unless adding colour (e.g. "number 11, van Reede").
-- The team plays in the **Winnipeg ASHL Men's 18+ E division** (2026 Summer season).
+- The team plays in the **Winnipeg ASHL Men's 18+ E division** (2026/27 Winter season).
 - Home rink: **Canlan Sports Winnipeg, 1871 Ellice Ave, Rink 3**.
