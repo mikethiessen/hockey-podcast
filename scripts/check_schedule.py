@@ -13,9 +13,8 @@ import requests
 from datetime import datetime, timezone, timedelta
 
 TEAM_ID = "Nz7BgbzbxfrhWtft"
-SCHEDULE_ID = "NC9xfp7yJc3Vm4Ul"  # NOTE: this ID changes when Canlan starts a new
-# schedule/season instance (confirmed Aug 2026 — regular season used wkh2BQJfxrHuziPq,
-# this new one covers playoffs). No auto-discovery endpoint found yet; update manually
+SCHEDULE_ID = "d6ieKFuhvhmS8Q7y"  # 2026/27 Winter season. NOTE: this ID changes when Canlan starts a new
+# schedule/season instance. No auto-discovery endpoint found yet; update manually
 # by grabbing the sn_schedule value from https://canlanstats.sportninja.com/team/{TEAM_ID}
 API_URL = f"https://canlan2-api.sportninja.net/v1/schedules/{SCHEDULE_ID}/games"
 SCHEDULE_FILE = os.path.join(os.path.dirname(__file__), "../data/schedule.json")
