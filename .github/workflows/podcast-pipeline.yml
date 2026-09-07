@@ -2,7 +2,8 @@ name: Podcast Pipeline
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "0 * * * *"  # hourly backup net — real-time triggering comes from an
+                          # external poller (cron-job.org) hitting workflow_dispatch every 1 min
   workflow_dispatch:
     inputs:
       game_id:
