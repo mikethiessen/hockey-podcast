@@ -9,6 +9,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "oT7lQnmF6H7mrfrJ",
+      "who": "casey",
+      "summary": "Casey noted that the Village People outshot Yay? Hooray! five to one in the third period despite losing 3-1, framing the third-period effort as the identity the team should build from.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ]
 }
