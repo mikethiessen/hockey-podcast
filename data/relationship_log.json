@@ -1,41 +1,13 @@
 {
-  "season": "2026-summer",
-  "predictions": [
-    {
-      "game_id": "DP6x68hPfRrqyIf0",
-      "made_by": "casey",
-      "checkable_type": "player_points_streak",
-      "checkable_target": {
-        "player": "Michael van Reede",
-        "threshold": 6
-      },
-      "resolved": false,
-      "outcome": null
-    }
-  ],
+  "season": null,
+  "predictions": [],
   "notable_moments": [
     {
-      "game_id": "DP6x68hPfRrqyIf0",
+      "game_id": "oT7lQnmF6H7mrfrJ",
       "who": "gord",
-      "summary": "Gord noted that zero penalties in a close, back-and-forth game felt either impressive or suspicious \u2014 he wasn't sure which.",
+      "summary": "Gord noted that the team has repeatedly identified fixing the second period as the key issue but has not resolved it across multiple games this season.",
       "match_keys": {
-        "score_margin_bucket": "CLOSE_OR_OVERTIME"
-      }
-    },
-    {
-      "game_id": "8CfgqGbvvaXowgvW",
-      "who": "casey",
-      "summary": "Casey acknowledged without spin that the 5-1 home loss was genuinely rough before pivoting to McCallister's 4-game point streak as the one real positive from the night.",
-      "match_keys": {
-        "score_margin_bucket": "BLOWOUT_LOSS"
-      }
-    },
-    {
-      "game_id": "fL5XM4SMMBIj0Uxq",
-      "who": "casey",
-      "summary": "Casey dropped his usual silver-lining framing and flatly acknowledged the Goonies have beaten the Village People all three times they've met this season, calling it \"a statement they're making about us.\"",
-      "match_keys": {
-        "score_margin_bucket": "BLOWOUT_LOSS"
+        "score_margin_bucket": "NORMAL"
       }
     }
   ]
