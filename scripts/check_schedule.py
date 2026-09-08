@@ -33,15 +33,33 @@ def load_schedule():
 
 
 def fetch_division_games():
-    params = {
-        "page": 1,
-        "order": "asc",
-        "exclude_cancelled_games": 1,
-        "team_id": TEAM_ID,
-    }
-    resp = requests.get(API_URL, headers=HEADERS, params=params, timeout=15)
-    resp.raise_for_status()
-    return resp.json()["data"]
+    """Fetch every page — see sync_schedule.py for why this matters. Also important
+    here specifically: with order=asc, a newly-completed game sorts near the END of
+    the list once enough games have been played, so it could land on a later page."""
+    all_games = []
+    page = 1
+    while True:
+        params = {
+            "page": page,
+            "order": "asc",
+            "exclude_cancelled_games": 1,
+            "team_id": TEAM_ID,
+        }
+        resp = requests.get(API_URL, headers=HEADERS, params=params, timeout=15)
+        resp.raise_for_status()
+        body = resp.json()
+        page_games = body.get("data", [])
+        all_games.extend(page_games)
+
+        meta = body.get("meta", {})
+        last_page = meta.get("last_page")
+        if last_page is None:
+            break
+        if page >= last_page:
+            break
+        page += 1
+
+    return all_games
 
 
 def main():
