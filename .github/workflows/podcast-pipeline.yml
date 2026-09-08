@@ -11,6 +11,15 @@ on:
         required: false
         default: ""
 
+# Serialize all runs of this workflow. Without this, the 1-min poller can fire a new
+# run before a prior run finishes writing episode_generated=true back to schedule.json
+# (script + audio + upload can take several minutes) — every overlapping run then sees
+# the same game as "not yet processed" and independently generates a duplicate episode.
+# cancel-in-progress is false so we queue rather than kill an in-flight generation run.
+concurrency:
+  group: podcast-pipeline
+  cancel-in-progress: false
+
 jobs:
   check-for-game:
     name: Check for completed game
