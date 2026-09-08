@@ -1,5 +1,14 @@
 {
-  "season": null,
+  "season": "2026/27 Winter",
   "predictions": [],
-  "notable_moments": []
+  "notable_moments": [
+    {
+      "game_id": "oT7lQnmF6H7mrfrJ",
+      "who": "casey",
+      "summary": "Casey noted the Village People's third period shutdown (one shot against) as evidence of the team's potential, framing the second-period collapse as the sole fixable problem.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
+    }
+  ]
 }
