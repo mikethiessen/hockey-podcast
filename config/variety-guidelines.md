@@ -46,9 +46,10 @@ episode's summary where possible.
 
 ## 2. Vary What Opens the Recap
 
-The Cold Open should still be Casey's (see host dynamic — Casey leads), but what
-Casey opens *on* should vary game to game based on what's actually notable in the
-data:
+Casey's very first line is always the fixed welcome-to-the-show opener (see
+`hosts.md`/`podcast-guidelines.md`) — that never changes. This section is about
+what comes immediately AFTER that welcome line: what Casey and Gord lead on
+should vary game to game based on what's actually notable in the data:
 
 - A high-penalty game → open on the penalty count/tone, not the score first
 - A game with a standout assist chain → open on the setup, then the score
