@@ -1,14 +1,5 @@
 {
   "season": null,
   "predictions": [],
-  "notable_moments": [
-    {
-      "game_id": "oT7lQnmF6H7mrfrJ",
-      "who": "gord",
-      "summary": "Gord noted that the team has repeatedly identified fixing the second period as the key issue but has not resolved it across multiple games this season.",
-      "match_keys": {
-        "score_margin_bucket": "NORMAL"
-      }
-    }
-  ]
+  "notable_moments": []
 }
