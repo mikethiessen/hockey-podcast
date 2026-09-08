@@ -35,14 +35,20 @@ def load_file(path):
 
 def load_past_episodes(season=None):
     """Load episode summaries from previously generated games in the same season only,
-    so storylines don't carry over across a season reset."""
+    so storylines don't carry over across a season reset.
+    If season is None (e.g. current game isn't in schedule.json yet), fail SAFE by
+    returning no past episodes rather than skipping the filter — silently including
+    every past episode regardless of season is worse than showing none."""
+    if season is None:
+        print("  Warning: current game's season is unknown — treating as no past episode context.")
+        return []
     schedule_path = DATA_DIR / "schedule.json"
     schedule = json.loads(load_file(schedule_path))
     past = []
     for game in schedule["games"]:
         if not game.get("episode_generated"):
             continue
-        if season is not None and game.get("season") != season:
+        if game.get("season") != season:
             continue
         summary_path = DATA_DIR / "episodes" / game["game_id"] / "summary.json"
         if summary_path.exists():
@@ -159,7 +165,18 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
             past_context += f"Result: {ep.get('result_summary')}\n"
             past_context += f"Storylines: {ep.get('storylines')}\n\n"
     else:
-        past_context = "## Past Episodes\nThis is the first episode of the season. No prior context.\n"
+        past_context = (
+            "## Past Episodes\n"
+            "This is the FIRST episode of a BRAND NEW season. There is no prior context.\n"
+            "This is a hard constraint, not a style note:\n"
+            "- Do NOT invent, imply, or reference any past games, opponents, scores, or "
+            "months (no \"last season\", \"in the summer\", \"since May\", \"last June\", etc.)\n"
+            "- Do NOT name any opponent other than tonight's — inventing one (or reusing a "
+            "real name from outside tonight's data) is equally forbidden.\n"
+            "- Season storylines and closing takes must be built ONLY from tonight's game. "
+            "It is completely normal and expected for a season-opener episode to have no "
+            "season-long storyline yet — say so plainly rather than fabricating one.\n"
+        )
 
     recent_form_block = f"\n---\n\n{recent_form_context}\n" if recent_form_context else ""
     relationship_block = f"\n---\n\n{relationship_context}\n" if relationship_context else ""
