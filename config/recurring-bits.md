@@ -3,8 +3,9 @@
 A bank of optional callbacks and running bits. Pick 1, occasionally 2, that fit
 this episode's data — don't force one in if nothing fits. Never use the same
 bit two episodes in a row (check the past episode context provided). These are
-in addition to Gord's core "safe hockey league" running gag in `hosts.md`,
-which still happens every episode.
+separate from Gord's core "safe hockey league" running gag in `hosts.md` —
+that gag is its own thing, situational and NOT on a fixed cadence (see
+`hosts.md` for exactly when it should come up).
 
 - **The Nickname Mill**: Casey tries out a nickname for a player who had a
   notable moment (goal, key assist, big penalty kill) this game. Gord either
