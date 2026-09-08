@@ -71,6 +71,22 @@ jobs:
           echo "found=${{ steps.check.outputs.found || steps.auto_check.outputs.found || 'false' }}" >> $GITHUB_OUTPUT
           echo "game_id=${{ steps.check.outputs.game_id || steps.auto_check.outputs.game_id || '' }}" >> $GITHUB_OUTPUT
 
+      - name: Commit synced schedule
+        # This job and generate-episode each start from their own fresh checkout —
+        # nothing this job does to schedule.json is visible to generate-episode's
+        # commit step unless it's pushed here first. Without this, every game
+        # sync_schedule.py discovers (aside from the one game_id actually processed
+        # this run) is silently discarded when the runner is torn down.
+        if: ${{ github.event.inputs.game_id == '' }}
+        run: |
+          git config user.name "podcast-bot"
+          git config user.email "podcast-bot@users.noreply.github.com"
+          git add data/schedule.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync schedule: pick up newly discovered games"
+            git push
+          fi
+
   generate-episode:
     name: Generate episode
     runs-on: ubuntu-latest
