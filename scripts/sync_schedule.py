@@ -21,15 +21,34 @@ HEADERS = {
 
 
 def fetch_division_games():
-    params = {
-        "page": 1,
-        "order": "asc",
-        "exclude_cancelled_games": 1,
-        "team_id": TEAM_ID,
-    }
-    resp = requests.get(API_URL, headers=HEADERS, params=params, timeout=15)
-    resp.raise_for_status()
-    return resp.json()["data"]
+    """Fetch every page of results — the API paginates, and without walking all
+    pages, games beyond page 1 (e.g. later-season games once enough are scheduled)
+    are silently invisible to sync, regardless of whether they're on the league site."""
+    all_games = []
+    page = 1
+    while True:
+        params = {
+            "page": page,
+            "order": "asc",
+            "exclude_cancelled_games": 1,
+            "team_id": TEAM_ID,
+        }
+        resp = requests.get(API_URL, headers=HEADERS, params=params, timeout=15)
+        resp.raise_for_status()
+        body = resp.json()
+        page_games = body.get("data", [])
+        all_games.extend(page_games)
+
+        meta = body.get("meta", {})
+        last_page = meta.get("last_page")
+        if last_page is None:
+            # No pagination metadata found — assume single page rather than looping forever.
+            break
+        if page >= last_page:
+            break
+        page += 1
+
+    return all_games
 
 
 def filter_village_people_games(games):
