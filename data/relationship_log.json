@@ -1,6 +1,18 @@
 {
   "season": "2026/27 Winter",
-  "predictions": [],
+  "predictions": [
+    {
+      "game_id": "oT7lQnmF6H7mrfrJ",
+      "made_by": "casey",
+      "checkable_type": "team_result_streak",
+      "checkable_target": {
+        "metric": "wins",
+        "window_games": 1
+      },
+      "resolved": false,
+      "outcome": null
+    }
+  ],
   "notable_moments": [
     {
       "game_id": "oT7lQnmF6H7mrfrJ",
@@ -14,6 +26,14 @@
       "game_id": "oT7lQnmF6H7mrfrJ",
       "who": "casey",
       "summary": "Casey noted that the Village People outshot Yay? Hooray! five to one in the third period despite losing 3-1, framing the third-period effort as the identity the team should build from.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
+    },
+    {
+      "game_id": "oT7lQnmF6H7mrfrJ",
+      "who": "casey",
+      "summary": "Casey flagged the first-period shot volume (12 shots, zero goals) as the conversion problem to watch across the season.",
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
