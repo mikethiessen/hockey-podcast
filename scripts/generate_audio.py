@@ -17,7 +17,7 @@ DATA_DIR = ROOT / "data"
 AUDIO_DIR = ROOT / "audio"
 
 # Fill these in after picking voices at elevenlabs.io
-CASEY_VOICE_ID = "bIHbv24MWmeRgasZH58o"
+CASEY_VOICE_ID = "dczS3m0UuOM2UHQb1Jtc"
 GORD_VOICE_ID = "9oa4l5rZznK9dXRwFpSB"
 
 ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
