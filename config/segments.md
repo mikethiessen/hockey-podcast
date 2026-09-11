@@ -62,9 +62,18 @@ to `data/guest_coach_log.json` and mirrored into that game's `special_guest`
 field in `data/schedule.json` afterward, for reference only.
 
 ### milestone_watch
-Use when a player is close to a season milestone (e.g. 5th goal, 10th point).
-Requires: milestone data to be manually noted in `data/schedule.json` for that game.
-Slot: inserted after `player_spotlight`.
+Inserted after `player_spotlight`. Fully automatic — no manual config edit
+needed. `scripts/milestones.py` detects two kinds of real, data-only events
+each episode:
+- A player becoming the sole new season leader in goals, assists, points, or
+  penalties, but only when they recorded that stat in tonight's game — and
+  each category has its own 3-episode cooldown so a back-and-forth lead race
+  doesn't get mentioned every episode.
+- A player extending an active goal-scoring streak to 3+ consecutive games
+  played.
+Nothing is invented; both checks run purely on real per-game stats. Results
+are logged to `data/milestone_log.json` and mirrored into that game's
+`milestones` field in `data/schedule.json` afterward, for reference only.
 
 ### rivalry_alert
 Use when the opponent is a team the Village People have a notable record against.
@@ -78,10 +87,11 @@ Slot: inserted before `closing_take`.
 active_special_segments: []
 
 <!--
-guest_coach is fully automatic (see its section above) — do NOT add it here.
-milestone_watch and rivalry_alert are still manual for now: to activate one
-for the next episode, edit the list above, e.g.:
-active_special_segments: [milestone_watch]
+guest_coach and milestone_watch are fully automatic (see their sections
+above) — do NOT add either here.
+rivalry_alert is still manual for now: to activate it for the next episode,
+edit the list above, e.g.:
+active_special_segments: [rivalry_alert]
 Then add the required data to the game entry in data/schedule.json.
 After the episode generates, clear this list.
 -->
