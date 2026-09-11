@@ -61,8 +61,18 @@ Gord, bound by the same no-invented-facts rules) and the result gets logged
 to `data/guest_coach_log.json` and mirrored into that game's `special_guest`
 field in `data/schedule.json` afterward, for reference only.
 
-### milestone_watch
-Inserted after `player_spotlight`. Fully automatic — no manual config edit
+### rivalry_alert
+Use when the opponent is a team the Village People have a notable record against.
+Requires: at least 2 prior games against this opponent in the season log.
+Slot: inserted before `closing_take`.
+
+---
+
+## Milestones (organic, not a segment)
+
+This is NOT a special segment and doesn't get its own slot — it's real material
+that should surface naturally inside whatever segment it fits, the same way
+Season Stats or Recurring Bits do. Fully automatic; no manual config edit
 needed. `scripts/milestones.py` detects two kinds of real, data-only events
 each episode:
 - A player becoming the sole new season leader in goals, assists, points, or
@@ -71,14 +81,12 @@ each episode:
   doesn't get mentioned every episode.
 - A player extending an active goal-scoring streak to 3+ consecutive games
   played.
-Nothing is invented; both checks run purely on real per-game stats. Results
-are logged to `data/milestone_log.json` and mirrored into that game's
-`milestones` field in `data/schedule.json` afterward, for reference only.
-
-### rivalry_alert
-Use when the opponent is a team the Village People have a notable record against.
-Requires: at least 2 prior games against this opponent in the season log.
-Slot: inserted before `closing_take`.
+Nothing is invented; both checks run purely on real per-game stats. When
+something qualifies, it should be woven into game_recap, player_spotlight, or
+season_storylines — whichever the moment genuinely calls for — conversationally,
+not announced as its own segment. Results are logged to
+`data/milestone_log.json` and mirrored into that game's `milestones` field in
+`data/schedule.json` afterward, for reference only.
 
 ---
 
@@ -87,8 +95,9 @@ Slot: inserted before `closing_take`.
 active_special_segments: []
 
 <!--
-guest_coach and milestone_watch are fully automatic (see their sections
-above) — do NOT add either here.
+guest_coach is fully automatic (see its section above) — do NOT add it here.
+milestone_watch is no longer a special segment at all — see "Milestones"
+above; it's never added here.
 rivalry_alert is still manual for now: to activate it for the next episode,
 edit the list above, e.g.:
 active_special_segments: [rivalry_alert]

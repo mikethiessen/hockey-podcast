@@ -205,12 +205,13 @@ def format_milestone_context(milestones):
     """Returns "" (section omitted) if nothing real qualifies this episode."""
     if not milestones:
         return ""
-    lines = ["## Special Segment: Milestone Watch (insert after player_spotlight)"]
+    lines = ["## Milestones (real, from tonight's game and season data)"]
     lines.append(
-        "The following are real, verified facts from tonight's game and season data. "
-        "Insert a short milestone_watch segment after player_spotlight covering only "
-        "what's listed below — do not invent any additional milestone, streak, or "
-        "leadership claim beyond these:"
+        "The following are real, verified facts. Work them into the episode "
+        "naturally wherever they genuinely fit — inside game_recap, "
+        "player_spotlight, or season_storylines, whichever suits the moment — "
+        "rather than as a separate segment. Do not invent any additional "
+        "milestone, streak, or leadership claim beyond what's listed:"
     )
     for m in milestones:
         lines.append(f"- {m}")
