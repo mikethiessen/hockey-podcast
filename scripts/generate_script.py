@@ -21,6 +21,14 @@ from relationship_log import (
     format_relationship_context,
     extract_relationship_tags,
 )
+from guest_coach import (
+    load_guest_coach_log,
+    save_guest_coach_log,
+    should_trigger_this_episode,
+    format_guest_coach_context,
+    extract_guest_coach_tag,
+    record_episode_result,
+)
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -156,7 +164,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context):
+def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context, guest_coach_context):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -180,6 +188,7 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 
     recent_form_block = f"\n---\n\n{recent_form_context}\n" if recent_form_context else ""
     relationship_block = f"\n---\n\n{relationship_context}\n" if relationship_context else ""
+    guest_coach_block = f"\n---\n\n{guest_coach_context}\n" if guest_coach_context else ""
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
@@ -200,7 +209,7 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 
 Game Type for this episode: **{game_type}**
 Apply the corresponding rules from the "Segment Structure by Game Type" section above.
-
+{guest_coach_block}
 ---
 
 ## Recurring Bits
@@ -242,7 +251,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 Write a complete podcast script for this game following all guidelines above.
 
 Requirements:
-- Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take → next_game_preview), including any active special segments
+- Follow the exact segment order from the segments config (cold_open → game_recap → player_spotlight → gord_corner → season_storylines → closing_take → next_game_preview), including any active special segments. If a "Special Segment: Guest Coach" section is present above, replace gord_corner with that guest segment for this episode only — do not include both.
 - Apply the Segment Structure by Game Type rule for **{game_type}** — flex segment length/emphasis as instructed, don't change the segment order itself
 - Casey always opens the Cold Open — this does not change episode to episode
 - The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Variety Guidelines section on what the Cold Open leads on next: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
@@ -339,8 +348,15 @@ def generate_script(game_id):
     if moment_matches:
         print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
 
+    # Guest coach: automatic cadence, no manual config edits required
+    guest_coach_log = load_guest_coach_log()
+    guest_coach_triggered = should_trigger_this_episode(guest_coach_log)
+    guest_coach_context = format_guest_coach_context(guest_coach_log)
+    if guest_coach_triggered:
+        print("  Guest coach segment triggered for this episode.")
+
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context)
+    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context, guest_coach_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
@@ -350,6 +366,15 @@ def generate_script(game_id):
         messages=[{"role": "user", "content": prompt}]
     )
     raw_script = message.content[0].text.strip()
+
+    # Strip the optional GUEST_COACH: tag (never spoken) and log the invented character
+    raw_script, guest_entry = extract_guest_coach_tag(raw_script)
+    guest_coach_log = record_episode_result(guest_coach_log, guest_coach_triggered, guest_entry)
+    save_guest_coach_log(guest_coach_log)
+    if guest_coach_triggered and guest_entry:
+        print(f"  Guest coach this episode: {guest_entry['name']} ({guest_entry['personality']})")
+    elif guest_coach_triggered:
+        print("  Warning: guest coach was triggered but no GUEST_COACH: tag was found in the script.")
 
     # Strip any optional PREDICTION:/MOMENT: tags (never spoken) and log them
     script, new_predictions, new_moments = extract_relationship_tags(raw_script, game_id)
@@ -386,6 +411,8 @@ def generate_script(game_id):
     for game in schedule["games"]:
         if game["game_id"] == game_id:
             game["episode_generated"] = True
+            if guest_coach_triggered and guest_entry:
+                game["special_guest"] = f"{guest_entry['name']} — {guest_entry['personality']}"
             break
     schedule_path.write_text(json.dumps(schedule, indent=2))
     print("  schedule.json updated.")

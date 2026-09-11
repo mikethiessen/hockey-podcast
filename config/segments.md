@@ -52,10 +52,14 @@ type to flex the standard segments — same segment list, different emphasis:
 ## Special Segments (activate per-episode by adding to `active_special_segments` below)
 
 ### guest_coach
-A mystery guest coach character joins for one segment to offer tactical advice.
-Define the character in the episode's game entry in `data/schedule.json` under `special_guest`.
-Example: `"special_guest": "Coach Boudreau, a retired AHL coach who takes rec hockey way too seriously"`
-Replaces: `gord_corner` for that episode.
+A one-off guest coach character joins for one segment to offer tactical advice,
+replacing `gord_corner` for that episode. This is now fully automatic — no
+manual config edit needed. `scripts/guest_coach.py` tracks a randomized
+3-6 episode gap and triggers this segment on its own; when it fires, the
+model invents a brand new character on the spot (distinct from Casey and
+Gord, bound by the same no-invented-facts rules) and the result gets logged
+to `data/guest_coach_log.json` and mirrored into that game's `special_guest`
+field in `data/schedule.json` afterward, for reference only.
 
 ### milestone_watch
 Use when a player is close to a season milestone (e.g. 5th goal, 10th point).
@@ -73,9 +77,11 @@ Slot: inserted before `closing_take`.
 
 active_special_segments: []
 
-<!-- 
-To activate a special segment for the next episode, edit the list above. Example:
-active_special_segments: [guest_coach]
-Then add the guest details to the game entry in data/schedule.json.
+<!--
+guest_coach is fully automatic (see its section above) — do NOT add it here.
+milestone_watch and rivalry_alert are still manual for now: to activate one
+for the next episode, edit the list above, e.g.:
+active_special_segments: [milestone_watch]
+Then add the required data to the game entry in data/schedule.json.
 After the episode generates, clear this list.
 -->
