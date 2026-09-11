@@ -22,6 +22,12 @@ MIN_GAP = 3
 MAX_GAP = 6
 HISTORY_CONTEXT_SIZE = 5  # how many recent guests to show the model, to avoid repeats
 
+# Feature flag: set to True to turn the guest coach segment back on. While
+# False, generate_script.py skips this feature entirely — it doesn't touch
+# the cadence log at all, so episodes_since_last/gap_target stay exactly
+# where they were and the cadence picks back up seamlessly once re-enabled.
+ENABLED = False
+
 
 def _new_log():
     return {

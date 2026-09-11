@@ -52,14 +52,20 @@ type to flex the standard segments — same segment list, different emphasis:
 ## Special Segments (activate per-episode by adding to `active_special_segments` below)
 
 ### guest_coach
+**Currently disabled** — set `ENABLED = True` at the top of `scripts/guest_coach.py`
+to turn it back on. The code and cadence tracking are untouched and ready to
+go; while disabled, `generate_script.py` skips this feature entirely and
+doesn't advance the cadence log, so it picks back up cleanly whenever it's
+re-enabled.
+
 A one-off guest coach character joins for one segment to offer tactical advice,
-replacing `gord_corner` for that episode. This is now fully automatic — no
-manual config edit needed. `scripts/guest_coach.py` tracks a randomized
-3-6 episode gap and triggers this segment on its own; when it fires, the
-model invents a brand new character on the spot (distinct from Casey and
-Gord, bound by the same no-invented-facts rules) and the result gets logged
-to `data/guest_coach_log.json` and mirrored into that game's `special_guest`
-field in `data/schedule.json` afterward, for reference only.
+replacing `gord_corner` for that episode. When enabled, this is fully
+automatic — no manual config edit needed. `scripts/guest_coach.py` tracks a
+randomized 3-6 episode gap and triggers this segment on its own; when it
+fires, the model invents a brand new character on the spot (distinct from
+Casey and Gord, bound by the same no-invented-facts rules) and the result
+gets logged to `data/guest_coach_log.json` and mirrored into that game's
+`special_guest` field in `data/schedule.json` afterward, for reference only.
 
 ### rivalry_alert
 Use when the opponent is a team the Village People have a notable record against.

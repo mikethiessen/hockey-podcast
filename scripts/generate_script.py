@@ -22,6 +22,7 @@ from relationship_log import (
     extract_relationship_tags,
 )
 from guest_coach import (
+    ENABLED as GUEST_COACH_ENABLED,
     load_guest_coach_log,
     save_guest_coach_log,
     should_trigger_this_episode,
@@ -350,12 +351,18 @@ def generate_script(game_id):
     if moment_matches:
         print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
 
-    # Guest coach: automatic cadence, no manual config edits required
-    guest_coach_log = load_guest_coach_log()
-    guest_coach_triggered = should_trigger_this_episode(guest_coach_log)
-    guest_coach_context = format_guest_coach_context(guest_coach_log)
-    if guest_coach_triggered:
-        print("  Guest coach segment triggered for this episode.")
+    # Guest coach: automatic cadence, no manual config edits required.
+    # Currently disabled via guest_coach.ENABLED — when off, skip entirely and
+    # leave the cadence log untouched so it resumes cleanly once re-enabled.
+    guest_coach_triggered = False
+    guest_coach_context = ""
+    guest_coach_log = None
+    if GUEST_COACH_ENABLED:
+        guest_coach_log = load_guest_coach_log()
+        guest_coach_triggered = should_trigger_this_episode(guest_coach_log)
+        guest_coach_context = format_guest_coach_context(guest_coach_log)
+        if guest_coach_triggered:
+            print("  Guest coach segment triggered for this episode.")
 
     # Milestone watch: automatic leader-change + goal-streak detection, real data only
     milestones, milestone_log = compute_milestones(schedule, game_id)
@@ -376,13 +383,16 @@ def generate_script(game_id):
     raw_script = message.content[0].text.strip()
 
     # Strip the optional GUEST_COACH: tag (never spoken) and log the invented character
-    raw_script, guest_entry = extract_guest_coach_tag(raw_script)
-    guest_coach_log = record_episode_result(guest_coach_log, guest_coach_triggered, guest_entry)
-    save_guest_coach_log(guest_coach_log)
-    if guest_coach_triggered and guest_entry:
-        print(f"  Guest coach this episode: {guest_entry['name']} ({guest_entry['personality']})")
-    elif guest_coach_triggered:
-        print("  Warning: guest coach was triggered but no GUEST_COACH: tag was found in the script.")
+    if GUEST_COACH_ENABLED:
+        raw_script, guest_entry = extract_guest_coach_tag(raw_script)
+        guest_coach_log = record_episode_result(guest_coach_log, guest_coach_triggered, guest_entry)
+        save_guest_coach_log(guest_coach_log)
+        if guest_coach_triggered and guest_entry:
+            print(f"  Guest coach this episode: {guest_entry['name']} ({guest_entry['personality']})")
+        elif guest_coach_triggered:
+            print("  Warning: guest coach was triggered but no GUEST_COACH: tag was found in the script.")
+    else:
+        guest_entry = None
 
     save_milestone_log(milestone_log)
 
