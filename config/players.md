@@ -10,7 +10,7 @@ The AI will only reference these notes when the player appears in the game stats
 
 | # | Name | Notes |
 |---|------|-------|
-| 4 | Ryan James | Team captain; plays defence |
+| 4 | Ryan James | Team manager; plays defence |
 | 5 | Justin Gulenchyn | Plays defence |
 | 3 | Jaison Johnson | |
 | 25 | Mike Thiessen | |
@@ -24,7 +24,7 @@ The AI will only reference these notes when the player appears in the game stats
 | 21 | Sean Madden | |
 | 11 | Michael van Reede | |
 | 2 | Ian McCallister | |
-| 31 | Darian Hepner | Goalie |
+| 31 | Darian Hepner | Goalie (backup) |
 | 17 | Darren Stevenson | |
 | 66 | Riley Goerzen | Plays defence |
 | 80 | Dwight Sutherland | |
@@ -33,7 +33,7 @@ The AI will only reference these notes when the player appears in the game stats
 | 5 | Ari Kay | |
 | — | David Kornas | |
 | — | Eric Gagnon | Goalie (backup) |
-| 31 | Sean Case | Goalie (backup) |
+| 31 | Sean Case | Goalie |
 
 ---
 

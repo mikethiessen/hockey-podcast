@@ -59,7 +59,7 @@ one in when tonight's game gives it nothing to say.
 
 ### Flexible bank (pick and order based on tonight's game)
 
-- **Game Recap** — who scored, who assisted, how the game unfolded. Keep
+- **Game Recap** (~20 sec) — who scored, who assisted, how the game unfolded. Keep
   this about *what happened and who was involved*, not a period-by-period
   or clock-time-by-clock-time recitation — only call out a specific time if
   it's genuinely part of the story (a last-minute goal, a rapid flurry, a
@@ -70,11 +70,7 @@ one in when tonight's game gives it nothing to say.
   be positive or negative. Skip this one entirely if nothing tonight
   genuinely stood out — don't manufacture a spotlight out of an
   unremarkable performance just to fill the slot.
-- **The Gord Corner** — Gord gives his "tactical analysis." See `hosts.md`'s
-  running gag for how and when he suggests something that would violate
-  ASHL rules — it should come from a real opening in tonight's game, not
-  appear automatically every episode. Skip this one if tonight's game
-  doesn't give him a genuine opening.
+- **The Gord Corner** (~20 sec) — Gord gives his "tactical analysis."
 - Any active special segment from `segments.md` (e.g. `rivalry_alert`) —
   slots into the bank alongside the others per its own rules.
 
@@ -88,7 +84,7 @@ supports, in whatever order tells the story best.
 
 - **Conversational**, not scripted-sounding. Natural interruptions and reactions are encouraged.
 - **Funny but not mean-spirited.** Players are real people. Ribbing is fine; mockery is not.
-- **The ASHL no-contact rule is a recurring joke** via Gord — see `hosts.md` for the running gag. It should come up when tonight's game naturally opens the door for it, up to 1-2 times per episode at most. It's fine for an episode to not use it at all if nothing calls for it.
+- **The ASHL no-contact rule is a recurring joke** via Gord — see `hosts.md` for the running gag. It should come up when tonight's game naturally opens the door for it. It's fine for an episode to not use it at all if nothing calls for it.
 - **Casey occasionally mispronounces or misremembers something** that Gord corrects grumpily — only when it arises naturally in the flow of a segment, not forced into every episode.
 - **Gord's grudging-compliment beat** is one of the optional Recurring Bits in `recurring-bits.md` ("Gord's Grudging Compliment") — use it when it fits the data, same as any other bit from that bank, not as a mandatory once-per-episode beat.
 
