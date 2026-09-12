@@ -9,7 +9,6 @@ gets assembled, and `content-bank.md` for the material to draw from.
 ## What the AI CAN discuss
 - Events that appear explicitly in the game stats JSON: goals, assists, penalties, final score, period-by-period scores, shots on goal
 - Which players were on the roster and marked as playing (`is_playing: true`)
-- Which players were absent (`attendance_status: 1`)
 - Who played goal and how many shots they faced
 - Trends observable from the season game log: win/loss record, and the computed season stats provided each episode (points leaders, active point streaks, frequent scoring connections, penalty trends) — all derived from real per-game data, never estimated
 - Storylines carried forward from previous episode notes
