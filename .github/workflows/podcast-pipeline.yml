@@ -10,6 +10,10 @@ on:
         description: "Game ID to manually generate an episode for (optional)"
         required: false
         default: ""
+      force:
+        description: "Regenerate even if this game_id already has episode_generated=true (use only for intentional redo)"
+        required: false
+        default: "false"
 
 # Serialize all runs of this workflow. Without this, the 1-min poller can fire a new
 # run before a prior run finishes writing episode_generated=true back to schedule.json
@@ -41,11 +45,35 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Handle manual game_id override
+        # Manual dispatch used to always set found=true unconditionally, bypassing the
+        # episode_generated check entirely. That's how a single game_id ended up with
+        # multiple full episodes generated back-to-back: someone (or a re-triggered
+        # poller call) re-ran the workflow with the same game_id after it had already
+        # succeeded, and this step never checked whether it needed to. Now it checks
+        # schedule.json first and only proceeds if the episode isn't already generated,
+        # unless `force: true` is explicitly passed for an intentional redo.
         if: ${{ github.event.inputs.game_id != '' }}
         id: check
         run: |
-          echo "found=true" >> $GITHUB_OUTPUT
-          echo "game_id=${{ github.event.inputs.game_id }}" >> $GITHUB_OUTPUT
+          GAME_ID="${{ github.event.inputs.game_id }}"
+          FORCE="${{ github.event.inputs.force }}"
+          ALREADY_GENERATED=$(python3 -c "
+          import json
+          try:
+              with open('data/schedule.json') as f:
+                  schedule = json.load(f)
+              game = next((g for g in schedule['games'] if g['game_id'] == '$GAME_ID'), None)
+              print('true' if game and game.get('episode_generated') else 'false')
+          except Exception:
+              print('false')
+          ")
+          if [ "$ALREADY_GENERATED" = "true" ] && [ "$FORCE" != "true" ]; then
+            echo "Episode already generated for game $GAME_ID — skipping. Pass force=true on workflow_dispatch to regenerate intentionally."
+            echo "found=false" >> $GITHUB_OUTPUT
+          else
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "game_id=$GAME_ID" >> $GITHUB_OUTPUT
+          fi
 
       - name: Sync schedule and check for completed game
         if: ${{ github.event.inputs.game_id == '' }}
@@ -124,9 +152,36 @@ jobs:
         run: python scripts/upload_episode.py ${{ needs.check-for-game.outputs.game_id }}
 
       - name: Commit updated data back to repo
+        # This is the step that previously could fail silently-ish: the episode is
+        # already generated and uploaded to Buzzsprout by this point, so if the push
+        # here fails and nothing retries it, episode_generated=true never reaches the
+        # repo. The game then still looks "not yet processed" to the next run (auto or
+        # manual), which regenerates and re-uploads a full duplicate episode. This is
+        # exactly what happened on 2026-09-08. Retrying with a rebase handles transient
+        # push failures; if it still can't push after retrying, fail loudly instead of
+        # silently losing the flag.
         run: |
           git config user.name "podcast-bot"
           git config user.email "podcast-bot@users.noreply.github.com"
           git add data/
-          git diff --cached --quiet || git commit -m "Generated episode for game ${{ needs.check-for-game.outputs.game_id }}"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Generated episode for game ${{ needs.check-for-game.outputs.game_id }}"
+
+          branch=$(git symbolic-ref --short HEAD)
+          max_attempts=5
+          attempt=1
+          until git push; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "::error::Failed to push after $max_attempts attempts. The episode for game ${{ needs.check-for-game.outputs.game_id }} was already generated and uploaded to Buzzsprout, but data/schedule.json's episode_generated flag was NOT saved to the repo. To avoid a duplicate episode, manually set episode_generated=true for this game_id in data/schedule.json before the next run — do NOT re-run this workflow with the game_id to 'finish the job'."
+              exit 1
+            fi
+            echo "Push failed (attempt $attempt/$max_attempts). Fetching and rebasing before retry..."
+            sleep $((attempt * 5))
+            git fetch origin "$branch"
+            git rebase "origin/$branch" || { echo "::error::Rebase failed during retry."; git rebase --abort; exit 1; }
+            attempt=$((attempt + 1))
+          done
+          echo "Push succeeded."
