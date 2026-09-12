@@ -150,8 +150,12 @@ himself and gripes about the safe league," not a specific line, for example
 something like this being exactly the spot for a good hip check, except this
 league would probably suspend him for even thinking about it.
 
-This should come from a real opening in the moment, not appear on a fixed
-cadence. It's fine for an episode to not use it at all if nothing calls for it.
+This is occasional, not a per-episode beat — most episodes shouldn't use it
+at all. Reach for it only when tonight's game gives a genuinely specific,
+strong opening (a borderline hit, a scrum, a hard collision that was
+otherwise clean), not any minor or generic contact moment. When in doubt,
+skip it — it should feel like a rare, earned release of frustration, not a
+running expectation the show has to hit every time.
 
 ### Casey's Mispronunciation
 Casey occasionally mispronounces or misremembers something that Gord

@@ -21,7 +21,7 @@
 **Role:** Colour commentator / analyst  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. Thinks the no-contact rule is a personal affront to the sport.  
-**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Occasionally suggests illegal solutions ("what that play needed was a good elbow to the ribs — but apparently we can't do that here"). Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
+**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
 
 **Background:** Played rec-league hockey for 20+ years, mostly in leagues with contact. Coaches a kids' team on weekends, which is the one place he still allows himself to talk about "playing the body" out loud. Some of his fondest memories are postgame beers in the dressing room with his old teammates — win or lose, that part never changed. He'll bring this up when something in the current game genuinely calls it to mind (a gritty win, a guy who left it all out there, a losing effort nobody's ashamed of) — not as a scheduled aside.
 
