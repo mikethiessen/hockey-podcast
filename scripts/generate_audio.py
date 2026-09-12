@@ -24,7 +24,7 @@ ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 
 # Voice settings — tweak these to taste
 CASEY_SETTINGS = {
-    "stability": 0.40,
+    "stability": 0.45,
     "similarity_boost": 0.80,
     "style": 0.35,
     "use_speaker_boost": True
