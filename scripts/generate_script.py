@@ -166,7 +166,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -202,21 +202,21 @@ def build_prompt(stats, past_episodes, hosts, guidelines, segments, players, var
 
 ---
 
-## Podcast Guidelines
-{guidelines}
+## Core Rules
+{core_rules}
 
 ---
 
-## Segment Structure
-{segments}
+## Script Construction
+{script_construction}
 
 Game Type for this episode: **{game_type}**
 Apply the corresponding rules from the "Segment Structure by Game Type" section above.
 {guest_coach_block}
 ---
 
-## Recurring Bits
-{bits}
+## Content Bank
+{content_bank}
 
 ---
 
@@ -226,11 +226,6 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 
 ## Player Notes
 {players}
-
----
-
-## Script Variety Guidelines
-{variety}
 
 ---
 
@@ -257,7 +252,7 @@ Requirements:
 - Structure the episode around three fixed anchors: cold_open always first, next_game_preview always last (this now also carries the closing take — Casey's outlook and Gord's counterpoint), and season_storylines required somewhere in between at whatever position flows best. Beyond those three, choose which of game_recap, player_spotlight, and gord_corner to include and in what order — pick only the ones tonight's game actually supports, don't run all of them by default, and don't force one in when there's nothing there for it. Keep total spoken length around ~5 minutes (700-800 words) regardless of how many segments you pick — fewer segments means each one runs a bit longer, more segments means each stays tighter. If a "Special Segment: Guest Coach" section is present above, that segment takes the tactical-analysis slot gord_corner would otherwise fill, for this episode only — do not include both. If a "Milestones" section is present above, weave those real facts naturally into whichever segment genuinely fits — game_recap, player_spotlight, or season_storylines — rather than creating a separate segment for them.
 - Apply the Segment Structure by Game Type rule for **{game_type}** — flex segment length/emphasis as instructed, don't change the segment order itself
 - Casey always opens the Cold Open — this does not change episode to episode
-- The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Variety Guidelines section on what the Cold Open leads on next: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
+- The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Construction section's "Vary What Opens the Recap" guidance: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
 - In game_recap, don't recite exact clock times or walk through every period mechanically by default. Only call out a specific time or period when it's genuinely part of the story — a late-game winner, a goal in the final minute, multiple goals in a short span, a third-period collapse. Otherwise keep the recap focused on what happened and who was involved, not when down to the minute.
 - For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
 - Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
@@ -302,11 +297,10 @@ def generate_script(game_id):
 
     # Load config files
     hosts = load_file(CONFIG_DIR / "hosts.md")
-    guidelines = load_file(CONFIG_DIR / "podcast-guidelines.md")
-    segments = load_file(CONFIG_DIR / "segments.md")
+    core_rules = load_file(CONFIG_DIR / "core-rules.md")
+    content_bank = load_file(CONFIG_DIR / "content-bank.md")
     players = load_file(CONFIG_DIR / "players.md")
-    variety = load_file(CONFIG_DIR / "variety-guidelines.md")
-    bits = load_file(CONFIG_DIR / "recurring-bits.md")
+    script_construction = load_file(CONFIG_DIR / "script-construction.md")
 
     game_type = classify_game(stats)
     print(f"  Game type: {game_type}")
@@ -371,7 +365,7 @@ def generate_script(game_id):
         print(f"  Milestone(s) detected: {milestones}")
 
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, guidelines, segments, players, variety, next_game_context, game_type, bits, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context)
+    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")

@@ -29,9 +29,9 @@
 
 **Recurring bit:** Keeps an informal, half-serious "penalty minutes power ranking" in his head, built from real PIM data. He brings it up when the game's penalty activity actually gives him a reason to — a big PIM night, someone climbing the mental list, a suspiciously clean game he doesn't trust — not on a fixed schedule.
 
-**Running gag:** When a game situation calls for it, Gord suggests a physical response, then catches himself and remembers he's in a no-contact league. Vary the wording each time rather than repeating a set phrase — the beat is "he catches himself and gripes about the safe league," not a specific line, for example something like this being exactly the spot for a good hip check, except this league would probably suspend him for even thinking about it.
-
-This should come from a real opening in the moment, not appear on a fixed cadence.
+**Running gag:** See `content-bank.md`'s "Running Gags" section for Gord's
+"safe league" bit (the physicality-then-catches-himself gag). It lives there
+now alongside the show's other recurring bits and gags.
 
 ---
 
