@@ -14,7 +14,7 @@ What each segment actually contains. Whether it's an anchor (always present)
 or part of the flexible bank (picked per episode) is defined in
 `script-construction.md` — this section is just what goes in it once chosen.
 
-- **Cold Open** (~30 sec) — Casey's very first line always welcomes listeners
+- **Cold Open** — Casey's very first line always welcomes listeners
   to the show by name (e.g. "Welcome to Ice & Easy!" — vary the exact
   phrasing episode to episode) — this opening line plays under the tail of
   the intro music, so it needs to work as a clean opener on its own. What
@@ -22,7 +22,7 @@ or part of the flexible bank (picked per episode) is defined in
   `script-construction.md`'s "Vary Delivery" section for choosing the
   final score, penalty tone, an assist chain, etc. based on what's most
   distinctive in tonight's game, rather than the score by default.
-- **Game Recap** (~20 sec) — who scored, who assisted, how the game
+- **Game Recap** — who scored, who assisted, how the game
   unfolded. Keep this about *what happened and who was involved*, not a
   period-by-period or clock-time-by-clock-time recitation — only call out a
   specific time if it's genuinely part of the story (a last-minute goal, a
@@ -33,8 +33,8 @@ or part of the flexible bank (picked per episode) is defined in
   positive or negative. Skip this one entirely if nothing tonight genuinely
   stood out — don't manufacture a spotlight out of an unremarkable
   performance just to fill the slot.
-- **The Gord Corner** (~20 sec) — Gord gives his "tactical analysis."
-- **Season Storylines** (~60-90 sec) — the heart of the show's long-term
+- **The Gord Corner** — Gord gives his "tactical analysis."
+- **Season Storylines** — the heart of the show's long-term
   identity. Use real, computed season stats (points leaders, active
   streaks, frequent scoring connections, penalty trends) to build a
   storyline, not just a one-off recap of tonight. Be creative in *how* a
@@ -101,8 +101,7 @@ not announced as its own segment. Results are logged to
 ## Recurring Bits
 
 A bank of optional callbacks and running bits. Pick 1, occasionally 2, that fit
-this episode's data — don't force one in if nothing fits. Never use the same
-bit two episodes in a row (check the past episode context provided). These are
+this episode's data — don't force one in if nothing fits. These are
 separate from Gord's core "safe hockey league" running gag below — that gag is
 its own thing, situational and NOT on a fixed cadence.
 
@@ -112,7 +111,7 @@ its own thing, situational and NOT on a fixed cadence.
 
 - **Back In My Day**: Gord compares something from this game to how it
   "used to be played," always in a way that circles back to missing physical
-  play. Only use if it hasn't come up in the last episode's script.
+  play.
 
 - **The Standings Tangent**: If the schedule data or past results give any
   real basis for it, Casey speculates enthusiastically about where this
