@@ -23,17 +23,64 @@
 
 ## Episode Structure
 
-Each episode should follow this segment order (adjustable via `config/segments.md`):
+There are three fixed anchors. Everything else is a flexible bank — choose
+which of those to include and in what order based on what actually happened
+in tonight's game, not a fixed checklist run the same way every episode.
+Total spoken length should still land around ~5 minutes (700-800 words)
+regardless of how many segments you pick — an episode with fewer segments
+runs each one a bit longer; a busier episode with more segments keeps each
+one tighter. Don't pad a segment just to hit a word count, and don't force
+one in when tonight's game gives it nothing to say.
 
-1. **Cold Open** (~30 sec) — Casey's very first line always welcomes listeners to the show by name (e.g. "Welcome to Ice & Easy!" — vary the exact phrasing episode to episode) — this opening line plays under the tail of the intro music, so it needs to work as a clean opener on its own. What Casey and Gord lead on immediately after that welcome is NOT fixed — see `variety-guidelines.md` §2 for choosing the final score, penalty tone, an assist chain, etc. based on what's most distinctive in tonight's game, rather than the score by default.
-2. **Game Recap** (~30 sec) — Who scored, who assisted, how the game unfolded. Keep this about *what happened and who was involved*, not a period-by-period or clock-time-by-clock-time recitation — only call out a specific time if it's genuinely part of the story (a last-minute goal, a rapid flurry, a third-period collapse).
-3. **Player Spotlight** (~60 sec) — Pick 1-2 standout performers from the stats. Can be positive or negative.
-4. **The Gord Corner** (~30 sec) — Gord gives his "tactical analysis." See `hosts.md`'s running gag for how and when he suggests something that would violate ASHL rules — it should come from a real opening in tonight's game, not appear automatically every episode.
-5. **Season Storylines** (~60-90 sec) — The heart of the show's long-term identity. Use real, computed season stats (points leaders, active streaks, frequent scoring connections, penalty trends) to build a storyline, not just a one-off recap of tonight. Be creative in *how* a real stat gets presented — but never state a number that isn't in the provided season stats data.
-6. **Closing Take** (~30 sec) — Casey's optimistic outlook for next game. Gord's grumbling counterpoint.
-7. **Next Game Preview** (~20 sec) — Date, time, and opponent for the next scheduled game. If we've already played this opponent this season, recap the last meeting using real data. See `segments.md` for full rules — this segment is skipped entirely if there's no game left on the schedule.
+### Anchors (always present)
 
-Total target length: ~5 minutes of spoken audio (approximately 700-800 words of script).
+- **Cold Open** (always first, ~30 sec) — Casey's very first line always
+  welcomes listeners to the show by name (e.g. "Welcome to Ice & Easy!" —
+  vary the exact phrasing episode to episode) — this opening line plays
+  under the tail of the intro music, so it needs to work as a clean opener
+  on its own. What Casey and Gord lead on immediately after that welcome is
+  NOT fixed — see `variety-guidelines.md` §2 for choosing the final score,
+  penalty tone, an assist chain, etc. based on what's most distinctive in
+  tonight's game, rather than the score by default.
+- **Season Storylines** (required every episode, but its position among the
+  other segments is flexible — place it wherever it flows best, not always
+  in the same spot) — the heart of the show's long-term identity. Use real,
+  computed season stats (points leaders, active streaks, frequent scoring
+  connections, penalty trends) to build a storyline, not just a one-off
+  recap of tonight. Be creative in *how* a real stat gets presented — but
+  never state a number that isn't in the provided season stats data.
+- **Next Game Preview** (always last) — date, time, and opponent for the
+  next scheduled game. If we've already played this opponent this season,
+  recap the last meeting using real data. This segment also carries the
+  show's closing beat: Casey's outlook heading into that next game, and
+  Gord's grumbling counterpoint — fold that into the same segment rather
+  than treating it as a separate goodbye. See `segments.md` for full rules;
+  this segment is skipped entirely if there's no game left on the schedule.
+
+### Flexible bank (pick and order based on tonight's game)
+
+- **Game Recap** — who scored, who assisted, how the game unfolded. Keep
+  this about *what happened and who was involved*, not a period-by-period
+  or clock-time-by-clock-time recitation — only call out a specific time if
+  it's genuinely part of the story (a last-minute goal, a rapid flurry, a
+  third-period collapse). Most episodes will want this, but if the cold
+  open or player spotlight already covers what happened, it's fine to skip
+  a separate recap rather than repeat it.
+- **Player Spotlight** — pick 1-2 standout performers from the stats. Can
+  be positive or negative. Skip this one entirely if nothing tonight
+  genuinely stood out — don't manufacture a spotlight out of an
+  unremarkable performance just to fill the slot.
+- **The Gord Corner** — Gord gives his "tactical analysis." See `hosts.md`'s
+  running gag for how and when he suggests something that would violate
+  ASHL rules — it should come from a real opening in tonight's game, not
+  appear automatically every episode. Skip this one if tonight's game
+  doesn't give him a genuine opening.
+- Any active special segment from `segments.md` (e.g. `rivalry_alert`) —
+  slots into the bank alongside the others per its own rules.
+
+Don't run all four bank segments every episode by default — that's exactly
+the rigidity that causes repetition. Pick the ones tonight's game actually
+supports, in whatever order tells the story best.
 
 ---
 
