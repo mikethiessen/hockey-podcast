@@ -37,6 +37,14 @@ ROOT = Path(__file__).parent.parent
 CONFIG_DIR = ROOT / "config"
 DATA_DIR = ROOT / "data"
 
+# When true, the script/audio still get generated for real (so you can actually
+# listen to it), but nothing persistent gets touched: schedule.json's
+# episode_generated flag, the guest-coach cadence log, the milestone cooldown
+# log, and the relationship log (predictions/notable moments) are all left
+# exactly as they were. This lets a test run happen without marking the game
+# as done or advancing any cadence/cooldown state that a real episode would.
+TEST_MODE = os.environ.get("TEST_MODE", "false").lower() == "true"
+
 
 def load_file(path):
     with open(path) as f:
@@ -380,7 +388,10 @@ def generate_script(game_id):
     if GUEST_COACH_ENABLED:
         raw_script, guest_entry = extract_guest_coach_tag(raw_script)
         guest_coach_log = record_episode_result(guest_coach_log, guest_coach_triggered, guest_entry)
-        save_guest_coach_log(guest_coach_log)
+        if not TEST_MODE:
+            save_guest_coach_log(guest_coach_log)
+        else:
+            print("  TEST MODE: guest coach cadence log not saved.")
         if guest_coach_triggered and guest_entry:
             print(f"  Guest coach this episode: {guest_entry['name']} ({guest_entry['personality']})")
         elif guest_coach_triggered:
@@ -388,7 +399,10 @@ def generate_script(game_id):
     else:
         guest_entry = None
 
-    save_milestone_log(milestone_log)
+    if not TEST_MODE:
+        save_milestone_log(milestone_log)
+    else:
+        print("  TEST MODE: milestone cooldown log not saved.")
 
     # Strip any optional PREDICTION:/MOMENT: tags (never spoken) and log them
     script, new_predictions, new_moments = extract_relationship_tags(raw_script, game_id)
@@ -398,7 +412,10 @@ def generate_script(game_id):
     if new_moments:
         relationship_log["notable_moments"].extend(new_moments)
         print(f"  Logged {len(new_moments)} new notable moment(s).")
-    save_relationship_log(relationship_log)
+    if not TEST_MODE:
+        save_relationship_log(relationship_log)
+    else:
+        print("  TEST MODE: relationship log not saved.")
 
     # Save script
     episode_dir = DATA_DIR / "episodes" / game_id
@@ -420,18 +437,21 @@ def generate_script(game_id):
     print(f"  Summary saved to {summary_path}")
 
     # Mark episode as generated in schedule.json
-    schedule_path = DATA_DIR / "schedule.json"
-    schedule = json.loads(load_file(schedule_path))
-    for game in schedule["games"]:
-        if game["game_id"] == game_id:
-            game["episode_generated"] = True
-            if guest_coach_triggered and guest_entry:
-                game["special_guest"] = f"{guest_entry['name']} — {guest_entry['personality']}"
-            if milestones:
-                game["milestones"] = milestones
-            break
-    schedule_path.write_text(json.dumps(schedule, indent=2))
-    print("  schedule.json updated.")
+    if not TEST_MODE:
+        schedule_path = DATA_DIR / "schedule.json"
+        schedule = json.loads(load_file(schedule_path))
+        for game in schedule["games"]:
+            if game["game_id"] == game_id:
+                game["episode_generated"] = True
+                if guest_coach_triggered and guest_entry:
+                    game["special_guest"] = f"{guest_entry['name']} — {guest_entry['personality']}"
+                if milestones:
+                    game["milestones"] = milestones
+                break
+        schedule_path.write_text(json.dumps(schedule, indent=2))
+        print("  schedule.json updated.")
+    else:
+        print("  TEST MODE: schedule.json not updated — this game remains eligible for a real run.")
 
     return str(script_path)
 

@@ -14,6 +14,10 @@ on:
         description: "Regenerate even if this game_id already has episode_generated=true (use only for intentional redo)"
         required: false
         default: "false"
+      skip_upload:
+        description: "Test mode: generate real script + audio but don't upload to Buzzsprout, and don't mark episode_generated or advance any cadence/cooldown state. Download the result from this run's artifacts."
+        required: false
+        default: "false"
 
 # Serialize all runs of this workflow. Without this, the 1-min poller can fire a new
 # run before a prior run finishes writing episode_generated=true back to schedule.json
@@ -51,12 +55,16 @@ jobs:
         # poller call) re-ran the workflow with the same game_id after it had already
         # succeeded, and this step never checked whether it needed to. Now it checks
         # schedule.json first and only proceeds if the episode isn't already generated,
-        # unless `force: true` is explicitly passed for an intentional redo.
+        # unless `force: true` is explicitly passed for an intentional redo, or
+        # `skip_upload: true` (test mode) — test runs never touch schedule.json or any
+        # cadence/cooldown state, so re-running one is always safe regardless of
+        # whether a real episode already exists for this game_id.
         if: ${{ github.event.inputs.game_id != '' }}
         id: check
         run: |
           GAME_ID="${{ github.event.inputs.game_id }}"
           FORCE="${{ github.event.inputs.force }}"
+          SKIP_UPLOAD="${{ github.event.inputs.skip_upload }}"
           ALREADY_GENERATED=$(python3 -c "
           import json
           try:
@@ -67,8 +75,8 @@ jobs:
           except Exception:
               print('false')
           ")
-          if [ "$ALREADY_GENERATED" = "true" ] && [ "$FORCE" != "true" ]; then
-            echo "Episode already generated for game $GAME_ID — skipping. Pass force=true on workflow_dispatch to regenerate intentionally."
+          if [ "$ALREADY_GENERATED" = "true" ] && [ "$FORCE" != "true" ] && [ "$SKIP_UPLOAD" != "true" ]; then
+            echo "Episode already generated for game $GAME_ID — skipping. Pass force=true to regenerate for real, or skip_upload=true to test without affecting the real state."
             echo "found=false" >> $GITHUB_OUTPUT
           else
             echo "found=true" >> $GITHUB_OUTPUT
@@ -138,6 +146,7 @@ jobs:
       - name: Generate script
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TEST_MODE: ${{ github.event.inputs.skip_upload }}
         run: python scripts/generate_script.py ${{ needs.check-for-game.outputs.game_id }}
 
       - name: Generate audio
@@ -146,12 +155,29 @@ jobs:
         run: python scripts/generate_audio.py ${{ needs.check-for-game.outputs.game_id }}
 
       - name: Upload to Buzzsprout
+        if: ${{ github.event.inputs.skip_upload != 'true' }}
         env:
           BUZZSPROUT_API_TOKEN: ${{ secrets.BUZZSPROUT_API_TOKEN }}
           BUZZSPROUT_PODCAST_ID: ${{ secrets.BUZZSPROUT_PODCAST_ID }}
         run: python scripts/upload_episode.py ${{ needs.check-for-game.outputs.game_id }}
 
+      - name: Upload test artifacts (skip_upload only)
+        if: ${{ github.event.inputs.skip_upload == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-episode-${{ needs.check-for-game.outputs.game_id }}
+          path: |
+            data/episodes/${{ needs.check-for-game.outputs.game_id }}/script.txt
+            data/episodes/${{ needs.check-for-game.outputs.game_id }}/episode.mp3
+          retention-days: 14
+
       - name: Commit updated data back to repo
+        # Skipped entirely in test mode (skip_upload=true) — nothing was written to
+        # schedule.json or any cadence/cooldown log by generate_script.py's TEST_MODE
+        # guard, and the generated script/audio for a test run should never be
+        # committed to the repo. The download link is the "Upload test artifacts"
+        # step above instead.
+        #
         # This is the step that previously could fail silently-ish: the episode is
         # already generated and uploaded to Buzzsprout by this point, so if the push
         # here fails and nothing retries it, episode_generated=true never reaches the
@@ -160,6 +186,7 @@ jobs:
         # exactly what happened on 2026-09-08. Retrying with a rebase handles transient
         # push failures; if it still can't push after retrying, fail loudly instead of
         # silently losing the flag.
+        if: ${{ github.event.inputs.skip_upload != 'true' }}
         run: |
           git config user.name "podcast-bot"
           git config user.email "podcast-bot@users.noreply.github.com"
@@ -185,3 +212,4 @@ jobs:
             attempt=$((attempt + 1))
           done
           echo "Push succeeded."
+
