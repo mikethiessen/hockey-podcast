@@ -37,6 +37,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "JVZUzYbY6Nk6YCfb",
+      "who": "casey",
+      "summary": "Casey flagged the McKinley\u2013van Reede\u2013Stevenson connection as the team's most consistent offensive line, noting they combined on both goals in the season's first two games.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ]
 }

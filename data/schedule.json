@@ -18,9 +18,11 @@
       "starts_at": "2026-09-12T00:20:00+00:00",
       "opponent": "Slap Nuts",
       "home_or_away": "home",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
-      "milestones": [],
+      "milestones": [
+        "Colin McKinley is now the season's sole leader in points (2), after recording a point tonight."
+      ],
       "season": "2026/27 Winter"
     },
     {
