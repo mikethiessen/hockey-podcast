@@ -19,7 +19,7 @@ or part of the flexible bank (picked per episode) is defined in
   phrasing episode to episode) — this opening line plays under the tail of
   the intro music, so it needs to work as a clean opener on its own. What
   Casey and Gord lead on immediately after that welcome is NOT fixed — see
-  `script-construction.md`'s "Vary What Opens the Recap" for choosing the
+  `script-construction.md`'s "Vary Delivery" section for choosing the
   final score, penalty tone, an assist chain, etc. based on what's most
   distinctive in tonight's game, rather than the score by default.
 - **Game Recap** (~20 sec) — who scored, who assisted, how the game
@@ -204,3 +204,22 @@ episode's summary where possible.
 Gord can push back on penalty calls specifically — was it fair, harsh, a good
 call — since that's commentary on real data, not invented fact. This should feel
 like genuine analyst disagreement, not forced conflict.
+
+---
+
+## Derive Patterns From the Existing Data (No New Fields Needed)
+
+The stats JSON already contains period, clock_time, assist type, and penalty
+severity. Use it:
+
+- **Multi-point games**: if a player appears as both a scorer and an assister
+  in the same game's `our_goals` list, call that out as a multi-point night.
+- **Assist chains**: if a goal has 2 assists, it's a passing play — describe it
+  as one. If it has 0 assists, call it a hustle/individual goal.
+- **Penalty clustering by period**: look at the `period` field on each penalty
+  entry. If most penalties happened in one period, say so ("three of the four
+  penalties came in the third") instead of listing them flatly in order.
+- **Quick hits**: when a game has a lot of minor events (e.g. 4+ penalties, or
+  several late/low-impact goals), group the less important ones into a fast
+  "quick hits" list rather than giving each the same full treatment as the
+  headline events.

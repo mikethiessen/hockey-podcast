@@ -31,10 +31,6 @@ actually supports — not a fixed checklist):**
 - `gord_corner`
 - Any active special segment (e.g. `rivalry_alert`)
 
-Don't run all four bank segments every episode by default — that's exactly
-the rigidity that causes repetition. Pick the ones tonight's game actually
-supports, in whatever order tells the story best.
-
 ---
 
 ## Segment Structure by Game Type
@@ -66,6 +62,29 @@ this is guidance for the selection above, not a separate fixed structure:
 
 ---
 
+## Vary Delivery
+
+Selection and ordering aren't the only place variety matters — how a segment
+unfolds should vary too, on both of these axes:
+
+- **What opens the recap.** Casey's very first line is always the fixed
+  welcome-to-the-show opener (see `hosts.md`/`core-rules.md`) — that never
+  changes. But what comes immediately after it should vary game to game
+  based on what's actually notable in the data: a high-penalty game opens on
+  the penalty count/tone rather than the score; a standout assist chain
+  opens on the setup, then the score; a tight or low-event game just opens
+  on the score, since there's not much else to lead with; a blowout does the
+  same, since the score *is* the story. Pick whichever event type is most
+  distinctive for tonight's data rather than defaulting to score-first every
+  time.
+- **Who speaks first within a segment.** Casey always opens the Cold Open —
+  that's fixed. But within other segments (Game Recap, Player Spotlight,
+  Season Storylines), it doesn't have to always be "Casey says something,
+  then Gord reacts." Let Gord occasionally raise the point first, with Casey
+  reacting, as long as Casey still owns the top of the Cold Open.
+
+---
+
 ## Active Special Segments This Episode
 
 active_special_segments: []
@@ -81,48 +100,3 @@ Then add the required data to the game entry in data/schedule.json.
 After the episode generates, clear this list.
 -->
 
----
-
-## Vary What Opens the Recap
-
-Casey's very first line is always the fixed welcome-to-the-show opener (see
-`hosts.md`/`core-rules.md`) — that never changes. This section is about
-what comes immediately AFTER that welcome line: what Casey and Gord lead on
-should vary game to game based on what's actually notable in the data:
-
-- A high-penalty game → open on the penalty count/tone, not the score first
-- A game with a standout assist chain → open on the setup, then the score
-- A tight/low-event game → open on the score, since there's not much else to lead with
-- A blowout → open on the score, since that's the story
-
-Pick whichever event type is most distinctive for *that* game's data rather than
-defaulting to score-first every time.
-
----
-
-## Vary Reaction Order Within Segments
-
-Casey always opens the Cold Open. That's fixed. But within other segments
-(Game Recap, Player Spotlight, Season Storylines), it doesn't have to always be
-"Casey says something, then Gord reacts." Let Gord occasionally be the one who
-raises a point first within a segment, with Casey reacting — as long as Casey
-still owns the top of the Cold Open.
-
----
-
-## Derive Patterns From the Existing Data (No New Fields Needed)
-
-The stats JSON already contains period, clock_time, assist type, and penalty
-severity. Use it:
-
-- **Multi-point games**: if a player appears as both a scorer and an assister
-  in the same game's `our_goals` list, call that out as a multi-point night.
-- **Assist chains**: if a goal has 2 assists, it's a passing play — describe it
-  as one. If it has 0 assists, call it a hustle/individual goal.
-- **Penalty clustering by period**: look at the `period` field on each penalty
-  entry. If most penalties happened in one period, say so ("three of the four
-  penalties came in the third") instead of listing them flatly in order.
-- **Quick hits**: when a game has a lot of minor events (e.g. 4+ penalties, or
-  several late/low-impact goals), group the less important ones into a fast
-  "quick hits" list rather than giving each the same full treatment as the
-  headline events.
