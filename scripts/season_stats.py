@@ -83,6 +83,9 @@ def compute_season_stats(schedule, up_to_game_id):
             "goals_for": len(s.get("our_goals", [])),
             "result": s.get("result"),
             "goalie": s.get("goalie"),
+            "periods": s.get("periods", []),
+            "our_score": s.get("our_score"),
+            "opp_score": s.get("opp_score"),
         })
 
     # Active point streaks: consecutive most recent games (that the player
@@ -117,6 +120,7 @@ def compute_season_stats(schedule, up_to_game_id):
     trajectories = _compute_trajectories(game_log)
     returns = _compute_returns(game_log)
     rarities = _compute_rarities(game_log)
+    two_way = _compute_two_way_season(game_log)
 
     return {
         "games_counted": len(played_stats),
@@ -127,7 +131,117 @@ def compute_season_stats(schedule, up_to_game_id):
         "trajectories": trajectories,
         "returns": returns,
         "rarities": rarities,
+        "two_way": two_way,
     }
+
+
+def _compute_two_way_season(game_log):
+    """Season-level aggregates covering the parts of the game that don't show
+    up in a scoresheet: goaltending workload, period tendencies, discipline
+    over time, leads held, and shots-vs-result mismatches. Everything is
+    counted from real per-game data already fetched — no estimation, and no
+    interpretation baked in. What any of it *means* is left open."""
+    if not game_log:
+        return {}
+
+    out = {}
+
+    # --- Goalie workload across the season ---
+    goalie_games = {}
+    for e in game_log:
+        g = e.get("goalie")
+        if not g:
+            continue
+        shots_faced = sum(p.get("shots_them") or 0 for p in e.get("periods", []))
+        rec = goalie_games.setdefault(g, {"games": 0, "shots_faced": 0, "goals_against": 0})
+        rec["games"] += 1
+        rec["shots_faced"] += shots_faced
+        rec["goals_against"] += (e.get("opp_score") or 0)
+    if goalie_games:
+        out["goalies"] = [
+            {
+                "name": n,
+                "games": d["games"],
+                "shots_faced": d["shots_faced"],
+                "goals_against": d["goals_against"],
+                "avg_shots_faced": round(d["shots_faced"] / d["games"], 1),
+            }
+            for n, d in sorted(goalie_games.items(), key=lambda kv: -kv[1]["games"])
+        ]
+
+    # --- Period tendencies: goal and shot differential by period ---
+    period_totals = {}
+    for e in game_log:
+        for p in e.get("periods", []):
+            if p.get("is_overtime"):
+                continue
+            name = p.get("name") or "Unknown"
+            rec = period_totals.setdefault(
+                name, {"goals_us": 0, "goals_them": 0, "shots_us": 0, "shots_them": 0}
+            )
+            rec["goals_us"] += p.get("goals_us") or 0
+            rec["goals_them"] += p.get("goals_them") or 0
+            rec["shots_us"] += p.get("shots_us") or 0
+            rec["shots_them"] += p.get("shots_them") or 0
+    if period_totals:
+        out["by_period"] = [
+            {"period": name, **rec} for name, rec in period_totals.items()
+        ]
+
+    # --- Discipline over time: penalties per game, first half vs second half ---
+    pen_counts = [len(e["penalty_players"]) for e in game_log]
+    if len(pen_counts) >= 4:
+        mid = len(pen_counts) // 2
+        out["discipline"] = {
+            "total": sum(pen_counts),
+            "per_game": round(sum(pen_counts) / len(pen_counts), 1),
+            "earlier_per_game": round(sum(pen_counts[:mid]) / mid, 1),
+            "recent_per_game": round(sum(pen_counts[mid:]) / (len(pen_counts) - mid), 1),
+        }
+    elif pen_counts:
+        out["discipline"] = {
+            "total": sum(pen_counts),
+            "per_game": round(sum(pen_counts) / len(pen_counts), 1),
+        }
+
+    # --- Leads held vs. not, from period-by-period running score ---
+    led_after_a_period = 0
+    led_and_won = 0
+    for e in game_log:
+        running_us = running_them = 0
+        ever_led = False
+        for p in e.get("periods", []):
+            running_us += p.get("goals_us") or 0
+            running_them += p.get("goals_them") or 0
+            if running_us > running_them:
+                ever_led = True
+        if ever_led:
+            led_after_a_period += 1
+            if e.get("result") == "win":
+                led_and_won += 1
+    if led_after_a_period:
+        out["leads"] = {
+            "games_led_at_some_point": led_after_a_period,
+            "of_those_won": led_and_won,
+        }
+
+    # --- Shots vs. result mismatches ---
+    outshot_lost = 0
+    outshot_by_opp_won = 0
+    for e in game_log:
+        su = sum(p.get("shots_us") or 0 for p in e.get("periods", []))
+        st = sum(p.get("shots_them") or 0 for p in e.get("periods", []))
+        if su > st and e.get("result") == "loss":
+            outshot_lost += 1
+        if st > su and e.get("result") == "win":
+            outshot_by_opp_won += 1
+    if outshot_lost or outshot_by_opp_won:
+        out["shot_result_mismatch"] = {
+            "outshot_opponent_but_lost": outshot_lost,
+            "were_outshot_but_won": outshot_by_opp_won,
+        }
+
+    return out
 
 
 def _points_after_n_games(game_log, n):
@@ -446,6 +560,55 @@ def format_season_stats(season_stats):
             lines.append(
                 f"- {r['player']} returned after missing {r['games_missed']} game(s)"
             )
+        lines.append("")
+
+    tw = season_stats.get("two_way") or {}
+    if tw:
+        lines.append("**The other side of the game this season (real, unaggregated by opinion):**")
+
+        if tw.get("goalies"):
+            for g in tw["goalies"]:
+                lines.append(
+                    f"- {g['name']} in goal: {g['games']} game(s), {g['shots_faced']} shots "
+                    f"faced ({g['avg_shots_faced']}/game), {g['goals_against']} goals against"
+                )
+
+        if tw.get("by_period"):
+            for p in tw["by_period"]:
+                lines.append(
+                    f"- {p['period']}: scored {p['goals_us']}, allowed {p['goals_them']}; "
+                    f"shots {p['shots_us']} for, {p['shots_them']} against"
+                )
+
+        if tw.get("discipline"):
+            d = tw["discipline"]
+            base = f"- Penalties: {d['total']} total, {d['per_game']}/game"
+            if "recent_per_game" in d:
+                base += (
+                    f" (earlier half {d['earlier_per_game']}/game, "
+                    f"recent half {d['recent_per_game']}/game)"
+                )
+            lines.append(base)
+
+        if tw.get("leads"):
+            l = tw["leads"]
+            lines.append(
+                f"- Led at some point in {l['games_led_at_some_point']} game(s); "
+                f"won {l['of_those_won']} of those"
+            )
+
+        if tw.get("shot_result_mismatch"):
+            m = tw["shot_result_mismatch"]
+            if m["outshot_opponent_but_lost"]:
+                lines.append(
+                    f"- Outshot the opponent and still lost: "
+                    f"{m['outshot_opponent_but_lost']} game(s)"
+                )
+            if m["were_outshot_but_won"]:
+                lines.append(
+                    f"- Were outshot and won anyway: {m['were_outshot_but_won']} game(s)"
+                )
+
         lines.append("")
 
     lines.append(
