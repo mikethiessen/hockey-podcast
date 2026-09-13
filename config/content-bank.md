@@ -35,11 +35,15 @@ or part of the flexible bank (picked per episode) is defined in
   performance just to fill the slot.
 - **The Gord Corner** — Gord gives his "tactical analysis."
 - **Season Storylines** — the heart of the show's long-term
-  identity. Use real, computed season stats (points leaders, active
-  streaks, frequent scoring connections, penalty trends) to build a
-  storyline, not just a one-off recap of tonight. Be creative in *how* a
-  real stat gets presented — but never state a number that isn't in the
-  provided season stats data.
+  identity, and the single best place to be genuinely creative. The per-game
+  data is a closed set, but the season layer compounds: build the storyline
+  out of *change over time* — a rank that moved, a streak that broke, a
+  cold stretch, a first that only counts as a first because of everything
+  before it — rather than reciting current standings. This is also where the
+  hosts' running theories and their own past claims come into play (see
+  "Season-Long Theories" and "Holding the Hosts Accountable" below). Be
+  creative in *how* a real pattern gets presented — but never state a number
+  that isn't in the provided season stats data.
 - **Next Game Preview** — date, time, and opponent for the next scheduled
   game. If we've already played this opponent this season, recap the last
   meeting using real data. This segment also carries the show's closing
@@ -137,6 +141,52 @@ its own thing, situational and NOT on a fixed cadence.
 
 Usage note: these are flavor, not filler. If a bit doesn't have real data to
 hang on, skip it rather than forcing it in generically.
+
+---
+
+## Season-Long Theories (the hosts' own running arguments)
+
+This is where the show earns repeat listeners. Per-game facts are a closed set —
+who scored, who assisted, who sat. But a *theory* about the season compounds
+across episodes, and only someone who's been listening can appreciate it paying
+off or falling apart.
+
+Casey and Gord can each develop a running thesis about this team and revisit it
+as the season goes: that they win when a particular pair connects, that penalty
+trouble is what actually costs them games, that a specific player is on the
+verge of a breakout, that the team is better on the road. A theory is
+**interpretation, not fact** — it must be built only on real numbers from the
+season stats provided, and framed as what a host believes rather than something
+the data proves. Never invent a stat to support one.
+
+The interesting part isn't stating a theory — it's testing it. Tonight's real
+result either supports a host's standing theory, complicates it, or blows it up
+entirely. Let them notice that. A theory that survives three episodes and then
+collapses is better television than one that's simply correct, and a host
+quietly dropping a theory he was loud about is its own kind of callback.
+
+Don't force a theory into every episode, and don't invent one where the data
+gives nothing to build on. But when a real season-long pattern is there, it's
+almost always more interesting than restating who leads in points.
+
+---
+
+## Holding the Hosts Accountable
+
+The past-episode context and the relationship log carry forward what Casey and
+Gord actually said in previous episodes — predictions they made, players they
+wrote off, calls they were confident about. Use it.
+
+The show should be willing to revisit its own past claims against what really
+happened: Gord's skepticism about a player who has since been producing, Casey's
+"he's about to break out" call that either landed or didn't, a prediction that
+aged badly. Being *wrong* is more fun than being right, and a host having to
+concede it is one of the few things that genuinely can't be appreciated on a
+first listen.
+
+Only do this when there's a specific, real prior claim to return to — never
+invent a past prediction or misremember what was actually said. If the log has
+nothing concrete, skip it.
 
 ---
 
