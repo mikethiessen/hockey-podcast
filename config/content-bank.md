@@ -1,10 +1,60 @@
 # Content Bank
 
-Every reusable piece of episode material lives here: what each segment
-actually contains, the special segments, the organic milestone material,
-the recurring bits, and the running gags. See `script-construction.md` for
-how an episode picks and orders from this bank, and `core-rules.md` for the
-hard rules that apply underneath all of it.
+Material to draw from when building an episode. It opens with the show's
+richest creative territory — the season-long theories the hosts develop and
+their accountability for past claims — because that's where an episode
+becomes worth listening to twice. What follows (segment contents, bits, gags,
+phrasing) is supporting material: examples of the register this show works
+in, not a checklist to work through.
+
+See `script-construction.md` for how an episode picks and orders from this
+bank, and `core-rules.md` for the hard rules that apply underneath all of it.
+
+---
+
+## Season-Long Theories (the hosts' own running arguments)
+
+This is where the show earns repeat listeners. Per-game facts are a closed set —
+who scored, who assisted, who sat. But a *theory* about the season compounds
+across episodes, and only someone who's been listening can appreciate it paying
+off or falling apart.
+
+Casey and Gord can each develop a running thesis about this team and revisit it
+as the season goes: that they win when a particular pair connects, that penalty
+trouble is what actually costs them games, that a specific player is on the
+verge of a breakout, that the team is better on the road. A theory is
+**interpretation, not fact** — it must be built only on real numbers from the
+season stats provided, and framed as what a host believes rather than something
+the data proves. Never invent a stat to support one.
+
+The interesting part isn't stating a theory — it's testing it. Tonight's real
+result either supports a host's standing theory, complicates it, or blows it up
+entirely. Let them notice that. A theory that survives three episodes and then
+collapses is better television than one that's simply correct, and a host
+quietly dropping a theory he was loud about is its own kind of callback.
+
+Don't force a theory into every episode, and don't invent one where the data
+gives nothing to build on. But when a real season-long pattern is there, it's
+almost always more interesting than restating who leads in points.
+
+---
+
+## Holding the Hosts Accountable
+
+The past-episode context and the relationship log carry forward what Casey and
+Gord actually said in previous episodes — predictions they made, players they
+wrote off, calls they were confident about. Use it.
+
+The show should be willing to revisit its own past claims against what really
+happened: Gord's skepticism about a player who has since been producing, Casey's
+"he's about to break out" call that either landed or didn't, a prediction that
+aged badly. Being *wrong* is more fun than being right, and a host having to
+concede it is one of the few things that genuinely can't be appreciated on a
+first listen.
+
+Only do this when there's a specific, real prior claim to return to — never
+invent a past prediction or misremember what was actually said. If the log has
+nothing concrete, skip it.
 
 ---
 
@@ -29,10 +79,14 @@ or part of the flexible bank (picked per episode) is defined in
   rapid flurry, a third-period collapse). Most episodes will want this, but
   if the cold open or player spotlight already covers what happened, it's
   fine to skip a separate recap rather than repeat it.
-- **Player Spotlight** — pick 1-2 standout performers from the stats. Can be
-  positive or negative. Skip this one entirely if nothing tonight genuinely
-  stood out — don't manufacture a spotlight out of an unremarkable
-  performance just to fill the slot.
+- **Player Spotlight** — whatever real pattern in tonight's data is most
+  worth dwelling on. Often that's a single standout performer, but it can
+  just as easily be a pair who kept connecting, a goalie's night, a
+  defensive effort, or a team-wide trend the season stats surfaced — let the
+  data set the scope rather than forcing it into a fixed number of players.
+  Can be positive or negative. Skip this one entirely if nothing tonight
+  genuinely stood out — don't manufacture a spotlight out of an
+  unremarkable performance just to fill the slot.
 - **The Gord Corner** — Gord gives his "tactical analysis."
 - **Season Storylines** — the heart of the show's long-term
   identity, and the single best place to be genuinely creative. The per-game
@@ -41,7 +95,8 @@ or part of the flexible bank (picked per episode) is defined in
   first that only counts as a first because of everything
   before it — rather than reciting current standings. This is also where the
   hosts' running theories and their own past claims come into play (see
-  "Season-Long Theories" and "Holding the Hosts Accountable" below). Be
+  "Season-Long Theories" and "Holding the Hosts Accountable" at the top of
+  this file). Be
   creative in *how* a real pattern gets presented — but never state a number
   that isn't in the provided season stats data.
 - **Next Game Preview** — date, time, and opponent for the next scheduled
@@ -104,10 +159,14 @@ not announced as its own segment. Results are logged to
 
 ## Recurring Bits
 
-A bank of optional callbacks and running bits. Pick 1, occasionally 2, that fit
-this episode's data — don't force one in if nothing fits. These are
-separate from Gord's core "safe hockey league" running gag below — that gag is
-its own thing, situational and NOT on a fixed cadence.
+Examples of the kind of bit that works on this show — not an exhaustive menu.
+Pick 1, occasionally 2, that fit this episode's data — don't force one in if
+nothing fits. Just as often, invent a genuinely new one-off bit that tonight's
+data suggests and the list below doesn't cover; a bit that only makes sense
+because of what happened in *this* game is usually better than reaching for a
+stock one. The examples exist to show the register, not to limit the options.
+These are separate from Gord's core "safe hockey league" running gag below —
+that gag is its own thing, situational and NOT on a fixed cadence.
 
 - **The Nickname Mill**: Casey tries out a nickname for a player who had a
   notable moment (goal, key assist, big penalty kill) this game. Gord either
@@ -144,52 +203,6 @@ hang on, skip it rather than forcing it in generically.
 
 ---
 
-## Season-Long Theories (the hosts' own running arguments)
-
-This is where the show earns repeat listeners. Per-game facts are a closed set —
-who scored, who assisted, who sat. But a *theory* about the season compounds
-across episodes, and only someone who's been listening can appreciate it paying
-off or falling apart.
-
-Casey and Gord can each develop a running thesis about this team and revisit it
-as the season goes: that they win when a particular pair connects, that penalty
-trouble is what actually costs them games, that a specific player is on the
-verge of a breakout, that the team is better on the road. A theory is
-**interpretation, not fact** — it must be built only on real numbers from the
-season stats provided, and framed as what a host believes rather than something
-the data proves. Never invent a stat to support one.
-
-The interesting part isn't stating a theory — it's testing it. Tonight's real
-result either supports a host's standing theory, complicates it, or blows it up
-entirely. Let them notice that. A theory that survives three episodes and then
-collapses is better television than one that's simply correct, and a host
-quietly dropping a theory he was loud about is its own kind of callback.
-
-Don't force a theory into every episode, and don't invent one where the data
-gives nothing to build on. But when a real season-long pattern is there, it's
-almost always more interesting than restating who leads in points.
-
----
-
-## Holding the Hosts Accountable
-
-The past-episode context and the relationship log carry forward what Casey and
-Gord actually said in previous episodes — predictions they made, players they
-wrote off, calls they were confident about. Use it.
-
-The show should be willing to revisit its own past claims against what really
-happened: Gord's skepticism about a player who has since been producing, Casey's
-"he's about to break out" call that either landed or didn't, a prediction that
-aged badly. Being *wrong* is more fun than being right, and a host having to
-concede it is one of the few things that genuinely can't be appreciated on a
-first listen.
-
-Only do this when there's a specific, real prior claim to return to — never
-invent a past prediction or misremember what was actually said. If the log has
-nothing concrete, skip it.
-
----
-
 ## Running Gags
 
 ### Gord's "Safe League" Gag
@@ -214,41 +227,18 @@ not forced into every episode.
 
 ---
 
-## Phrase Banks
+## Phrasing
 
-Don't reuse the same verb/phrase for an event type every episode. Rotate through
-variants like these (write your own in the same spirit — this is a starting set,
-not a fixed list to quote verbatim):
+Hockey events repeat constantly — goals, assists, penalties are most of what
+the data contains — so the language describing them has to carry the variety
+the events themselves don't.
 
-**Goals**
-- "buried it"
-- "found the back of the net"
-- "beat the goalie clean"
-- "snuck one through"
-- "capitalized on the chance"
-- "got the puck to go in"
-- "put the Village People on the board"
-- "made it count"
-
-**Assists**
-- "set that up"
-- "threaded the pass"
-- "did the legwork on that one"
-- "picked up the helper"
-- "made the play that made the play"
-- "got credit for the assist"
-
-**Penalties**
-- "took a seat in the box"
-- "picked up two minutes"
-- "gave the other team a power play"
-- "got called for it"
-- "cost the team a man"
-- "found himself in the box"
-
-Casey and Gord should not describe the same *kind* of event identically twice in
-one script, and should avoid repeating the exact same phrase from the previous
-episode's summary where possible.
+Don't reuse the same verb or construction for an event type across a script,
+and avoid repeating phrasing from the previous episode's summary. Casey and
+Gord should also describe the same *kind* of event differently from each
+other; they're different people, and a goal Casey calls one thing Gord would
+describe another way entirely. Reach for whatever fits the moment and the
+speaker rather than a house style for each event type.
 
 ---
 
