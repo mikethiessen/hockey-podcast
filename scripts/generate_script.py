@@ -440,6 +440,7 @@ def generate_script(game_id):
     if not TEST_MODE:
         schedule_path = DATA_DIR / "schedule.json"
         schedule = json.loads(load_file(schedule_path))
+        marked = False
         for game in schedule["games"]:
             if game["game_id"] == game_id:
                 game["episode_generated"] = True
@@ -447,7 +448,34 @@ def generate_script(game_id):
                     game["special_guest"] = f"{guest_entry['name']} — {guest_entry['personality']}"
                 if milestones:
                     game["milestones"] = milestones
+                marked = True
                 break
+
+        if not marked:
+            # The game_id isn't in schedule.json at all. This used to fail silently:
+            # the loop found nothing, the file was rewritten unchanged, and the commit
+            # step saw no diff — so episode_generated never landed and the NEXT run
+            # regenerated a duplicate episode. It happens on the auto-detect path,
+            # where check_schedule.py finds a game from the API that the local
+            # schedule.json may not contain yet. Add the entry rather than lose the
+            # flag, and say so loudly.
+            print(f"  WARNING: game {game_id} was not in schedule.json — adding it now "
+                  "so episode_generated is recorded and no duplicate is generated.")
+            entry = {
+                "game_id": game_id,
+                "starts_at": stats.get("date") or "",
+                "opponent": stats.get("opponent") or "",
+                "home_or_away": stats.get("home_or_away") or "",
+                "episode_generated": True,
+                "special_guest": None,
+                "season": schedule.get("season"),
+            }
+            if guest_coach_triggered and guest_entry:
+                entry["special_guest"] = f"{guest_entry['name']} — {guest_entry['personality']}"
+            if milestones:
+                entry["milestones"] = milestones
+            schedule["games"].append(entry)
+
         schedule_path.write_text(json.dumps(schedule, indent=2))
         print("  schedule.json updated.")
     else:

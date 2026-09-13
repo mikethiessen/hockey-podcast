@@ -38,7 +38,16 @@ jobs:
 
     steps:
       - name: Checkout repo
+        # ref: main is REQUIRED, not cosmetic. Without it, checkout uses github.sha —
+        # the commit SHA from when this run was QUEUED. The concurrency group above
+        # serializes execution, but a run queued while another is still generating
+        # keeps its stale SHA, so it would check out a schedule.json from before the
+        # in-flight run wrote episode_generated=true, see the game as unprocessed,
+        # and generate a duplicate. Pinning to the branch tip means every job reads
+        # the schedule as it exists when the job actually starts.
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -131,7 +140,16 @@ jobs:
 
     steps:
       - name: Checkout repo
+        # ref: main is REQUIRED, not cosmetic. Without it, checkout uses github.sha —
+        # the commit SHA from when this run was QUEUED. The concurrency group above
+        # serializes execution, but a run queued while another is still generating
+        # keeps its stale SHA, so it would check out a schedule.json from before the
+        # in-flight run wrote episode_generated=true, see the game as unprocessed,
+        # and generate a duplicate. Pinning to the branch tip means every job reads
+        # the schedule as it exists when the job actually starts.
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -142,6 +160,31 @@ jobs:
         run: |
           pip install -r requirements.txt
           sudo apt-get install -y ffmpeg
+
+      - name: Final duplicate guard
+        # Last line of defence, evaluated against the freshly-checked-out schedule.json
+        # in THIS job. check-for-game ran in a separate job with its own checkout and
+        # its own point in time; this re-reads the flag immediately before we spend an
+        # API call or a Buzzsprout upload. If the episode landed in between, stop here.
+        # Skipped for force/test runs, which are intentional re-runs.
+        if: ${{ github.event.inputs.skip_upload != 'true' && github.event.inputs.force != 'true' }}
+        run: |
+          GAME_ID="${{ needs.check-for-game.outputs.game_id }}"
+          ALREADY=$(python3 -c "
+          import json
+          try:
+              with open('data/schedule.json') as f:
+                  s = json.load(f)
+              g = next((x for x in s['games'] if x['game_id'] == '$GAME_ID'), None)
+              print('true' if g and g.get('episode_generated') else 'false')
+          except Exception:
+              print('false')
+          ")
+          if [ "$ALREADY" = "true" ]; then
+            echo "::error::Episode for $GAME_ID is already marked generated in schedule.json. Aborting before generation to prevent a duplicate."
+            exit 1
+          fi
+          echo "No existing episode for $GAME_ID — proceeding."
 
       - name: Generate script
         env:
