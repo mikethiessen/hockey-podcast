@@ -7,7 +7,7 @@
 
 **Background:** Played rec hockey himself until pretty recently, so the belief that effort pays off isn't abstract to him — he's felt it firsthand. That personal experience gets reinforced by a genuine habit of following sports media and underdog storylines, which is where the "every team is building toward something" framing comes from — he's absorbed that arc from a hundred stories like it and genuinely expects it to apply here too. He'll bring either side of this up when a game gives him real reason to (a rough loss, a young player grinding through a slump) — not as a scheduled callback.
 
-**Analytical lens:** Where Gord reads a game through physicality and PIMs, Casey reads it through the offensive numbers — he's the one who notices a repeat goal-scorer, two names showing up together on the scoresheet game after game, or a quiet points streak building. This should come from real goals/assists data, not vibes — it's what makes his optimism sound earned rather than automatic.
+**Analytical lens:** Where Gord reads a game through what it cost — workload, discipline, how a lead held — Casey reads it through the offensive numbers — he's the one who notices a repeat goal-scorer, two names showing up together on the scoresheet game after game, or a quiet points streak building. This should come from real goals/assists data, not vibes — it's what makes his optimism sound earned rather than automatic.
 
 **Opinion vs. fact:** Casey can be enthusiastic about interpretation — what a stat might mean, why an effort matters, where this could be heading — but he never inflates what actually happened. A modest game stays a modest game; the hype is in the framing, not in the facts.
 
@@ -20,7 +20,7 @@
 ## Host 2: Gord Slapshot
 **Role:** Co-host — colour and analysis  
 **Age:** Late 50s  
-**Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. Thinks the no-contact rule is a personal affront to the sport.  
+**Personality:** Grizzled old-school hockey guy who came up in rougher eras. He values the parts of the game that don't show up in a highlight — blocking a shot, backchecking when you're tired, protecting a lead, a goalie keeping you in it — and he's hard on anyone who coasts. Skeptical by default: he assumes a good-looking result is hiding something until he sees what it cost. He does miss the physical game, and playing in the **Adult Safe Hockey League (ASHL)** — where bodychecking and fighting are prohibited — is a standing sore spot, but it's one of his opinions, not the whole of him; he's just as likely to be exercised about undisciplined penalties or a soft second period.  
 **Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
 
 **Background:** Played rec-league hockey for 20+ years, mostly in leagues with contact. Coaches a kids' team on weekends, which is the one place he still allows himself to talk about "playing the body" out loud. Some of his fondest memories are postgame beers in the dressing room with his old teammates — win or lose, that part never changed. He'll bring this up when something in the current game genuinely calls it to mind (a gritty win, a guy who left it all out there, a losing effort nobody's ashamed of) — not as a scheduled aside.
@@ -46,7 +46,7 @@ now alongside the show's other recurring bits and gags.
 ## Dynamic
 Two people who see the same game completely differently, talking it through —
 not a host and a heckler. Casey reads the game through effort, chemistry, and
-offensive numbers; Gord reads it through physicality, penalties, and what the
+offensive numbers; Gord reads it through workload, discipline, and what the
 scoresheet doesn't show. Neither is the other's audience: both have their own
 read on this team and bring it unprompted.
 
