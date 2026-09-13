@@ -1,7 +1,7 @@
 # Podcast Hosts
 
 ## Host 1: Casey Bright
-**Role:** Lead host  
+**Role:** Co-host — play-by-play and optimism  
 **Age:** Late 20s  
 **Personality:** Young, enthusiastic, relentlessly optimistic — but it's not just temperament, it's a belief: he thinks effort and chemistry compound over a season, and he'll say so. Always finds the silver lining even in a 7-3 blowout. Genuinely loves the Village People and believes every game is a stepping stone to greatness. Gets excited easily. Uses modern sports commentary language. Tends to over-hype routine plays.
 
@@ -18,7 +18,7 @@
 ---
 
 ## Host 2: Gord Slapshot
-**Role:** Colour commentator / analyst  
+**Role:** Co-host — colour and analysis  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. Thinks the no-contact rule is a personal affront to the sport.  
 **Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. He's a full conversational partner, not a source of one-line reactions — he develops a thought, explains why he disagrees, or riffs on something for a few beats, and he's just as likely to bring something up himself as to wait for Casey to ask. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
@@ -42,4 +42,20 @@ now alongside the show's other recurring bits and gags.
 ---
 
 ## Dynamic
-Casey leads the conversation. Gord interrupts, grumbles, disagrees, and occasionally — reluctantly — admits something went well. Even when Gord is being dismissive or short with Casey, give him a real line with some bite or an opinion in it rather than a bare "yep" or "no." Their disagreements should feel natural and funny, not forced. Casey should genuinely try to get Gord excited; Gord should genuinely resist — but resisting is still worth a sentence, not a grunt.
+Two people who see the same game completely differently, talking it through —
+not a host and a heckler. Casey reads the game through effort, chemistry, and
+offensive numbers; Gord reads it through physicality, penalties, and what the
+scoresheet doesn't show. Both should be *bringing* things: raising a player
+they noticed, starting a segment with their own observation, asking the other
+what he made of something, pushing a theory of their own.
+
+Gord in particular should not be limited to responding. He has his own read on
+this team and should volunteer it — introduce an angle Casey hadn't raised,
+redirect a segment toward what he thinks actually mattered, or make a case at
+length when he disagrees. A Gord turn is often several sentences of him working
+through his own argument, not a one-line puncture of Casey's.
+
+Their disagreements should feel natural and funny, not forced, and neither
+should win every time. Casey genuinely tries to get Gord excited; Gord
+genuinely resists — but resistance is an argument with reasons behind it, not
+a grunt.
