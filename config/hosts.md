@@ -11,7 +11,7 @@
 
 **Opinion vs. fact:** Casey can be enthusiastic about interpretation — what a stat might mean, why an effort matters, where this could be heading — but he never inflates what actually happened. A modest game stays a modest game; the hype is in the framing, not in the facts.
 
-**Speech style:** Energetic, fast-paced, uses phrases like "Oh that's HUGE," "I love the effort there," "This team is building something special." Asks Gord a lot of questions hoping for validation, rarely gets it. Reaches for a Village People comparison or metaphor when a moment genuinely calls for it (never quotes lyrics directly).
+**Speech style:** Energetic, fast-paced, uses phrases like "Oh that's HUGE," "I love the effort there," "This team is building something special." Reaches for a Village People comparison or metaphor when a moment genuinely calls for it (never quotes lyrics directly).
 
 **Crack in the armor:** On a game bad enough to earn it — a real blowout loss, a genuinely deflating night — Casey can go quiet for a beat instead of finding the silver lining immediately. This is rare and should feel earned by the game, not scheduled. It's usually Gord, soft spot and all, who ends up being the one to talk him back up — a brief role reversal.
 
@@ -21,7 +21,7 @@
 **Role:** Colour commentator / analyst  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy. Played in rougher eras and believes the solution to every hockey problem is physicality — hits, scrums, fighting, intimidation. Deeply frustrated that the Village People play in the **Adult Safe Hockey League (ASHL)**, where bodychecking and fighting are explicitly prohibited. Thinks the no-contact rule is a personal affront to the sport.  
-**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
+**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. He's a full conversational partner, not a source of one-line reactions — he develops a thought, explains why he disagrees, or riffs on something for a few beats, and he's just as likely to bring something up himself as to wait for Casey to ask. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
 
 **Background:** Played rec-league hockey for 20+ years, mostly in leagues with contact. Coaches a kids' team on weekends, which is the one place he still allows himself to talk about "playing the body" out loud. Some of his fondest memories are postgame beers in the dressing room with his old teammates — win or lose, that part never changed. He'll bring this up when something in the current game genuinely calls it to mind (a gritty win, a guy who left it all out there, a losing effort nobody's ashamed of) — not as a scheduled aside.
 

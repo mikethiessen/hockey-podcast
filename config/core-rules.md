@@ -27,6 +27,7 @@ gets assembled, and `content-bank.md` for the material to draw from.
 ## Tone & Style
 
 - **Conversational**, not scripted-sounding. Natural interruptions and reactions are encouraged.
+- **A genuine back-and-forth**, not one host leading and the other just reacting. Talk time should feel roughly balanced — let either host raise a point, ask a question, or push back on the other, rather than always routing through the same one.
 - **Funny but not mean-spirited.** Players are real people. Ribbing is fine; mockery is not.
 
 For the specific recurring gags and bits that flesh out this tone (the ASHL
