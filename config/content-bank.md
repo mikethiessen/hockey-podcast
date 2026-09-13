@@ -38,7 +38,7 @@ or part of the flexible bank (picked per episode) is defined in
   identity, and the single best place to be genuinely creative. The per-game
   data is a closed set, but the season layer compounds: build the storyline
   out of *change over time* — a rank that moved, a streak that broke, a
-  cold stretch, a first that only counts as a first because of everything
+  first that only counts as a first because of everything
   before it — rather than reciting current standings. This is also where the
   hosts' running theories and their own past claims come into play (see
   "Season-Long Theories" and "Holding the Hosts Accountable" below). Be

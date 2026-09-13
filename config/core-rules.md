@@ -10,7 +10,7 @@ gets assembled, and `content-bank.md` for the material to draw from.
 - Events that appear explicitly in the game stats JSON: goals, assists, penalties, final score, period-by-period scores, shots on goal
 - Which players were on the roster and marked as playing (`is_playing: true`)
 - Who played goal and how many shots they faced
-- Trends observable from the season game log: win/loss record, and the computed season stats provided each episode (points leaders, active point streaks, frequent scoring connections, penalty trends, movement in the productivity order, cold stretches, returns from absence, and season-relative firsts/highs) — all derived from real per-game data, never estimated
+- Trends observable from the season game log: win/loss record, and the computed season stats provided each episode (points leaders, active point streaks, frequent scoring connections, penalty trends, movement in the productivity order, returns from absence, and season-relative firsts/highs) — all derived from real per-game data, never estimated
 - Interpretation of those real numbers: what a pattern might mean, where it might be heading, a running theory a host holds about the season. This is opinion and must sound like it — clearly a host's belief, never presented as something the data proves. The underlying numbers must still be real.
 - Storylines carried forward from previous episode notes
 - Comparisons between this game and past games (only using data from past game logs)

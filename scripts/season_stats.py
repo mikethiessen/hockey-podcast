@@ -115,7 +115,6 @@ def compute_season_stats(schedule, up_to_game_id):
     )[:3]
 
     trajectories = _compute_trajectories(game_log)
-    droughts = _compute_droughts(game_log, player_totals)
     returns = _compute_returns(game_log)
     rarities = _compute_rarities(game_log)
 
@@ -126,7 +125,6 @@ def compute_season_stats(schedule, up_to_game_id):
         "top_assist_pairs": top_pairs,
         "penalty_leaders": penalty_leaders,
         "trajectories": trajectories,
-        "droughts": droughts,
         "returns": returns,
         "rarities": rarities,
     }
@@ -198,29 +196,6 @@ def _compute_trajectories(game_log, lookback=3):
 
     moves.sort(key=lambda m: -abs((m["from_rank"] or 99) - m["to_rank"]))
     return moves[:4]
-
-
-def _compute_droughts(game_log, player_totals, min_drought=3):
-    """#2 — The inverse of a streak: a player who has produced this season but
-    has now gone `min_drought`+ straight games played without a point."""
-    droughts = []
-    for player, totals in player_totals.items():
-        if totals["points"] < 1:
-            continue  # never produced — not a drought, just not a scorer
-        gap = 0
-        had_point_before = False
-        for entry in reversed(game_log):
-            if player not in entry["present"]:
-                continue  # didn't play — doesn't extend or break the drought
-            if player in entry["point_players"]:
-                had_point_before = True
-                break
-            gap += 1
-        if had_point_before and gap >= min_drought:
-            droughts.append({"player": player, "games": gap})
-
-    droughts.sort(key=lambda d: -d["games"])
-    return droughts[:4]
 
 
 def _compute_returns(game_log, min_absence=2):
@@ -463,14 +438,6 @@ def format_season_stats(season_stats):
                     f"- {m['player']} has {verb} from {m['from_rank']}th to "
                     f"{m['to_rank']}th over the last {m['lookback']} games"
                 )
-        lines.append("")
-
-    if season_stats.get("droughts"):
-        lines.append("**Cold stretches (produced earlier this season, quiet lately):**")
-        for d in season_stats["droughts"]:
-            lines.append(
-                f"- {d['player']}: {d['games']} straight games played without a point"
-            )
         lines.append("")
 
     if season_stats.get("returns"):
