@@ -57,11 +57,14 @@ CASEY_LINE_PAUSE_RANGE_MS = (400, 650)   # was shared (250, 450) — widened for
 GORD_LINE_PAUSE_RANGE_MS = (250, 450)    # unchanged
 SEGMENT_PAUSE_RANGE_MS = (350, 500)      # speaker switch
 
-# Small fade applied to the start/end of every spoken segment. TTS output that's
-# butted directly against silence can have an audible hard edge/click; a short
-# fade softens that transition so pauses feel like natural conversational beats
-# rather than pasted-in gaps.
-SEGMENT_EDGE_FADE_MS = 15
+# Fade applied to the start/end of every spoken segment. TTS output that's butted
+# directly against silence can have an audible hard edge/click — the fade-in just
+# needs to be enough to avoid that. The fade-out is longer on purpose: a short
+# symmetric fade left lines stopping abruptly right before the pause, with no
+# natural trail-off, which read as an awkward cutoff going into the other host's
+# line. A longer fade-out eases the tail down into the pause instead.
+SEGMENT_FADE_IN_MS = 15
+SEGMENT_FADE_OUT_MS = 100
 
 # Intro music: trimmed to this length regardless of the source file's length,
 # then faded out over the last 2 seconds of that trimmed clip
@@ -166,7 +169,7 @@ def generate_audio(game_id):
 
         audio_bytes = tts_line(text, voice_id, settings, api_key, previous_text, next_text)
         segment = AudioSegment.from_mp3(io.BytesIO(audio_bytes))
-        segment = segment.fade_in(SEGMENT_EDGE_FADE_MS).fade_out(SEGMENT_EDGE_FADE_MS)
+        segment = segment.fade_in(SEGMENT_FADE_IN_MS).fade_out(SEGMENT_FADE_OUT_MS)
         segments.append(segment)
 
         # Add pause — longer when speaker switches, with jitter so it doesn't
