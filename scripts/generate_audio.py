@@ -49,7 +49,7 @@ GORD_SETTINGS = {
 # metronomic/robotic — real back-and-forth conversation has some natural variance
 # in beat length, so these are ranges; an actual duration is picked per-transition.
 LINE_PAUSE_RANGE_MS = (250, 450)      # same speaker continuing (e.g. between sentences in one turn)
-SEGMENT_PAUSE_RANGE_MS = (500, 900)   # speaker switch
+SEGMENT_PAUSE_RANGE_MS = (350, 650)   # speaker switch
 
 # Small fade applied to the start/end of every spoken segment. TTS output that's
 # butted directly against silence can have an audible hard edge/click; a short
