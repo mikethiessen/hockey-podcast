@@ -31,17 +31,13 @@ ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 
 CASEY_SETTINGS = {
-    "stability": 0.45,       # reverted from 0.50 — that bump (this session) combined with the style drop
-                             # below into a flatter/more mechanical delivery ("unnatural") than intended.
-                             # 0.45 is the value that had been stable and unproblematic since the switch
-                             # to eleven_multilingual_v2.
-    "similarity_boost": 0.80,
-    "style": 0.35,           # reverted from 0.25 — same reasoning. The "strained/elevated" complaint
-                             # this was meant to fix is still unresolved; per the pitch discussion, a
-                             # settings tweak may not be the right lever for that at all — a different
-                             # voice_id might be the real fix, worth trying deliberately rather than
-                             # guessing at these two numbers again.
-    "speed": 1.05,
+    "stability": 0.5,        # reset to ElevenLabs platform default
+    "similarity_boost": 0.75,# reset to ElevenLabs platform default
+    "style": 0.0,            # reset to ElevenLabs platform default — note: this is the same value that
+                             # made Gord sound flat/robotic before his style bump to 0.15, so it's a live
+                             # risk of reintroducing flatness on Casey. Reset was requested as a clean
+                             # baseline to re-test from, not because 0.0 style is expected to be final.
+    "speed": 1.0,            # reset to ElevenLabs platform default
     "use_speaker_boost": True
 }
 GORD_SETTINGS = {
