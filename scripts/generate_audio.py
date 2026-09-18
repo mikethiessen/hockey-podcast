@@ -55,7 +55,7 @@ GORD_SETTINGS = {
 # each sentence right on top of the last, which read as rushed.
 CASEY_LINE_PAUSE_RANGE_MS = (400, 650)   # was shared (250, 450) — widened for Casey specifically
 GORD_LINE_PAUSE_RANGE_MS = (250, 450)    # unchanged
-SEGMENT_PAUSE_RANGE_MS = (350, 650)      # speaker switch
+SEGMENT_PAUSE_RANGE_MS = (350, 500)      # speaker switch
 
 # Small fade applied to the start/end of every spoken segment. TTS output that's
 # butted directly against silence can have an audible hard edge/click; a short
