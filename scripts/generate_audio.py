@@ -7,6 +7,7 @@ data/episodes/{game_id}/episode.mp3.
 
 import os
 import sys
+import random
 import requests
 from pathlib import Path
 from pydub import AudioSegment
@@ -23,6 +24,12 @@ GORD_VOICE_ID = "9oa4l5rZznK9dXRwFpSB"
 ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 
 # Voice settings — tweak these to taste
+# Model: eleven_turbo_v2_5 optimizes for low latency at the cost of expressiveness.
+# This is a batch/offline job — latency doesn't matter here — so eleven_multilingual_v2
+# trades a few extra seconds of generation time for noticeably more natural prosody
+# and emotional inflection, which was a big part of the "flat" feedback.
+TTS_MODEL_ID = "eleven_multilingual_v2"
+
 CASEY_SETTINGS = {
     "stability": 0.45,
     "similarity_boost": 0.80,
@@ -38,9 +45,17 @@ GORD_SETTINGS = {
     "use_speaker_boost": True
 }
 
-# Silence between lines (milliseconds)
-LINE_PAUSE_MS = 400
-SEGMENT_PAUSE_MS = 700
+# Silence between lines (milliseconds). A fixed gap every single time reads as
+# metronomic/robotic — real back-and-forth conversation has some natural variance
+# in beat length, so these are ranges; an actual duration is picked per-transition.
+LINE_PAUSE_RANGE_MS = (250, 450)      # same speaker continuing (e.g. between sentences in one turn)
+SEGMENT_PAUSE_RANGE_MS = (500, 900)   # speaker switch
+
+# Small fade applied to the start/end of every spoken segment. TTS output that's
+# butted directly against silence can have an audible hard edge/click; a short
+# fade softens that transition so pauses feel like natural conversational beats
+# rather than pasted-in gaps.
+SEGMENT_EDGE_FADE_MS = 15
 
 # Intro music: trimmed to this length regardless of the source file's length,
 # then faded out over the last 2 seconds of that trimmed clip
@@ -87,8 +102,16 @@ def parse_script(script_path):
     return [(s, t) for s, t in lines if t.strip()]
 
 
-def tts_line(text, voice_id, voice_settings, api_key):
-    """Call ElevenLabs TTS API and return audio bytes."""
+def tts_line(text, voice_id, voice_settings, api_key, previous_text=None, next_text=None):
+    """Call ElevenLabs TTS API and return audio bytes.
+
+    previous_text/next_text give the model surrounding textual context purely for
+    intonation prediction (e.g. so a question mark actually produces a rising
+    inflection, or a line lands with the right emphasis given what comes next).
+    Each line is still a separate audio file — this doesn't stitch audio, it just
+    stops every line from sounding like it was recorded in total isolation, which
+    was contributing to the flat, disconnected feel between the two hosts' lines.
+    """
     url = ELEVENLABS_API_URL.format(voice_id=voice_id)
     headers = {
         "xi-api-key": api_key,
@@ -98,9 +121,13 @@ def tts_line(text, voice_id, voice_settings, api_key):
     }
     payload = {
         "text": text,
-        "model_id": "eleven_multilingual_v2",
+        "model_id": TTS_MODEL_ID,
         "voice_settings": voice_settings
     }
+    if previous_text:
+        payload["previous_text"] = previous_text[-300:]
+    if next_text:
+        payload["next_text"] = next_text[:300]
     resp = requests.post(url, json=payload, headers=headers, timeout=30)
     if not resp.ok:
         print(f"  ElevenLabs error {resp.status_code}: {resp.text[:300]}")
@@ -123,28 +150,28 @@ def generate_audio(game_id):
     print(f"  Parsed {len(lines)} lines from script.")
 
     segments = []
-    silence_short = AudioSegment.silent(duration=LINE_PAUSE_MS)
-    silence_long = AudioSegment.silent(duration=SEGMENT_PAUSE_MS)
 
-    prev_speaker = None
     for i, (speaker, text) in enumerate(lines):
         print(f"  [{i+1}/{len(lines)}] {speaker}: {text[:60]}...")
         voice_id = CASEY_VOICE_ID if speaker == "CASEY" else GORD_VOICE_ID
         settings = CASEY_SETTINGS if speaker == "CASEY" else GORD_SETTINGS
+        previous_text = lines[i - 1][1] if i > 0 else None
+        next_text = lines[i + 1][1] if i < len(lines) - 1 else None
 
-        audio_bytes = tts_line(text, voice_id, settings, api_key)
+        audio_bytes = tts_line(text, voice_id, settings, api_key, previous_text, next_text)
         segment = AudioSegment.from_mp3(io.BytesIO(audio_bytes))
+        segment = segment.fade_in(SEGMENT_EDGE_FADE_MS).fade_out(SEGMENT_EDGE_FADE_MS)
         segments.append(segment)
 
-        # Add pause — longer when speaker switches
+        # Add pause — longer when speaker switches, with jitter so it doesn't
+        # sound like the same silence clip pasted between every line
         if i < len(lines) - 1:
             next_speaker = lines[i + 1][0]
             if next_speaker != speaker:
-                segments.append(silence_long)
+                pause_ms = random.randint(*SEGMENT_PAUSE_RANGE_MS)
             else:
-                segments.append(silence_short)
-
-        prev_speaker = speaker
+                pause_ms = random.randint(*LINE_PAUSE_RANGE_MS)
+            segments.append(AudioSegment.silent(duration=pause_ms))
 
     # Stitch all segments
     print("  Stitching audio...")
