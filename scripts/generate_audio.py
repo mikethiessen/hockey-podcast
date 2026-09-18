@@ -53,7 +53,7 @@ GORD_SETTINGS = {
 # in beat length, so these are ranges; an actual duration is picked per-transition.
 # Same-speaker pause (between sentences in one turn) is per-host: Casey was landing
 # each sentence right on top of the last, which read as rushed.
-CASEY_LINE_PAUSE_RANGE_MS = (400, 650)   # was shared (250, 450) — widened for Casey specifically
+CASEY_LINE_PAUSE_RANGE_MS = (300, 500)   # was (400, 650)
 GORD_LINE_PAUSE_RANGE_MS = (250, 450)    # unchanged
 SEGMENT_PAUSE_RANGE_MS = (350, 500)      # speaker switch
 
