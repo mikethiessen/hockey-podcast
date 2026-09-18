@@ -31,10 +31,16 @@ ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 
 CASEY_SETTINGS = {
-    "stability": 0.50,       # was 0.45 — a touch more grounded, less prone to peaky/strained delivery
+    "stability": 0.45,       # reverted from 0.50 — that bump (this session) combined with the style drop
+                             # below into a flatter/more mechanical delivery ("unnatural") than intended.
+                             # 0.45 is the value that had been stable and unproblematic since the switch
+                             # to eleven_multilingual_v2.
     "similarity_boost": 0.80,
-    "style": 0.25,           # was 0.35 — high style pushes exaggeration; pulled back to reduce the
-                             # pinched/strained "elevated" quality without losing his energy entirely
+    "style": 0.35,           # reverted from 0.25 — same reasoning. The "strained/elevated" complaint
+                             # this was meant to fix is still unresolved; per the pitch discussion, a
+                             # settings tweak may not be the right lever for that at all — a different
+                             # voice_id might be the real fix, worth trying deliberately rather than
+                             # guessing at these two numbers again.
     "speed": 1.05,
     "use_speaker_boost": True
 }
