@@ -31,9 +31,10 @@ ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 
 CASEY_SETTINGS = {
-    "stability": 0.45,
+    "stability": 0.50,       # was 0.45 — a touch more grounded, less prone to peaky/strained delivery
     "similarity_boost": 0.80,
-    "style": 0.35,
+    "style": 0.25,           # was 0.35 — high style pushes exaggeration; pulled back to reduce the
+                             # pinched/strained "elevated" quality without losing his energy entirely
     "speed": 1.05,
     "use_speaker_boost": True
 }
@@ -48,8 +49,11 @@ GORD_SETTINGS = {
 # Silence between lines (milliseconds). A fixed gap every single time reads as
 # metronomic/robotic — real back-and-forth conversation has some natural variance
 # in beat length, so these are ranges; an actual duration is picked per-transition.
-LINE_PAUSE_RANGE_MS = (250, 450)      # same speaker continuing (e.g. between sentences in one turn)
-SEGMENT_PAUSE_RANGE_MS = (350, 650)   # speaker switch
+# Same-speaker pause (between sentences in one turn) is per-host: Casey was landing
+# each sentence right on top of the last, which read as rushed.
+CASEY_LINE_PAUSE_RANGE_MS = (400, 650)   # was shared (250, 450) — widened for Casey specifically
+GORD_LINE_PAUSE_RANGE_MS = (250, 450)    # unchanged
+SEGMENT_PAUSE_RANGE_MS = (350, 650)      # speaker switch
 
 # Small fade applied to the start/end of every spoken segment. TTS output that's
 # butted directly against silence can have an audible hard edge/click; a short
@@ -170,7 +174,8 @@ def generate_audio(game_id):
             if next_speaker != speaker:
                 pause_ms = random.randint(*SEGMENT_PAUSE_RANGE_MS)
             else:
-                pause_ms = random.randint(*LINE_PAUSE_RANGE_MS)
+                line_range = CASEY_LINE_PAUSE_RANGE_MS if speaker == "CASEY" else GORD_LINE_PAUSE_RANGE_MS
+                pause_ms = random.randint(*line_range)
             segments.append(AudioSegment.silent(duration=pause_ms))
 
     # Stitch all segments
