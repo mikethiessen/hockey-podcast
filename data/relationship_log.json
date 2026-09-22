@@ -9,8 +9,9 @@
         "metric": "wins",
         "window_games": 1
       },
-      "resolved": false,
-      "outcome": null
+      "resolved": true,
+      "outcome": "missed",
+      "outcome_detail": "LOSS"
     }
   ],
   "notable_moments": [
@@ -44,6 +45,14 @@
       "summary": "Casey flagged the McKinley\u2013van Reede\u2013Stevenson connection as the team's most consistent offensive line, noting they combined on both goals in the season's first two games.",
       "match_keys": {
         "score_margin_bucket": "NORMAL"
+      }
+    },
+    {
+      "game_id": "fNK83tVSZLZp2LlN",
+      "who": "casey",
+      "summary": "Casey noted that four different players scored their first goals of the season in this game and argued the team may have unlocked something offensively, framing it as a potential turning point.",
+      "match_keys": {
+        "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
     }
   ]

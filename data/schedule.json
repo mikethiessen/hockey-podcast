@@ -30,9 +30,11 @@
       "starts_at": "2026-09-22T01:30:00+00:00",
       "opponent": "Cannons Hockey",
       "home_or_away": "away",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
-      "milestones": [],
+      "milestones": [
+        "Michael van Reede is now the season's sole leader in penalties (2), after recording a penalty tonight."
+      ],
       "season": "2026/27 Winter"
     },
     {
