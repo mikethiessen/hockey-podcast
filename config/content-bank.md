@@ -252,8 +252,10 @@ like genuine analyst disagreement, not forced conflict.
 
 ## Derive Patterns From the Existing Data (No New Fields Needed)
 
-The stats JSON already contains period, clock_time, assist type, and penalty
-severity. Use it:
+The stats JSON already contains period, time_elapsed, assist type, and penalty
+severity. `time_elapsed` is the time elapsed into that period (not time
+remaining) — e.g. "10:12" in a 12-minute period means it happened late, with
+under two minutes left; "1:00" means it happened early. Use it:
 
 - **Multi-point games**: if a player appears as both a scorer and an assister
   in the same game's `our_goals` list, call that out as a multi-point night.

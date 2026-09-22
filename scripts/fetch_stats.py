@@ -9,6 +9,31 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 }
 
+# Our league plays three 12-minute periods, with a 5-minute overtime if needed.
+REGULATION_PERIOD_MINUTES = 12
+OVERTIME_PERIOD_MINUTES = 5
+
+# The API's period_clock_time is a COUNTDOWN — time remaining in the period,
+# same convention as the clock on a real scoreboard (e.g. "2:00" means 2
+# minutes left, not 2 minutes elapsed). We convert it to elapsed time here so
+# nothing downstream (prompt text or the model) has to guess which direction
+# the clock runs.
+def _remaining_to_elapsed(remaining, is_overtime):
+    """Convert a 'MM:SS' time-remaining string into a 'MM:SS' elapsed string."""
+    if not remaining:
+        return None
+    try:
+        mm, ss = str(remaining).split(":")
+        remaining_seconds = int(mm) * 60 + int(ss)
+    except (ValueError, AttributeError):
+        return None
+
+    period_minutes = OVERTIME_PERIOD_MINUTES if is_overtime else REGULATION_PERIOD_MINUTES
+    total_seconds = period_minutes * 60
+    elapsed_seconds = max(0, total_seconds - remaining_seconds)
+    em, es = divmod(elapsed_seconds, 60)
+    return f"{em}:{es:02d}"
+
 
 def fetch_game(game_id):
     url = f"https://canlan2-api.sportninja.net/v1/games/{game_id}"
@@ -52,11 +77,13 @@ def parse_game(data):
         team_id = shot.get("team_id")
         period_id = g.get("period_id")
 
-        # Find period name
-        period_name = next(
-            (p["period_type"]["name_full"] for p in data.get("periods", []) if p["id"] == period_id),
-            "Unknown"
+        # Find period name and whether it's an overtime period
+        period_info = next(
+            (p for p in data.get("periods", []) if p["id"] == period_id),
+            None
         )
+        period_name = period_info["period_type"]["name_full"] if period_info else "Unknown"
+        period_is_ot = period_info["period_type"]["is_overtime"] if period_info else False
 
         assists = [
             {
@@ -68,7 +95,9 @@ def parse_game(data):
 
         goal_entry = {
             "period": period_name,
-            "clock_time": g.get("period_clock_time"),
+            # Time elapsed into the period when the goal was scored (e.g. "10:12"
+            # in a 12-minute period means it happened late, with 1:48 left).
+            "time_elapsed": _remaining_to_elapsed(g.get("period_clock_time"), period_is_ot),
             "assists": assists,
         }
 
@@ -87,16 +116,18 @@ def parse_game(data):
     for o in data.get("offenses", []):
         player_name = find_player_name(o.get("player_id"), data.get("playerRosters", []))
         team_id = o.get("team_id")
+        penalty_period_info = next(
+            (p for p in data.get("periods", []) if p["id"] == o.get("period_id")),
+            None
+        )
+        penalty_period_is_ot = penalty_period_info["period_type"]["is_overtime"] if penalty_period_info else False
         penalties.append({
             "team": "us" if team_id == TEAM_ID else "them",
             "player": player_name,
             "infraction": o["offense_type"]["name_full"],
             "severity": o["offense_severity"]["name"],
-            "period": next(
-                (p["period_type"]["name_full"] for p in data.get("periods", []) if p["id"] == o.get("period_id")),
-                "Unknown"
-            ),
-            "clock_time": o.get("period_clock_time"),
+            "period": penalty_period_info["period_type"]["name_full"] if penalty_period_info else "Unknown",
+            "time_elapsed": _remaining_to_elapsed(o.get("period_clock_time"), penalty_period_is_ot),
         })
 
     # Parse our roster for this game
