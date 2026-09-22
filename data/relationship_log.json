@@ -54,6 +54,14 @@
       "match_keys": {
         "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
+    },
+    {
+      "game_id": "fNK83tVSZLZp2LlN",
+      "who": "casey",
+      "summary": "Casey argued that the four-goal comeback road tie against Cannons Hockey represents a genuine upward line in the team's offensive development across the first three games of the season.",
+      "match_keys": {
+        "score_margin_bucket": "CLOSE_OR_OVERTIME"
+      }
     }
   ]
 }
