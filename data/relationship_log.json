@@ -62,6 +62,14 @@
       "match_keys": {
         "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
+    },
+    {
+      "game_id": "fNK83tVSZLZp2LlN",
+      "who": "casey",
+      "summary": "Casey noted that Darren Stevenson had a two-point night (assist + goal) for the team's first multi-point game of the season, and leads the team with 3 points through 3 games.",
+      "match_keys": {
+        "score_margin_bucket": "CLOSE_OR_OVERTIME"
+      }
     }
   ]
 }
