@@ -42,7 +42,7 @@
       "starts_at": "2026-09-26T01:20:00+00:00",
       "opponent": "Jager Bombers",
       "home_or_away": "away",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
       "milestones": [],
       "season": "2026/27 Winter"

@@ -70,6 +70,14 @@
       "match_keys": {
         "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
+    },
+    {
+      "game_id": "Uxz2MxcogXuH6Fm7",
+      "who": "casey",
+      "summary": "Casey acknowledged that tonight was the team's first shutout of the season and noted it as a meaningful number that would sit in the season stats going forward.",
+      "match_keys": {
+        "score_margin_bucket": "SHUTOUT_LOSS"
+      }
     }
   ]
 }
