@@ -31,13 +31,16 @@ ELEVENLABS_API_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 TTS_MODEL_ID = "eleven_multilingual_v2"
 
 CASEY_SETTINGS = {
-    "stability": 0.5,        # reset to ElevenLabs platform default
-    "similarity_boost": 0.75,# reset to ElevenLabs platform default
-    "style": 0.0,            # reset to ElevenLabs platform default — note: this is the same value that
-                             # made Gord sound flat/robotic before his style bump to 0.15, so it's a live
-                             # risk of reintroducing flatness on Casey. Reset was requested as a clean
-                             # baseline to re-test from, not because 0.0 style is expected to be final.
-    "speed": 1.0,            # reset to ElevenLabs platform default
+    # Reverted off the "platform default" baseline (0.5/0.75/0.0/1.0) — every real
+    # episode generated under that baseline (fNK83tVSZLZp2LlN, Uxz2MxcogXuH6Fm7) came
+    # back with audible static in Casey's audio, and no episode generated with these
+    # values (the ones in place from the multilingual_v2 switch through the "Everything
+    # is great" confirmation) has ever had that complaint. Restoring the last
+    # confirmed-clean values rather than guessing at a new combination.
+    "stability": 0.45,
+    "similarity_boost": 0.80,
+    "style": 0.35,
+    "speed": 1.05,
     "use_speaker_boost": True
 }
 GORD_SETTINGS = {
