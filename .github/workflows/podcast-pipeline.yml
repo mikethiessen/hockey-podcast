@@ -18,6 +18,10 @@ on:
         description: "Test mode: generate real script + audio but don't upload to Buzzsprout, and don't mark episode_generated or advance any cadence/cooldown state. Download the result from this run's artifacts."
         required: false
         default: "false"
+      audio_only:
+        description: "Re-render audio only from the game_id's EXISTING script.txt already in the repo (skips generate_script.py entirely, no LLM call, no content change). For isolating whether a bad-sounding episode is a one-off TTS render glitch. Always test mode: never uploads to Buzzsprout or touches schedule/cadence state, regardless of skip_upload."
+        required: false
+        default: "false"
 
 # Serialize all runs of this workflow. Without this, the 1-min poller can fire a new
 # run before a prior run finishes writing episode_generated=true back to schedule.json
@@ -166,8 +170,8 @@ jobs:
         # in THIS job. check-for-game ran in a separate job with its own checkout and
         # its own point in time; this re-reads the flag immediately before we spend an
         # API call or a Buzzsprout upload. If the episode landed in between, stop here.
-        # Skipped for force/test runs, which are intentional re-runs.
-        if: ${{ github.event.inputs.skip_upload != 'true' && github.event.inputs.force != 'true' }}
+        # Skipped for force/test/audio-only runs, which are intentional re-runs.
+        if: ${{ github.event.inputs.skip_upload != 'true' && github.event.inputs.force != 'true' && github.event.inputs.audio_only != 'true' }}
         run: |
           GAME_ID="${{ needs.check-for-game.outputs.game_id }}"
           ALREADY=$(python3 -c "
@@ -187,6 +191,7 @@ jobs:
           echo "No existing episode for $GAME_ID — proceeding."
 
       - name: Generate script
+        if: ${{ github.event.inputs.audio_only != 'true' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TEST_MODE: ${{ github.event.inputs.skip_upload }}
@@ -198,17 +203,17 @@ jobs:
         run: python scripts/generate_audio.py ${{ needs.check-for-game.outputs.game_id }}
 
       - name: Upload to Buzzsprout
-        if: ${{ github.event.inputs.skip_upload != 'true' }}
+        if: ${{ github.event.inputs.skip_upload != 'true' && github.event.inputs.audio_only != 'true' }}
         env:
           BUZZSPROUT_API_TOKEN: ${{ secrets.BUZZSPROUT_API_TOKEN }}
           BUZZSPROUT_PODCAST_ID: ${{ secrets.BUZZSPROUT_PODCAST_ID }}
         run: python scripts/upload_episode.py ${{ needs.check-for-game.outputs.game_id }}
 
-      - name: Upload test artifacts (skip_upload only)
-        if: ${{ github.event.inputs.skip_upload == 'true' }}
+      - name: Upload test artifacts (skip_upload or audio_only)
+        if: ${{ github.event.inputs.skip_upload == 'true' || github.event.inputs.audio_only == 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: test-episode-${{ needs.check-for-game.outputs.game_id }}
+          name: test-episode-${{ needs.check-for-game.outputs.game_id }}-${{ github.run_id }}
           path: |
             data/episodes/${{ needs.check-for-game.outputs.game_id }}/script.txt
             data/episodes/${{ needs.check-for-game.outputs.game_id }}/episode.mp3
@@ -229,7 +234,7 @@ jobs:
         # exactly what happened on 2026-09-08. Retrying with a rebase handles transient
         # push failures; if it still can't push after retrying, fail loudly instead of
         # silently losing the flag.
-        if: ${{ github.event.inputs.skip_upload != 'true' }}
+        if: ${{ github.event.inputs.skip_upload != 'true' && github.event.inputs.audio_only != 'true' }}
         run: |
           git config user.name "podcast-bot"
           git config user.email "podcast-bot@users.noreply.github.com"
