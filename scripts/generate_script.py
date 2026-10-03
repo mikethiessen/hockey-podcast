@@ -250,6 +250,17 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 {json.dumps(stats, indent=2)}
 ```
 
+The `game_timeline` field is the authoritative order events happened in — it already
+merges both teams' goals and penalties into one chronological sequence, sorted by
+period and time. Use it (not `our_goals`/`their_goals`/`penalties` individually) for
+anything about *when* something happened relative to anything else — who scored
+first, what a team's goals looked like clustered together or spread out, what
+happened right before or after something else, or how the game opened or closed.
+Don't reconstruct the order yourself from the separate lists; `game_timeline` is
+already correct. Each entry's `time_remaining` is how much time was left in the
+period at that moment — treat a low `time_remaining` value as late in the period
+(a last-minute or last-seconds event) without needing to calculate anything.
+
 ---
 
 ## Your Task

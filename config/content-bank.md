@@ -252,10 +252,15 @@ like genuine analyst disagreement, not forced conflict.
 
 ## Derive Patterns From the Existing Data (No New Fields Needed)
 
-The stats JSON already contains period, time_elapsed, assist type, and penalty
-severity. `time_elapsed` is the time elapsed into that period (not time
-remaining) — e.g. "10:12" in a 12-minute period means it happened late, with
-under two minutes left; "1:00" means it happened early. Use it:
+The stats JSON already contains period, time_elapsed, time_remaining, assist
+type, and penalty severity. `time_elapsed` is the time elapsed into that period
+(not time remaining) — e.g. "10:12" in a 12-minute period means it happened
+late, with under two minutes left. `time_remaining` is the flip side — how
+much time was left in the period at that moment — so a low `time_remaining`
+value is a late/last-minute event without doing any subtraction. For the order
+things happened in, use `game_timeline` (goals and penalties from both teams,
+already merged into one true chronological sequence) rather than reconstructing
+order from `our_goals`/`their_goals`/`penalties` separately. Use this data:
 
 - **Multi-point games**: if a player appears as both a scorer and an assister
   in the same game's `our_goals` list, call that out as a multi-point night.
@@ -268,3 +273,8 @@ under two minutes left; "1:00" means it happened early. Use it:
   several late/low-impact goals), group the less important ones into a fast
   "quick hits" list rather than giving each the same full treatment as the
   headline events.
+- **Scoring runs and game flow**: use `game_timeline` to notice things that only
+  show up in true sequence — a team scoring several in a row, who actually
+  opened or closed the scoring, a late collapse or comeback. Don't describe a
+  sequence of events (who scored first, a run of unanswered goals, how the game
+  closed) without checking `game_timeline` for the real order first.

@@ -18,21 +18,32 @@ OVERTIME_PERIOD_MINUTES = 5
 # minutes left, not 2 minutes elapsed). We convert it to elapsed time here so
 # nothing downstream (prompt text or the model) has to guess which direction
 # the clock runs.
-def _remaining_to_elapsed(remaining, is_overtime):
-    """Convert a 'MM:SS' time-remaining string into a 'MM:SS' elapsed string."""
-    if not remaining:
+def _seconds_from_clock(time_str):
+    """Parse a 'MM:SS' string into total seconds. Returns None if unparseable."""
+    if not time_str:
         return None
     try:
-        mm, ss = str(remaining).split(":")
-        remaining_seconds = int(mm) * 60 + int(ss)
+        mm, ss = str(time_str).split(":")
+        return int(mm) * 60 + int(ss)
     except (ValueError, AttributeError):
+        return None
+
+
+def _format_seconds(total_seconds):
+    m, s = divmod(total_seconds, 60)
+    return f"{m}:{s:02d}"
+
+
+def _remaining_to_elapsed(remaining, is_overtime):
+    """Convert a 'MM:SS' time-remaining string into a 'MM:SS' elapsed string."""
+    remaining_seconds = _seconds_from_clock(remaining)
+    if remaining_seconds is None:
         return None
 
     period_minutes = OVERTIME_PERIOD_MINUTES if is_overtime else REGULATION_PERIOD_MINUTES
     total_seconds = period_minutes * 60
     elapsed_seconds = max(0, total_seconds - remaining_seconds)
-    em, es = divmod(elapsed_seconds, 60)
-    return f"{em}:{es:02d}"
+    return _format_seconds(elapsed_seconds)
 
 
 def fetch_game(game_id):
@@ -68,9 +79,18 @@ def parse_game(data):
             "shots_them": p["shots_visiting_count"] if is_home else p["shots_home_count"],
         })
 
-    # Parse goals - separate ours vs theirs
+    # Period order, by position in the API's own periods array (1st, 2nd, 3rd,
+    # OT, in that sequence) — used below to sort goals and penalties into one
+    # true chronological timeline across period boundaries.
+    period_order = {p["id"]: idx for idx, p in enumerate(data.get("periods", []))}
+
+    # Parse goals - separate ours vs theirs (kept for existing consumers that
+    # read these two lists directly), and also collect every goal into a single
+    # sort key alongside penalties below to build one merged timeline.
     our_goals = []
     their_goals = []
+    timeline_events = []  # (period_order, elapsed_seconds, event_dict) — sorted and emitted as game_timeline below
+
     for g in data.get("goals", []):
         shot = g.get("shot", {})
         scorer_id = shot.get("player_id")
@@ -93,42 +113,91 @@ def parse_game(data):
             for a in g.get("assists", [])
         ]
 
+        raw_remaining = g.get("period_clock_time")
+        elapsed = _remaining_to_elapsed(raw_remaining, period_is_ot)
+        scorer_name = find_player_name(scorer_id, data.get("playerRosters", []))
+
         goal_entry = {
             "period": period_name,
-            # Time elapsed into the period when the goal was scored (e.g. "10:12"
-            # in a 12-minute period means it happened late, with 1:48 left).
-            "time_elapsed": _remaining_to_elapsed(g.get("period_clock_time"), period_is_ot),
+            # Time elapsed into the period (e.g. "10:12" in a 12-minute period
+            # means it happened late, with 1:48 left) and, explicitly, how much
+            # time was left in the period when it happened — so a goal in the
+            # last few seconds reads as such without anyone doing subtraction.
+            "time_elapsed": elapsed,
+            "time_remaining": raw_remaining,
             "assists": assists,
+            "scorer": scorer_name,
         }
 
-        if team_id == TEAM_ID:
-            # Find scorer name from rosters
-            scorer_name = find_player_name(scorer_id, data.get("playerRosters", []))
-            goal_entry["scorer"] = scorer_name
+        team = "us" if team_id == TEAM_ID else "them"
+        if team == "us":
             our_goals.append(goal_entry)
         else:
-            scorer_name = find_player_name(scorer_id, data.get("playerRosters", []))
-            goal_entry["scorer"] = scorer_name
             their_goals.append(goal_entry)
+
+        timeline_events.append((
+            period_order.get(period_id, 999),
+            _seconds_from_clock(elapsed) if elapsed is not None else -1,
+            {
+                "type": "goal",
+                "team": team,
+                "period": period_name,
+                "time_elapsed": elapsed,
+                "time_remaining": raw_remaining,
+                "scorer": scorer_name,
+                "assists": assists,
+            },
+        ))
 
     # Parse penalties
     penalties = []
     for o in data.get("offenses", []):
         player_name = find_player_name(o.get("player_id"), data.get("playerRosters", []))
         team_id = o.get("team_id")
+        period_id = o.get("period_id")
         penalty_period_info = next(
-            (p for p in data.get("periods", []) if p["id"] == o.get("period_id")),
+            (p for p in data.get("periods", []) if p["id"] == period_id),
             None
         )
         penalty_period_is_ot = penalty_period_info["period_type"]["is_overtime"] if penalty_period_info else False
-        penalties.append({
-            "team": "us" if team_id == TEAM_ID else "them",
+        penalty_period_name = penalty_period_info["period_type"]["name_full"] if penalty_period_info else "Unknown"
+
+        raw_remaining = o.get("period_clock_time")
+        elapsed = _remaining_to_elapsed(raw_remaining, penalty_period_is_ot)
+        team = "us" if team_id == TEAM_ID else "them"
+
+        penalty_entry = {
+            "team": team,
             "player": player_name,
             "infraction": o["offense_type"]["name_full"],
             "severity": o["offense_severity"]["name"],
-            "period": penalty_period_info["period_type"]["name_full"] if penalty_period_info else "Unknown",
-            "time_elapsed": _remaining_to_elapsed(o.get("period_clock_time"), penalty_period_is_ot),
-        })
+            "period": penalty_period_name,
+            "time_elapsed": elapsed,
+            "time_remaining": raw_remaining,
+        }
+        penalties.append(penalty_entry)
+
+        timeline_events.append((
+            period_order.get(period_id, 999),
+            _seconds_from_clock(elapsed) if elapsed is not None else -1,
+            {
+                "type": "penalty",
+                "team": team,
+                "period": penalty_period_name,
+                "time_elapsed": elapsed,
+                "time_remaining": raw_remaining,
+                "player": player_name,
+                "infraction": o["offense_type"]["name_full"],
+                "severity": o["offense_severity"]["name"],
+            },
+        ))
+
+    # One merged, truly chronological timeline across both teams and all
+    # periods — goals and penalties interleaved in the order they actually
+    # happened, not two separate per-team lists the model would otherwise
+    # have to interleave itself by comparing clock values across arrays.
+    timeline_events.sort(key=lambda e: (e[0], e[1]))
+    game_timeline = [e[2] for e in timeline_events]
 
     # Parse our roster for this game
     our_roster_entry = next(
@@ -166,6 +235,12 @@ def parse_game(data):
         "our_goals": our_goals,
         "their_goals": their_goals,
         "penalties": penalties,
+        # Authoritative chronological order of events — use this, not our_goals/
+        # their_goals/penalties separately, to describe the sequence of what
+        # happened in the game. Those three lists are kept for other code that
+        # reads them directly (season stats, recent-form tracking), but they are
+        # NOT in game order relative to each other.
+        "game_timeline": game_timeline,
         "players_present": players_present,
         "players_absent": players_absent,
         "goalie": goalie,
