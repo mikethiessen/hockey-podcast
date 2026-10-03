@@ -223,6 +223,12 @@ jobs:
           cp audio_generate_log.txt data/debug/last_audio_error.txt 2>/dev/null || echo "(no log captured)" > data/debug/last_audio_error.txt
           cp "data/episodes/${{ needs.check-for-game.outputs.game_id }}/script.txt" data/debug/last_test_script.txt 2>/dev/null || true
           git add data/debug/
+          # This is a test run (skip_upload/audio_only): it writes real content into
+          # already-committed files like script.txt/episode.mp3 without meaning to
+          # persist them. Discard those in-place modifications now that the bits we
+          # actually want are already copied into data/debug/ above — otherwise they'd
+          # leave the tree dirty and the pull --rebase below would fail on them.
+          git checkout -- data/episodes/ 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "Debug: audio generation diagnostic for game ${{ needs.check-for-game.outputs.game_id }} (run ${{ github.run_id }})"
             git pull --rebase origin main
