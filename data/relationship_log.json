@@ -78,6 +78,14 @@
       "match_keys": {
         "score_margin_bucket": "SHUTOUT_LOSS"
       }
+    },
+    {
+      "game_id": "CVYVKJTPQKuMs6Ua",
+      "who": "casey",
+      "summary": "Casey acknowledged his McKinley-van Reede-Stevenson line theory may have been misattributed, noting McKinley contributed without the other two present.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ]
 }
