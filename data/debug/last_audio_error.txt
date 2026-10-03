@@ -1,0 +1,15 @@
+Generating audio for game CVYVKJTPQKuMs6Ua...
+  Parsed 27 lines from script.
+  [1/27] CASEY: Welcome back to Ice & Easy, the Village People Hockey Podcas...
+  ElevenLabs error 401: {"detail":{"type":"invalid_request","code":"quota_exceeded","message":"This request exceeds your quota of 23736. You have 0 credits remaining, while 33 credits are required for this request.","status":"quota_exceeded","request_id":"a045baf9453fa22c16deac417c8fc310"}}
+Traceback (most recent call last):
+  File "/home/runner/work/hockey-podcast/hockey-podcast/scripts/generate_audio.py", line 228, in <module>
+    generate_audio(game_id)
+  File "/home/runner/work/hockey-podcast/hockey-podcast/scripts/generate_audio.py", line 173, in generate_audio
+    audio_bytes = tts_line(text, voice_id, settings, api_key, previous_text, next_text)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/hockey-podcast/hockey-podcast/scripts/generate_audio.py", line 146, in tts_line
+    resp.raise_for_status()
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.elevenlabs.io/v1/text-to-speech/dczS3m0UuOM2UHQb1Jtc
