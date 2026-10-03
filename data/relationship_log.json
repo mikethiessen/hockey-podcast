@@ -86,6 +86,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "CVYVKJTPQKuMs6Ua",
+      "who": "gord",
+      "summary": "Gord noted that Laurie Kosie scored five goals against the Village People in a single game, largely fed by the Kramp-to-Kosie connection, and criticized the team's failure to shut down that two-man combination.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ]
 }
