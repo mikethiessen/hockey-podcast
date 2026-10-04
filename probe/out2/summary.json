@@ -1,0 +1,256 @@
+[
+ {
+  "games_keys": [
+   "data",
+   "meta"
+  ],
+  "n": 50
+ },
+ {
+  "game0_keys": [
+   "id",
+   "sport_id",
+   "generic_sport_id",
+   "generic_sport_name",
+   "game_status_id",
+   "game_type_id",
+   "league_game_number",
+   "starts_at",
+   "ends_at",
+   "started_at",
+   "ended_at",
+   "is_subscribed",
+   "is_upcoming_livestream",
+   "has_livestreams",
+   "video_status",
+   "video_provider_type_id",
+   "home_team_score",
+   "visiting_team_score",
+   "current_period",
+   "shootout",
+   "overtime",
+   "shootout_ended",
+   "homeTeam",
+   "visitingTeam",
+   "homeTeamSlot",
+   "visitingTeamSlot",
+   "has_placeholder_visitor",
+   "visiting_team_placeholder_name",
+   "venue",
+   "facility",
+   "schedule",
+   "rootSchedule",
+   "stats_processing",
+   "stats_rolledback",
+   "if_necessary_status",
+   "has_summary",
+   "feature_flags"
+  ]
+ },
+ {
+  "game_keys": [
+   "id",
+   "game_status_id",
+   "game_type_id",
+   "sport_id",
+   "generic_sport_id",
+   "league_game_number",
+   "starts_at",
+   "ends_at",
+   "started_at",
+   "ended_at",
+   "broadcast_id",
+   "broadcast_video_url",
+   "home_team_score",
+   "visiting_team_score",
+   "current_period",
+   "shootout",
+   "overtime",
+   "shootout_ended",
+   "can_score",
+   "homeTeam",
+   "visitingTeam",
+   "homeTeamSlot",
+   "visitingTeamSlot",
+   "has_placeholder_visitor",
+   "visiting_team_placeholder_name",
+   "venue",
+   "facility",
+   "schedule",
+   "rootSchedule",
+   "periods",
+   "shots",
+   "goals",
+   "offenses",
+   "goalieChanges",
+   "playerRosters",
+   "officials",
+   "referees",
+   "scorekeepers",
+   "timekeepers",
+   "signatures",
+   "livestreams",
+   "has_summary",
+   "game_summary",
+   "feature_flags"
+  ]
+ },
+ {
+  "player_keys": [
+   "id",
+   "name_first",
+   "name_middle",
+   "name_last",
+   "player_number",
+   "play_direction",
+   "is_spare",
+   "is_affiliate",
+   "is_injured",
+   "is_playing",
+   "is_starting",
+   "is_proposed_starting",
+   "is_suspended",
+   "is_promoted",
+   "attendance_status",
+   "customer_identifier",
+   "is_signed_waiver",
+   "league_registration_number",
+   "player_type"
+  ]
+ },
+ {
+  "opp": "1Qubm3sadakbr6ip"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft",
+  "status": 401,
+  "len": 26,
+  "head": "{\"message\":\"Unauthorized\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/stats",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/players",
+  "status": 401,
+  "len": 26,
+  "head": "{\"message\":\"Unauthorized\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/roster",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/statistics?schedule_id=d6ieKFuhvhmS8Q7y",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/statistics?sn_schedule=d6ieKFuhvhmS8Q7y",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y",
+  "status": 200,
+  "len": 5106,
+  "head": "{\"data\":{\"id\":\"d6ieKFuhvhmS8Q7y\",\"name\":\"2026\\/27 Winter\",\"name_full\":\"2026\\/27 Winter\",\"type\":\"Season\",\"abbreviation\":null,\"email\":\"dfedyck@canlansports.com\",\"website\":\"https:\\/\\/www.ashl.ca\\/winnipeg-winter-season\\/\",\"phone\":\"+12047848888\",\"starts_"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/standings",
+  "status": 401,
+  "len": 26,
+  "head": "{\"message\":\"Unauthorized\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/stats",
+  "status": 401,
+  "len": 26,
+  "head": "{\"message\":\"Unauthorized\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/players/statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/teams",
+  "status": 401,
+  "len": 26,
+  "head": "{\"message\":\"Unauthorized\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/teams/Nz7BgbzbxfrhWtft/statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/leaders",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/player-statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/stats/team?team_id=Nz7BgbzbxfrhWtft&schedule_id=d6ieKFuhvhmS8Q7y",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/statistics/team?team_id=Nz7BgbzbxfrhWtft&schedule_id=d6ieKFuhvhmS8Q7y",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/players/statistics?schedule_id=d6ieKFuhvhmS8Q7y",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/schedules/d6ieKFuhvhmS8Q7y/statistics",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/teams/Nz7BgbzbxfrhWtft/schedules/d6ieKFuhvhmS8Q7y/players",
+  "status": 404,
+  "len": 63,
+  "head": "{\"status\":404,\"message\":\"The requested resource was not found\"}"
+ },
+ {
+  "path": "/schedules/d6ieKFuhvhmS8Q7y/games?team_id=Nz7BgbzbxfrhWtft",
+  "status": 200,
+  "len": 28179,
+  "head": "{\"data\":[{\"id\":\"oT7lQnmF6H7mrfrJ\",\"sport_id\":\"YdNBdaFVjDXNONiY\",\"generic_sport_id\":null,\"generic_sport_name\":null,\"game_status_id\":9,\"game_type_id\":2,\"league_game_number\":\"\",\"starts_at\":\"2026-09-08T02:30:00+00:00\",\"ends_at\":\"2026-09-08T04:30:00+00:00"
+ }
+]
