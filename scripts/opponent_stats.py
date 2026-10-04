@@ -179,9 +179,8 @@ def format_opponent_stats(team_name, stats, purpose):
     """Prompt-ready text. purpose is 'preview' (next opponent) or 'recap' (team we
     just played; totals include tonight's game)."""
     header = (
-        f"## Opponent Season Leaders — {team_name} "
-        + ("(NEXT opponent — use in next_game_preview)" if purpose == "preview"
-           else "(tonight's opponent — use in game_recap)")
+        f"## Reference data (optional): opponent season leaders — {team_name} "
+        + ("(team we play next)" if purpose == "preview" else "(team we played tonight)")
     )
     guard = (
         "Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, "
@@ -233,7 +232,7 @@ def build_opponent_context(team_name, purpose):
     except Exception as e:  # network/API/shape problems must not break episode generation
         print(f"  Warning: opponent stats unavailable for {team_name}: {e}")
         return (
-            f"## Opponent Season Leaders — {team_name}\n"
+            f"## Reference data (optional): opponent season leaders — {team_name}\n"
             "Real season stats for this team could not be fetched this run. Do not invent "
             "players, stats, or standings for this team."
         )
