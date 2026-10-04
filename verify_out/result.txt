@@ -1,0 +1,990 @@
+division games: 50 finals: 49
+teams: ['Amrize', 'Bayside Boys', 'BeerKats', 'Blackhucks', 'Blades of Steel', 'Blue Blazers', 'Blue Ducks', 'Blue Mooners', 'Boondock Saints', 'Bud Knights', 'Bulldogs', 'Busch League', 'Buzzards', 'CFH Hockey Club', 'Cannons Hockey', 'Charleswood 22s', 'Chicken Hawks', 'Comets', 'Da Bullz', 'Dangle Berries', 'Deadweights', 'Dirty Herd', 'Dogglers', 'Double Dions', 'Dragons', 'Executioners', 'Falcons', 'Fistsablur', 'Flint Tropics', 'Flying Geese', 'Goats', 'Good Schtick', 'Gremlins', 'Hecla Islanders', 'Hellboys', 'Hungry Hungry Hippos', 'Huskies', 'Ice Hogs', 'Jackals', 'Jager Bombers', 'Jagr Bombs', 'Lakers', 'Lightning', 'Liquor Pigs', 'Lucic and Chong', 'Moose Knuckles', 'Muckers', 'Mushroom Kingdom HC', 'No Dekes', 'North End Alliance', 'Oxford Oxs', 'Pacemakers', 'Park City Heroes', 'Prairie Chickens', 'Prickly Pears', 'Puck & Shillelaghs', 'Puck Bunny Hunters', 'Puckin Clowns', 'Pucking Hopeless', 'Rusty and Winded', 'Saints', 'Seamen', 'Shock & Awe', 'Shorthanded', 'Silver Bullets', 'Slack Hawks', 'Slap Nuts', 'St. Charles Devils', 'Strange Brew', 'Subarctic Goats', 'Swamp Donkeys', 'Swedes', 'The Black Aces', 'The Bucks', 'The Famous Pirates', 'The Goonies', 'The Heat', 'The Hicks', 'The Kyle Wellwoods', 'The Milkmen', 'The Paul Coffeys', 'The Pylons', 'The Real Blades Of Steel', 'Throw It Down Crew', 'Top Ched Chucks', 'Toss N Sauce', 'Troopers', 'Tuesday Nooners', 'Turkeys', 'Village People', 'Walrus Attack', 'Whalers', 'Winnipeg Camel Toe Drags', 'Winnipeg Flyers', 'Winnipeg Knockoffs', 'Wolfpack', 'Wringers', 'Yay? Hooray!', 'Yellow Jackets', 'Yukon Smoker Boys']
+-----
+## Opponent Season Leaders — Amrize (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 0.
+Their top 5 by points:
+1. Paul Comte — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Matthew Radford — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Xander Da Silveira — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Brad Guay — 2 pts (0 G, 2 A) in 1 GP, 1 penalties
+5. Kevin Wright — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Bayside Boys (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 2, goals against 1.
+Their top 5 by points:
+1. Carter Pauls — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Charlie Fillmore-Handlon — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Aaron Pauls — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Brett Tustin — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Jordan Jackiew — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — BeerKats (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 6.
+Their top 5 by points:
+1. Matt Worobec — 2 pts (1 G, 1 A) in 1 GP, 1 penalties
+2. Matthew Hudson — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Matthew Radford — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Chris Doan — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Alex Kling — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Blackhucks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 7.
+Their top 5 by points:
+1. Colin Dandewich — 4 pts (3 G, 1 A) in 1 GP, 0 penalties
+2. Scott Ricard — 4 pts (2 G, 2 A) in 1 GP, 1 penalties
+3. Greg Dandewich — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+4. Richard Marcoux — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Samuel Perry — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Blades of Steel (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 2.
+Their top 3 by points:
+1. Jonathan Katz — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Nathan Weltman — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Tyler Hodder — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Blue Blazers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 6.
+Their top 3 by points:
+1. Max Bachman — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+2. Nick Giesbrecht — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Rhys Mitchell — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Blue Ducks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 3.
+Their top 5 by points:
+1. Brett Luschinski — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Noah Moscovitch — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Michael Remis — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Cade Nixdorf — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Mike Walker — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Blue Mooners (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 4, goals against 1.
+Their top 5 by points:
+1. Josh Scharer — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+2. Clayton Campbell — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Dhevan Patel — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Cole Magnus — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+5. Andrei Merkulov — 1 pts (0 G, 1 A) in 1 GP, 2 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Boondock Saints (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 4.
+Their top 4 by points:
+1. Everett Neil — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Karter Elderkin — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+3. Shawn Price — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Andrew Neil — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Bud Knights (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 2, goals against 1.
+Their top 4 by points:
+1. Jamie Neal — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Tyler Anderson — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Everett Morin — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+4. Owen Harms — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Bulldogs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 0.
+Their top 5 by points:
+1. Connor Piasecki — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Ian Maxwell — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Brady Hack — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Luke Forbes — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Scott Kosokowsky — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Busch League (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 4, goals against 3.
+Their top 5 by points:
+1. Kale Price — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+2. Ashton Romaniuk — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Ethan Unruh — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+4. Ryan Gottfried — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Troy Borthistle — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Buzzards (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 3, goals against 1.
+Their top 5 by points:
+1. Mark Wilson — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Brent Andryo — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Brock Houndle — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Anthony Conte — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Garrett Queau — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — CFH Hockey Club (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 1.
+Their top 5 by points:
+1. Andrew Wang — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Jordan Nemetchek — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Cliff Gill — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Rob Stankewich — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Steven Graham — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Cannons Hockey (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 1, goals against 0.
+Their top 3 by points:
+1. Kelsey Friesen — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. John Derksen — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+3. Tyler Hodder — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Charleswood 22s (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 7.
+Their top 5 by points:
+1. Kevin Beyer — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Adam Rath — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Darryl Lougheed — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Dave Livingston — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Drew Keating — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Chicken Hawks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 8.
+Their top 4 by points:
+1. Cole Olynick — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Robert Mitchell — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Dave Macki — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Kobe Davies — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Comets (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 5.
+Their top 5 by points:
+1. Derek Fyfe — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Jamie Gillespie — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. John Hunsberger — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Vern McMahon — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Keanu Asperin — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Da Bullz (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 3.
+Their top 5 by points:
+1. Michael Blanchard — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Paul Burnett — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Garrett Gledhill — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Justin Taylor — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Magnus Johnson — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Dangle Berries (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 3.
+Their top 3 by points:
+1. Mike Falk — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Dan Fitzsimmons — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Kyle Howse — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Deadweights (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 2.
+Their top 5 by points:
+1. Ariel Melvin — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Garrett Uskoski — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Shaun Moffatt — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Trevor LeBlond — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Jordan McGonigal — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Dirty Herd (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 4.
+Their top 5 by points:
+1. Bob Macgregor — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Paul Deniset — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Tyler Wirvin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Jamie Brewster — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Jason Abbott — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Dogglers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 8.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Double Dions (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 4.
+Their top 3 by points:
+1. Eric McLuckie — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Ben Wicha — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Matthew Carlin — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Dragons (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 4.
+Their top 3 by points:
+1. Joshua Boucher — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+2. Clint Wilkie — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Ian Lumsden — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Executioners (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 6.
+Their top 5 by points:
+1. Garrett Moss — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Serge Simard — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. David Whetter — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Ryan Billington — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Alvin Lee — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Falcons (NEXT opponent — use in next_game_preview)
+Falcons has no completed games this season yet, so there are no season totals. Do not invent players or stats for this team.
+-----
+## Opponent Season Leaders — Fistsablur (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 4.
+Their top 5 by points:
+1. Alex Klassen — 5 pts (4 G, 1 A) in 1 GP, 0 penalties
+2. Tristen Bear — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Cameron Proulx — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Jeremy Dick — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Steve Gerbrandt — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Flint Tropics (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 3.
+Their top 5 by points:
+1. Dawson Smith — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Tanner Boyle — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Brandon Thiessen — 2 pts (1 G, 1 A) in 1 GP, 2 penalties
+4. Rylan Penner — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Logan Funk — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Flying Geese (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 3, goals against 2.
+Their top 5 by points:
+1. Jonathan Kostek — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Josh Sarbiewski — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Kyle Jur — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Derek Warren — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Devon Desmarais — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Goats (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 5, goals against 9.
+Their top 5 by points:
+1. Matthew Bertouille — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+2. Carson Law — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Nick Pierce — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Jordan Larosa — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Alex Dunk — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Good Schtick (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 2.
+Their top 3 by points:
+1. Marc Saurette — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Byron Neufeld — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Jon Mead — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Gremlins (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 3, goals against 1.
+Their top 5 by points:
+1. Nick Pierce — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Trevor Riddell — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Kenny Riddell — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Nicholas Lacko — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Blaine Badiuk — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Hecla Islanders (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 7, goals against 3.
+Their top 5 by points:
+1. Scott Morrison — 5 pts (4 G, 1 A) in 1 GP, 0 penalties
+2. Tyler Harris — 5 pts (1 G, 4 A) in 1 GP, 0 penalties
+3. Bryce Dodd — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Miles Macdonell — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Tobie Savard — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Hellboys (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 4.
+Their top 5 by points:
+1. Mateo DeSousa — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+2. Jaden Wong — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Christian Sanderson — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Jamie Klassen — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Brennon Woodhouse — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Hungry Hungry Hippos (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 6.
+Their top 5 by points:
+1. Justin Deleeuw — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Tyler Hill — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Kurtis Terrick — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+4. Kyle Wilzer — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Matt Romanychyn — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Huskies (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 5.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Ice Hogs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 9, goals against 5.
+Their top 5 by points:
+1. Steve Rossnagel — 3 pts (2 G, 1 A) in 1 GP, 1 penalties
+2. Cody Grimstrup — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+3. Tim Finch — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+4. Eric Gerbrandt — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+5. Sully Rossnagel — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Jackals (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 8.
+Their top 1 by points:
+1. Zeb Hudon — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Jager Bombers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 2.
+Their top 3 by points:
+1. Beau Harrison — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Cameron Steadman — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Luc Mccarthy — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Jagr Bombs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 2.
+Their top 5 by points:
+1. Jerod Rathbone — 5 pts (2 G, 3 A) in 1 GP, 0 penalties
+2. Jesse Browne — 4 pts (3 G, 1 A) in 1 GP, 0 penalties
+3. Michael Phelps — 4 pts (0 G, 4 A) in 1 GP, 0 penalties
+4. Daniel Shields — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+5. James Knight — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Lakers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 5.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Lightning (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 1.
+Their top 5 by points:
+1. Jeff Sawler — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+2. Rob Bahry — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+3. Murray McCarthy — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+4. Darren Fenning — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Paul Spellman — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Liquor Pigs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 3.
+Their top 3 by points:
+1. Jon Kell — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Keith Richardson — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Winston Yip — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Lucic and Chong (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 3.
+Their top 5 by points:
+1. Stefan Arnason — 5 pts (3 G, 2 A) in 1 GP, 0 penalties
+2. Erik Arnason — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Royce O'Toole — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Myles OToole — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Christopher Protulipac — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Moose Knuckles (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 6.
+Their top 5 by points:
+1. Scott Baker — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Taz Stuart — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Joey Reuther — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Jamie Mierau — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Matt Worobec — 1 pts (0 G, 1 A) in 1 GP, 2 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Muckers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 3, goals against 1.
+Their top 5 by points:
+1. Dylan Morden — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Jake Ford — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Brennan Cook — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Koby Carriere — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Carson Ricard — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Mushroom Kingdom HC (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 7, goals against 6.
+Their top 5 by points:
+1. Shane Henrotte — 5 pts (0 G, 5 A) in 1 GP, 3 penalties
+2. Kyle Holden — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+3. Shaun Hopkins — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+4. Dustin Kozar — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+5. Jim Allan — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — No Dekes (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 7, goals against 4.
+Their top 5 by points:
+1. Michael Friesen — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Ari Kay — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+3. Nicholas Shea — 2 pts (2 G, 0 A) in 1 GP, 1 penalties
+4. Bryce Kalinowsky Irwin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Evan Fehr — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — North End Alliance (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 7, goals against 3.
+Their top 5 by points:
+1. Dan Shyka — 4 pts (3 G, 1 A) in 1 GP, 0 penalties
+2. Tyler Lancaster — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+3. Shane Henrotte — 3 pts (0 G, 3 A) in 1 GP, 1 penalties
+4. Garrett Laminger — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Mike Stupak — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Oxford Oxs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 6.
+Their top 2 by points:
+1. Randy Howorth — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Ernie Dyck — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Pacemakers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 4, goals against 3.
+Their top 5 by points:
+1. Ray St Mars — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. John Timlick — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Landen Chudley — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Jay Guarino — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Pete Chudley — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Park City Heroes (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 1.
+Their top 5 by points:
+1. Adam Ajudhia — 4 pts (2 G, 2 A) in 1 GP, 0 penalties
+2. Dusten Paulsen — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Darian Hepner — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+4. Andrew Washington — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+5. Brett Saunders — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Prairie Chickens (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 6.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Prickly Pears (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 0.
+Their top 5 by points:
+1. Joel Poiron — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+2. Jared Klassen — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Matt Popowich — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Scott Anderson — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Jordan Bodnar — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Puck & Shillelaghs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 4.
+Their top 5 by points:
+1. Brett Stewart — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Dave Bourrier — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Adam Firman — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Scott Miskiewicz — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Colin Repchinsky — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Puck Bunny Hunters (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 8.
+Their top 2 by points:
+1. Devan Schram — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Garrett Olafson — 2 pts (1 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Puckin Clowns (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 3.
+Their top 5 by points:
+1. Brett Shenback — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Alvin Pacag — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Ash Single — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Kent Maurstad — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Philip Tat — 1 pts (1 G, 0 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Pucking Hopeless (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 6, goals against 7.
+Their top 5 by points:
+1. Trevor Machutchon — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+2. Tyler Ladobruk — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+3. Jim Proulx — 1 pts (1 G, 0 A) in 1 GP, 2 penalties
+4. Marc Saurette — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Ron Neufeld — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Rusty and Winded (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 5, goals against 8.
+Their top 5 by points:
+1. Alex Young — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Brett Roberts — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Kevin Dedio — 2 pts (1 G, 1 A) in 1 GP, 1 penalties
+4. Kaden Dedio — 1 pts (1 G, 0 A) in 1 GP, 3 penalties
+5. Adam Hogan-Cann — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Saints (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 6.
+Their top 2 by points:
+1. Matthew Oberick — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Chayse Brawdy — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Seamen (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 5, goals against 7.
+Their top 5 by points:
+1. Steve Alexander — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+2. Cole Humphrey — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+3. Jeremie Rivard — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Adam Stoykewych — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Andrew Lajeunesse — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Shock & Awe (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 4.
+Their top 5 by points:
+1. Tristan Penner — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Cade Nixdorf — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Daniel Dumas — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Jayden Rach — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Landen Green — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Shorthanded (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 6.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Silver Bullets (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 2.
+Their top 5 by points:
+1. Matthew Gardner — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+2. David Walker — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+3. Beau Zelenewich — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+4. Jaret Horbatiuk — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Kaelan Briggs — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Slack Hawks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 6.
+Their top 5 by points:
+1. Lucas Redekop — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Jonathan Peyton — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Michael Neufeldt — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Brock Klassen — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Derek Bergen — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Slap Nuts (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 4, goals against 2.
+Their top 5 by points:
+1. Lukas Gertzen — 3 pts (3 G, 0 A) in 1 GP, 0 penalties
+2. Nik Nathanail — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Bill Nathanail — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Jean Paul Christophe — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Joshua Vogiatzakis — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — St. Charles Devils (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 5.
+Their top 5 by points:
+1. Gary Wasilewski — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Daniel De Smet — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Myles Kirby — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Andrew McKie — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Brian Melville — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Strange Brew (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 5.
+Their top 4 by points:
+1. Justen Kay — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Dan Morin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Danielle Maxwell — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Nick Gilmour — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Subarctic Goats (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 7, goals against 8.
+Their top 5 by points:
+1. Rob Stankewich — 5 pts (4 G, 1 A) in 1 GP, 0 penalties
+2. Jordan Nemetchek — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Wes Smith — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Scott Forcand — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Trevor Lines — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Swamp Donkeys (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 1.
+Their top 5 by points:
+1. Alex Firth — 4 pts (2 G, 2 A) in 1 GP, 0 penalties
+2. Jarrett Mazur — 4 pts (1 G, 3 A) in 1 GP, 0 penalties
+3. Austin Gilmore — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Derrik Goodwin — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Brady Laws — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Swedes (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 7, goals against 5.
+Their top 5 by points:
+1. Connor Davies — 5 pts (3 G, 2 A) in 1 GP, 0 penalties
+2. Charlie Ringland — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+3. Brendan Keane — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Cam Petras — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Keanen Brown — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Black Aces (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 0, goals against 1.
+No opposing player has recorded a point yet this season.
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Bucks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 9, goals against 2.
+Their top 5 by points:
+1. Tom Parkin — 5 pts (1 G, 4 A) in 1 GP, 0 penalties
+2. Trenton Fuerst — 4 pts (4 G, 0 A) in 1 GP, 0 penalties
+3. Zachary Penner — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+4. Zachary Campbell — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Justen Chin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Famous Pirates (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 2, goals against 1.
+Their top 4 by points:
+1. Alan Braverman — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Blake Richison — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Declan Muys — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Sandro Cerullo — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Goonies (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 0.
+Their top 5 by points:
+1. Mike Olson — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+2. Brian Garrity — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Gilles Aminot — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Andrew Whitehead — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. John Graumann — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Heat (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 5.
+Their top 5 by points:
+1. Samuel Jean-Paul — 6 pts (3 G, 3 A) in 1 GP, 0 penalties
+2. Donovan Pearase — 5 pts (2 G, 3 A) in 1 GP, 0 penalties
+3. Adam Doerksen — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Derek Witzky — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. Andrew R. Hamilton — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Hicks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 4.
+Their top 5 by points:
+1. Tyler Van de velde — 6 pts (2 G, 4 A) in 1 GP, 0 penalties
+2. Jordan Keck — 5 pts (2 G, 3 A) in 1 GP, 0 penalties
+3. Roux Bazin — 4 pts (0 G, 4 A) in 1 GP, 0 penalties
+4. Reid Stastook — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+5. Ryan Billingham — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Kyle Wellwoods (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 5, goals against 4.
+Their top 5 by points:
+1. Phil Jeffrey — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Kevin Reznik — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Mathieu Rivard — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Derek Chin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Kevin Lussier — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Milkmen (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 7.
+Their top 5 by points:
+1. Dustin Leach — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Jeremy Peltier — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Mark Sunstrum — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Dax Burtniak — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Jordan Findley — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Paul Coffeys (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 0.
+Their top 5 by points:
+1. Michael Ross — 6 pts (5 G, 1 A) in 1 GP, 0 penalties
+2. Matthew Fung — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Jason Vilela — 3 pts (0 G, 3 A) in 1 GP, 1 penalties
+4. Amrit Bains — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Mankarn Sidhu — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Pylons (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 4.
+Their top 5 by points:
+1. Colin Shepherd — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Bill Karras — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Dale Ducharme — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Hayden Sawchuk — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Rayne Sawchuk — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — The Real Blades Of Steel (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 8, goals against 2.
+Their top 5 by points:
+1. Clint Hartwell — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Scott Kerr — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Travis Fischer — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+4. Curtis Harper — 3 pts (0 G, 3 A) in 1 GP, 0 penalties
+5. Ben Durand — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Throw It Down Crew (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 5.
+Their top 5 by points:
+1. Matt Bento — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Jordan Kasprick — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Justin Vechina — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+4. Kyle Atkins — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+5. Scott Humphreys — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Top Ched Chucks (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 6.
+Their top 5 by points:
+1. Bryan Glennie — 2 pts (1 G, 1 A) in 1 GP, 1 penalties
+2. Jayden Maeren — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Jordan Konrad — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Corey Lee — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Zachary Lee — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Toss N Sauce (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 1.
+Their top 5 by points:
+1. Lokhlen Gregory — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Todd Shettler — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Brendan Corr — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+4. Jordon Ottenson — 2 pts (1 G, 1 A) in 1 GP, 1 penalties
+5. Bryan Whitford — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Troopers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 3.
+Their top 3 by points:
+1. Vincent Petrzelka — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Jesse Garber — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+3. Lewis Promislow — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Tuesday Nooners (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 1, goals against 5.
+Their top 1 by points:
+1. Wayne Polischuk — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Turkeys (NEXT opponent — use in next_game_preview)
+Turkeys has no completed games this season yet, so there are no season totals. Do not invent players or stats for this team.
+-----
+## Opponent Season Leaders — Walrus Attack (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 7.
+Their top 5 by points:
+1. Tyler Brisbois — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Justin Smith — 2 pts (0 G, 2 A) in 1 GP, 1 penalties
+3. Garry Albright — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. William Gladu — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Kaden Currie — 1 pts (0 G, 1 A) in 1 GP, 2 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Whalers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 5.
+Their top 5 by points:
+1. Craig Enns — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+2. Noah Barrett — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+3. Martin Lemieux — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Brian Maddaford — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+5. Chris Cymbaluk — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Winnipeg Camel Toe Drags (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 4, goals against 1.
+Their top 5 by points:
+1. Calan Duchart — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Riley Weiss — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Matthew Wilson — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Sean Rozwadowski — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Ethan Christianson — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Winnipeg Flyers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 3, goals against 5.
+Their top 3 by points:
+1. Stephen Godon — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+2. Trevor Wheeler — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Warren Britton — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Winnipeg Knockoffs (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 4.
+Their top 5 by points:
+1. Richard Marcoux — 5 pts (0 G, 5 A) in 1 GP, 0 penalties
+2. Kyle Ross — 4 pts (3 G, 1 A) in 1 GP, 0 penalties
+3. Braeden Parenteau — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+4. Richard Genaille — 2 pts (1 G, 1 A) in 1 GP, 0 penalties
+5. William Tyrone Schroeder — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Wolfpack (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 6, goals against 4.
+Their top 5 by points:
+1. Scott Murphy — 4 pts (3 G, 1 A) in 1 GP, 0 penalties
+2. Joey Wur — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+3. Shane Magian — 3 pts (1 G, 2 A) in 1 GP, 0 penalties
+4. John Jonker — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Robert Bauer — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Wringers (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 2, goals against 9.
+Their top 3 by points:
+1. Eric Sarrasin — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+2. Jacques Theriault — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+3. Justin Carter — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Yay? Hooray! (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 1-0-0 in 1 game(s), goals for 3, goals against 1.
+Their top 4 by points:
+1. Jon Benson — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Kevin Doole — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Leslie McNabb — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+4. Cory Bellhouse — 1 pts (0 G, 1 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Yellow Jackets (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 6.
+Their top 5 by points:
+1. Jordan Moore — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+2. Keith Bennett — 2 pts (2 G, 0 A) in 1 GP, 0 penalties
+3. Andrew Whitehead — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Wesley Johnson — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+5. Brady Hofer — 1 pts (0 G, 1 A) in 1 GP, 1 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
+-----
+## Opponent Season Leaders — Yukon Smoker Boys (NEXT opponent — use in next_game_preview)
+Season totals through their last completed game. Record: 0-1-0 in 1 game(s), goals for 4, goals against 8.
+Their top 5 by points:
+1. Maverick Rafter — 3 pts (2 G, 1 A) in 1 GP, 0 penalties
+2. Benjamin Micflikier — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+3. Kayin Pauls — 2 pts (0 G, 2 A) in 1 GP, 0 penalties
+4. Carrigan Umpherville — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+5. Cole Emberly — 1 pts (1 G, 0 A) in 1 GP, 0 penalties
+(Small sample — only a game or two played, so treat these as early-season numbers.)
+Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or backstory for these players, and do not name any other opposing players.
