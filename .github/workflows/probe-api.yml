@@ -1,0 +1,16 @@
+name: probe-api
+on:
+  push:
+    branches: [claude/opponent-stats-probe]
+    paths: ['probe/api.py', '.github/workflows/probe-api.yml']
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install requests && python probe/api.py
+      - run: |
+          git config user.name "probe-bot"; git config user.email "probe@users.noreply.github.com"
+          git add -f probe/out2 && git commit -m "API probe output" && git pull --rebase origin claude/opponent-stats-probe && git push
