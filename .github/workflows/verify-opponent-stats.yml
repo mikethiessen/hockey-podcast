@@ -18,14 +18,17 @@ jobs:
           sys.path.insert(0, "scripts")
           import opponent_stats as o
           sid = o._schedule_id()
-          div = o._fetch_division_games(sid)
-          print("division games:", len(div), "finals:", sum(1 for g in div if g.get("game_status_id")==9))
-          names = sorted({(g[s] or {}).get("name") for g in div for s in ("homeTeam","visitingTeam")})
-          print("teams:", names)
-          for n in names:
-              if n and n != "Village People":
-                  print("-----"); print(o.build_opponent_context(n, "preview"))
+          ours = o._fetch_games(sid, o.OUR_TEAM_ID)
+          print("our games:", len(ours))
+          opps = []
+          for g in ours:
+              for s in ("homeTeam","visitingTeam"):
+                  n = g[s]["name"]
+                  if n != "Village People" and n not in opps: opps.append(n)
+          print("opponents:", opps)
+          for n in opps:
+              print("-----"); print(o.build_opponent_context(n, "preview"))
           PY
       - run: |
           git config user.name "verify-bot"; git config user.email "verify@users.noreply.github.com"
-          git add -f verify_out && git commit -m "Verify output" && git push
+          git add -f verify_out && git commit -m "Verify output" && git pull --rebase origin claude/opponent-season-stats && git push

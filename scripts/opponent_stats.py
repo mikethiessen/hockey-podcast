@@ -34,6 +34,7 @@ API_BASE = "https://canlan2-api.sportninja.net/v1"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 }
+OUR_TEAM_ID = "Nz7BgbzbxfrhWtft"  # Village People
 FINAL_STATUS_ID = 9  # game_status_id 9 == final
 TOP_N = 5
 MAX_PAGES = 20  # safety stop on pagination
@@ -44,23 +45,27 @@ def _schedule_id():
         return json.load(f)["schedule_id"]
 
 
-def _fetch_division_games(schedule_id, team_id=None):
-    """All (non-cancelled) games in the schedule, walking every page. Optionally
-    filtered server-side to one team."""
-    games, page = [], 1
+def _fetch_games(schedule_id, team_id):
+    """All non-cancelled games in the schedule involving team_id (server-side
+    filter), walking every page. Stops on last_page, an empty page, or a page
+    that adds no new games, so a missing/odd meta block can't cause a silent
+    single-page read or an endless loop."""
+    games, seen, page = [], set(), 1
     while page <= MAX_PAGES:
-        params = {"page": page, "order": "asc", "exclude_cancelled_games": 1}
-        if team_id:
-            params["team_id"] = team_id
+        params = {"page": page, "order": "asc", "exclude_cancelled_games": 1, "team_id": team_id}
         resp = requests.get(
             f"{API_BASE}/schedules/{schedule_id}/games",
             headers=HEADERS, params=params, timeout=20,
         )
         resp.raise_for_status()
         body = resp.json()
-        games.extend(body.get("data", []))
+        batch = [g for g in body.get("data", []) if g["id"] not in seen]
+        if not batch:
+            break
+        seen.update(g["id"] for g in batch)
+        games.extend(batch)
         last_page = body.get("meta", {}).get("last_page")
-        if last_page is None or page >= last_page:
+        if last_page is not None and page >= last_page:
             break
         page += 1
     return games
@@ -72,11 +77,11 @@ def _fetch_game(game_id):
     return resp.json()["data"]
 
 
-def find_team_id(division_games, team_name):
+def find_team_id(games, team_name):
     """Resolve a team name (as stored in schedule.json) to its SportNinja ID using
-    the division schedule. Exact match first, then case-insensitive."""
+    a list of games. Exact match first, then case-insensitive."""
     names = {}
-    for g in division_games:
+    for g in games:
         for side in ("homeTeam", "visitingTeam"):
             t = g.get(side) or {}
             if t.get("id") and t.get("name"):
@@ -151,18 +156,20 @@ def aggregate_team(team_id, final_games_full):
 
 
 def get_opponent_season_stats(team_name):
-    """Returns {"team_id", "record", "players"} or None if the team can't be resolved.
-    Raises requests exceptions on API failure (caller handles)."""
+    """Returns {"team_id", "record", "players"} or None if the opponent can't be
+    resolved. Raises requests exceptions on API failure (caller handles).
+
+    The opponent's ID is found in OUR OWN team-filtered games (every opponent we
+    play appears there), then that opponent's games are fetched with the same
+    server-side team filter, so we get all of their games, not just one page of
+    the whole league."""
     schedule_id = _schedule_id()
-    division = _fetch_division_games(schedule_id)
-    team_id = find_team_id(division, team_name)
+    our_games = _fetch_games(schedule_id, OUR_TEAM_ID)
+    team_id = find_team_id(our_games, team_name)
     if not team_id:
         return None
-    team_finals = [
-        g for g in division
-        if g.get("game_status_id") == FINAL_STATUS_ID
-        and team_id in ((g.get("homeTeam") or {}).get("id"), (g.get("visitingTeam") or {}).get("id"))
-    ]
+    team_finals = [g for g in _fetch_games(schedule_id, team_id)
+                   if g.get("game_status_id") == FINAL_STATUS_ID]
     full = [_fetch_game(g["id"]) for g in team_finals]
     players, record = aggregate_team(team_id, full)
     return {"team_id": team_id, "record": record, "players": players}
