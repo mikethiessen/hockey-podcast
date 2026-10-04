@@ -220,11 +220,6 @@ otherwise clean), not any minor or generic contact moment. When in doubt,
 skip it — it should feel like a rare, earned release of frustration, not a
 running expectation the show has to hit every time.
 
-### Casey's Mispronunciation
-Casey occasionally mispronounces or misremembers something that Gord
-corrects grumpily — only when it arises naturally in the flow of a segment,
-not forced into every episode.
-
 ---
 
 ## Phrasing
