@@ -31,6 +31,7 @@ from guest_coach import (
     record_episode_result,
 )
 from milestones import compute_milestones, format_milestone_context, save_milestone_log
+from opponent_stats import build_opponent_context
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -121,7 +122,7 @@ def get_prior_meetings(schedule, opponent, before_game_id):
     return prior
 
 
-def format_next_game_context(next_game, prior_meetings):
+def format_next_game_context(next_game, prior_meetings, opponent_stats_context=""):
     if not next_game:
         return "## Next Game Preview\nThis is the last scheduled game of the season. Skip the next_game_preview segment entirely — do not include it in the script.\n"
 
@@ -149,11 +150,15 @@ def format_next_game_context(next_game, prior_meetings):
         )
     else:
         context += (
-            "We have NOT played this opponent yet this season — there is no prior meeting "
-            "data and no data on their individual players. Do not invent or guess at their "
-            "roster or best players. Keep the preview focused on the date/time/location and "
-            "general anticipation instead.\n"
+            "We have NOT played this opponent yet this season, so there is no prior-meeting "
+            "data. Do not invent or guess at their roster or best players. The only real "
+            "information about their players is the opponent season leaders reference data below "
+            "(if present); if it is absent or says no data, keep the preview focused on the "
+            "date/time/location and general anticipation instead.\n"
         )
+
+    if opponent_stats_context:
+        context += "\n" + opponent_stats_context + "\n"
 
     return context
 
@@ -174,7 +179,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -200,6 +205,7 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     relationship_block = f"\n---\n\n{relationship_context}\n" if relationship_context else ""
     guest_coach_block = f"\n---\n\n{guest_coach_context}\n" if guest_coach_context else ""
     milestone_block = f"\n---\n\n{milestone_context}\n" if milestone_context else ""
+    opponent_recap_block = f"{opponent_stats_context}\n\n---\n\n" if opponent_stats_context else ""
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
@@ -241,7 +247,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 
 ---
 
-{past_context}
+{opponent_recap_block}{past_context}
 
 ---
 
@@ -276,8 +282,9 @@ Requirements:
 - For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
 - Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
 - Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
-- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if real prior-meeting data is provided — never invent or guess at an opponent's roster or standout players. If there's no next game, omit this segment entirely.
-- Do not invent any detail not present in the game stats JSON or the Next Game Preview data
+- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if they appear in the prior-meeting data or in the Opponent Season Leaders block for the NEXT opponent — never invent or guess at an opponent's roster or standout players. Opponent season leaders, if provided, are optional reference material: use them only if a real storyline gives you a reason (a hot scorer, a rematch, a contrast with our own season stats). Not mentioning any opposing player is completely normal — never include them just because the data is there. If there's no next game, omit this segment entirely.
+- If an Opponent Season Leaders block for tonight's opponent appears above, treat it as optional background, not a segment or a checklist item. Most episodes should not mention the opponent's players at all; reach for it only when something in tonight's game or the season story makes it genuinely interesting (e.g. their top scorer being shut down, or a duel with one of our own leaders), using only the real numbers given and only players that block lists
+- Do not invent any detail not present in the game stats JSON, the Next Game Preview data, or the Opponent Season Leaders blocks
 - If a Relationship Context section is present above, only use it if it genuinely fits — never force a callback or prediction check-in that doesn't naturally arise from tonight's episode
 - Target 700-800 words total
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
@@ -335,7 +342,8 @@ def generate_script(game_id):
 
     next_game = get_next_game(schedule, game_id)
     prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
-    next_game_context = format_next_game_context(next_game, prior_meetings)
+    next_opp_stats_context = build_opponent_context(next_game["opponent"], "preview") if next_game else ""
+    next_game_context = format_next_game_context(next_game, prior_meetings, next_opp_stats_context)
     if next_game:
         print(f"  Next game: vs {next_game['opponent']} ({len(prior_meetings)} prior meeting(s) this season).")
     else:
@@ -384,7 +392,10 @@ def generate_script(game_id):
         print(f"  Milestone(s) detected: {milestones}")
 
     # Build prompt and call API
-    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context)
+    # Real season leaders for tonight's opponent (totals include tonight's game)
+    recap_opp_stats_context = build_opponent_context(stats["opponent"], "recap")
+
+    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
