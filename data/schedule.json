@@ -88,6 +88,16 @@
       "special_guest": null,
       "milestones": [],
       "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "PDAXIRYD1v2gDRnS",
+      "starts_at": "2026-10-31T03:50:00+00:00",
+      "opponent": "The Wolfpack",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
     }
   ]
 }
