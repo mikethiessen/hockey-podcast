@@ -98,6 +98,26 @@
       "special_guest": null,
       "milestones": [],
       "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "SBWoca7fUtUvO3hf",
+      "starts_at": "2026-11-15T03:30:00+00:00",
+      "opponent": "Bench Warmers (Men's)",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "X0Rfv7BA6Ez0wNzA",
+      "starts_at": "2026-11-19T00:40:00+00:00",
+      "opponent": "SeaLions",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
     }
   ]
 }
