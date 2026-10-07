@@ -118,6 +118,16 @@
       "special_guest": null,
       "milestones": [],
       "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "UhomfWR4sFCkqlAt",
+      "starts_at": "2026-11-27T00:00:00+00:00",
+      "opponent": "Tuesday Nooners",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
     }
   ]
 }
