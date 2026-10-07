@@ -68,6 +68,26 @@
       "special_guest": null,
       "milestones": [],
       "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "8fvii4yDzvQ55lcY",
+      "starts_at": "2026-10-16T23:30:00+00:00",
+      "opponent": "Puckin Clowns",
+      "home_or_away": "away",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
+    },
+    {
+      "game_id": "XVMEitL7SJlXwGT5",
+      "starts_at": "2026-10-22T00:40:00+00:00",
+      "opponent": "CFH Hockey Club",
+      "home_or_away": "home",
+      "episode_generated": false,
+      "special_guest": null,
+      "milestones": [],
+      "season": "2026/27 Winter"
     }
   ]
 }
