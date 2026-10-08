@@ -24,6 +24,9 @@ One host floats a new season-long theory, built only on the real numbers in the 
 ## prediction
 One host calls a specific, checkable shot about the next game, backed by the real numbers (the season stats, the Season Outlook block, the matchup), and the other host fades it. Record it with a PREDICTION tag. If the data doesn't really support a call, skip this and speculate instead.
 
+## game_plan
+What should the team do in the next game or the next few? The hosts get to be armchair coaches and disagree. Typical arguments: stack the top scorers together to maximize the best line, or spread them out so every shift has a threat; lean on the goalie's workload and cut the shots against; clean up the penalties; get more shots to the net. Ground each opinion in the real numbers (who leads in points, the listed scoring pairs, shots, penalties, the next opponent's record) and make the recommendation specific. The team does not track fixed lines or positions, so talk about pairing and spreading players, never about who "plays forward or defence", and don't assume who will or won't be available next game unless the data says so. Each host should commit to a view and defend it, and neither should win every time.
+
 ## trajectory
 Someone is climbing or sliding in the productivity order compared with a few games ago. What changed, and is it real or a blip? The hosts should disagree about whether it lasts. Use only the ranks and numbers listed in the season stats.
 

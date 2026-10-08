@@ -33,7 +33,7 @@ FORCED_LENSES = ("accountability",)
 # week to week, but picking them at random from a pool this size would feature
 # them only occasionally. So when eligible, ONE of these is added right after the
 # forced lenses, unless it was used in the most recent episodes.
-PRIORITY_LENSES = ("theory_check", "prediction")
+PRIORITY_LENSES = ("theory_check", "prediction", "game_plan")
 
 # Only used to fill empty slots when too few data lenses are eligible.
 FALLBACK_LENSES = ("season_outlook",)
@@ -79,6 +79,8 @@ ELIGIBILITY = {
     "theory_check": lambda c: bool(c.get("open_theories")),
     "new_theory": lambda c: _stats_ok(c) and _enough_for_calls(c) and bool(c.get("can_add_theory")),
     "prediction": lambda c: _stats_ok(c) and _enough_for_calls(c) and bool(c.get("has_next_game")),
+    "game_plan": lambda c: _stats_ok(c) and _enough_for_calls(c) and bool(c.get("has_next_game"))
+    and len(c["season_stats"].get("points_leaders") or []) >= 2,
     "trajectory": lambda c: _stats_ok(c) and bool(c["season_stats"].get("trajectories")),
     "chemistry": lambda c: _stats_ok(c) and bool(c["season_stats"].get("top_assist_pairs")),
     "streaks": lambda c: _stats_ok(c) and (bool(c["season_stats"].get("streaks")) or _team_streak_ok(c)),
