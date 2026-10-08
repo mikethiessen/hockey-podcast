@@ -208,9 +208,8 @@ def format_milestone_context(milestones):
     lines = ["## Milestones (real, from tonight's game and season data)"]
     lines.append(
         "The following are real, verified facts. Work them into the episode "
-        "naturally wherever they genuinely fit — inside game_recap, "
-        "player_spotlight, or season_storylines, whichever suits the moment — "
-        "rather than as a separate segment. Do not invent any additional "
+        "naturally wherever they genuinely fit, rather than as a separate "
+        "segment. Do not invent any additional "
         "milestone, streak, or leadership claim beyond what's listed:"
     )
     for m in milestones:

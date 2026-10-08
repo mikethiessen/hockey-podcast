@@ -64,8 +64,8 @@ def format_guest_coach_context(log):
 
     lines = ["## Special Segment: Guest Coach (this episode only)"]
     lines.append(
-        "This episode gets a one-off guest coach segment, replacing gord_corner "
-        "for this episode only. Invent a brand new character for tonight:\n"
+        "This episode gets a one-off guest coach, who takes over the tactical-analysis "
+        "moment for this episode only. Invent a brand new character for tonight:\n"
         "- Give them a name and a distinct personality/voice, clearly different "
         "from both Casey and Gord (a different energy, vocabulary, and way of "
         "reacting — not a third variation on either existing host).\n"

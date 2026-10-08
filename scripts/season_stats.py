@@ -86,6 +86,7 @@ def compute_season_stats(schedule, up_to_game_id):
             "periods": s.get("periods", []),
             "our_score": s.get("our_score"),
             "opp_score": s.get("opp_score"),
+            "home_or_away": s.get("home_or_away"),
         })
 
     # Active point streaks: consecutive most recent games (that the player
@@ -121,9 +122,13 @@ def compute_season_stats(schedule, up_to_game_id):
     returns = _compute_returns(game_log)
     rarities = _compute_rarities(game_log)
     two_way = _compute_two_way_season(game_log)
+    team_record, home_road, results = _compute_team_record(game_log)
 
     return {
         "games_counted": len(played_stats),
+        "team_record": team_record,
+        "home_road": home_road,
+        "results": results,
         "points_leaders": points_leaders,
         "streaks": streaks,
         "top_assist_pairs": top_pairs,
@@ -133,6 +138,34 @@ def compute_season_stats(schedule, up_to_game_id):
         "rarities": rarities,
         "two_way": two_way,
     }
+
+
+def _empty_record():
+    return {"gp": 0, "w": 0, "l": 0, "t": 0, "gf": 0, "ga": 0}
+
+
+def _compute_team_record(game_log):
+    """Our overall record, home/away split, and the ordered list of results
+    ("win"/"loss"/"tie"), all from games already in game_log. Games with a
+    missing score or result are skipped rather than guessed at."""
+    total = _empty_record()
+    split = {"home": _empty_record(), "away": _empty_record()}
+    results = []
+    for g in game_log:
+        res, gf, ga = g.get("result"), g.get("our_score"), g.get("opp_score")
+        if res not in ("win", "loss", "tie") or gf is None or ga is None:
+            continue
+        results.append(res)
+        buckets = [total]
+        side = g.get("home_or_away")
+        if side in split:
+            buckets.append(split[side])
+        for b in buckets:
+            b["gp"] += 1
+            b["gf"] += gf
+            b["ga"] += ga
+            b["w" if res == "win" else "l" if res == "loss" else "t"] += 1
+    return total, split, results
 
 
 def _compute_two_way_season(game_log):
@@ -497,8 +530,8 @@ def format_season_stats(season_stats):
         return (
             "## Season Stats\n"
             "Not enough games played yet this season to draw meaningful season-long "
-            "storylines. Skip statistical storylines this episode rather than forcing "
-            "one from too little data.\n"
+            "statistics. Don't build statistical storylines from too little data; "
+            "opinion and speculation grounded only in tonight's game is fine.\n"
         )
 
     lines = ["## Season Stats"]
@@ -611,18 +644,4 @@ def format_season_stats(season_stats):
 
         lines.append("")
 
-    lines.append(
-        "These are the show's richest creative territory. Per-game facts are a closed "
-        "set, but season-long patterns compound — a rank that *moved*, a streak that "
-        "*broke*, a first that only counts as a first because of everything before it. "
-        "Build the storyline out of change over time, not a recitation of current "
-        "standings. Reward the listener who has heard the earlier episodes.\n"
-    )
-
-    lines.append(
-        "If none of the above has anything notable for tonight's game specifically, "
-        "it's fine to skip season storylines and lean on last episode's carried-forward "
-        "storyline instead — don't force a stat in that isn't actually interesting."
-    )
-
-    return "\n".join(lines)
+    return "\n".join(lines).rstrip()

@@ -3,7 +3,7 @@
 ## Host 1: Casey Bright
 **Role:** Co-host — play-by-play and optimism  
 **Age:** Late 20s  
-**Personality:** Young, enthusiastic, relentlessly optimistic — but it's not just temperament, it's a belief: he thinks effort and chemistry compound over a season, and he'll say so. Always finds the silver lining even in a 7-3 blowout. Genuinely loves the Village People and believes every game is a stepping stone to greatness. Gets excited easily. Uses modern sports commentary language. Tends to over-hype routine plays.
+**Personality:** Young, enthusiastic, relentlessly optimistic — but it's not just temperament, it's a belief: he thinks effort and chemistry compound over a season, and he'll say so. Always finds the silver lining even in a 7-3 blowout. Genuinely loves the Village People and believes every game is a stepping stone to greatness. Specifically, he is convinced that **this is the year** the team wins the ASHL E-Division championship, and he keeps that belief alive through good nights and bad. His optimism about it is a belief, never a claim about standings. Gets excited easily. Uses modern sports commentary language. Tends to over-hype routine plays.
 
 **Background:** Played rec hockey himself until pretty recently, so the belief that effort pays off isn't abstract to him — he's felt it firsthand. That personal experience gets reinforced by a genuine habit of following sports media and underdog storylines, which is where the "every team is building toward something" framing comes from — he's absorbed that arc from a hundred stories like it and genuinely expects it to apply here too. He'll bring either side of this up when a game gives him real reason to (a rough loss, a young player grinding through a slump) — not as a scheduled callback.
 
@@ -21,7 +21,7 @@
 **Role:** Co-host — colour and analysis  
 **Age:** Late 50s  
 **Personality:** Grizzled old-school hockey guy who came up in rougher eras. He values the parts of the game that don't show up in a highlight — blocking a shot, backchecking when you're tired, protecting a lead, a goalie keeping you in it — and he's hard on anyone who coasts. Skeptical by default: he assumes a good-looking result is hiding something until he sees what it cost. He does miss the physical game, and playing in the **Adult Safe Hockey League (ASHL)** — where bodychecking and fighting are prohibited — is a standing sore spot, but it's one of his opinions, not the whole of him; he's just as likely to be exercised about undisciplined penalties or a soft second period.  
-**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly.
+**Speech style:** Annoyed easily. Even a dismissive reaction should carry some color or an opinion attached to it. Respects players who play hard and gets genuinely animated when someone takes a penalty, even a minor one ("NOW we're seeing some fire!"). Has a soft spot for the team but would never admit it openly. He wants the E-Division championship as badly as anyone and won't say so; his skepticism is partly him refusing to jinx it, and he treats the sacrifices it takes (showing up tired, playing hurt) with grudging respect.
 
 **Background:** Played rec-league hockey for 20+ years, mostly in leagues with contact. Coaches a kids' team on weekends, which is the one place he still allows himself to talk about "playing the body" out loud. Some of his fondest memories are postgame beers in the dressing room with his old teammates — win or lose, that part never changed. He'll bring this up when something in the current game genuinely calls it to mind (a gritty win, a guy who left it all out there, a losing effort nobody's ashamed of) — not as a scheduled aside.
 
@@ -33,7 +33,8 @@
 
 **Running gag:** See `content-bank.md`'s "Running Gags" section for Gord's
 "safe league" bit (the physicality-then-catches-himself gag). It lives there
-now alongside the show's other recurring bits and gags.
+now alongside the show's other recurring bits and gags, including his
+occasional "too many pre-game beers" theory after a flat performance.
 
 ---
 

@@ -11,13 +11,21 @@ Fully automated podcast pipeline for a recreational hockey team called **the Vil
 
 - **`hosts.md`** — Casey Bright (young, optimistic lead host — background as a recent rec player plus a sports-media "underdog storyline" worldview, an offensive-stats analytical lens, a rare "crack in the armor" beat on bad losses) and Gord Slapshot (grizzled veteran colour commentator — 20+ years playing contact hockey, postgame-beers-in-the-dressing-room background, a PIM "power ranking" running bit; his core "suggests something illegal, catches himself" running gag now lives in `content-bank.md`). Both hosts have an explicit "opinion vs. fact" guardrail so color and interpretation never drift into invented game facts.
 - **`core-rules.md`** — the hard, always-true rules: what the AI can/can't say, tone/style basics, script format, and how season resets work in code, not just in the prompt.
-- **`content-bank.md`** — everything reusable in one place: what each segment (cold open, game recap, player spotlight, gord corner, season storylines, next game preview) actually contains; special segments (`guest_coach`, `rivalry_alert`); the organic milestone material; the recurring bits bank (Nickname Mill, Back In My Day, Standings Tangent, Callback to Last Episode, Casey's Disco Detour, Gord's Grudging Compliment); Gord's running gag; Casey's mispronunciation bit; phrase banks; and Gord's-disagreement guidance.
-- **`script-construction.md`** — the decision layer: the 3-anchor + flexible-bank episode structure, game-type-based selection guidance (blowout/shutout/close game), the manual `active_special_segments` toggle (only `rivalry_alert` is still manual — `guest_coach` and milestones are fully automatic), and the structural variety rules (what opens the recap, reaction order, multi-point/assist-chain/penalty-clustering treatment).
+- **`content-bank.md`** — supporting material, nothing required: season-long theories, holding the hosts accountable, predictions/speculation, opponent scouting, organic milestones, example bits (Nickname Mill, Back In My Day, etc.), the Safe League gag, phrasing guidance, guest coach notes, and data-derived patterns. Anything that ran in a recent episode is treated as spent.
+- **`episode-brief.md`** — the per-run creative brief (templated with `{{game_type}}` and `{{featured_lenses}}`): Casey opens with a welcome, final score early, next-game preview last, the middle is free and season-focused (~700–800 words), no invented numbers.
+- **`lenses.md`** — human-editable descriptions of the season angles ("lenses") featured each episode. Ids must match `ELIGIBILITY` in `scripts/lenses.py`; eligibility rules stay in Python.
+- **`script-construction.md`** — the frame an episode fits in (welcome → score → free middle → preview), kept deliberately light. Thresholds and constants live in the Python modules, not here.
 - **`players.md`** — full roster with notes.
 
 ---
 
 ## Scripts (`/scripts`)
+
+- **`config_loader.py`** — loads config markdown, strips `<!-- -->` editor notes, renders `{{placeholders}}` and fails loudly on unfilled ones.
+- **`episode_memory.py`** — loads the last 3 full scripts from the same season (strictly before the current game) as the "Recent Episodes" block.
+- **`lenses.py`** — picks 3 season angles per episode from those with real data behind them, rotating away from recently used ones (seeded by game id).
+- **`look_ahead.py`** — season-outlook arithmetic (pace, record, upcoming games, next-opponent record), framed as projections.
+- **`opponent_stats.py`** — scouting report only when 1–3 opposing players clearly outscore the rest.
 
 - **`sync_schedule.py`** — fetches the SportNinja schedule API, adds new games to `schedule.json`.
 - **`check_schedule.py`** — checks if a Village People game finished recently and hasn't had an episode generated. Note: `SCHEDULE_ID` is hardcoded and must be updated manually when Canlan starts a new schedule instance (e.g. regular season → playoffs) — there's no auto-discovery endpoint.
@@ -57,3 +65,12 @@ Fully automated podcast pipeline for a recreational hockey team called **the Vil
 - `data/schedule.json`'s `season` field is the single source of truth for season-scoping. `season_stats.py`, `relationship_log.py`, and `load_past_episodes()` in `generate_script.py` all key off it. Changing the season value for new games is what triggers the "start fresh" behavior described in `core-rules.md`.
 - The relationship log (`data/relationship_log.json`) resets to empty automatically the first time it's loaded with a new season value — no manual cleanup needed between seasons.
 - Before relying on `recent_form` or season storylines for real broadcast use, make sure episodes are being generated for every completed game in order — gaps in `episode_generated` don't break the numbers (which pull live from the API regardless), but they do create gaps in `load_past_episodes()`'s context and in the relationship log's callback material, since those only read from games that actually got a script written.
+
+
+---
+
+## Tests
+`python3 -m unittest discover -s tests -v` (no network needed). Covers config loading, lenses, look-ahead, tag parsing, prediction resolution, theories, callbacks, log migration, and prompt assembly.
+
+## Relationship tags
+The model may emit `PREDICTION`, `MOMENT`, `THEORY`, `THEORY_UPDATE` tags; they are always stripped before audio. Predictions are resolved in code against games up to the current one, settled ones queue as callbacks until surfaced, and at most 3 theories stay open. The manual `rivalry_alert` toggle and the Grudging Compliment bit were retired.

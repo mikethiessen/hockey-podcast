@@ -17,6 +17,12 @@ from relationship_log import (
     load_relationship_log,
     save_relationship_log,
     resolve_predictions,
+    pending_callbacks,
+    mark_surfaced,
+    add_predictions,
+    open_theories,
+    can_add_theory,
+    apply_theory_tags,
     match_notable_moments,
     format_relationship_context,
     extract_relationship_tags,
@@ -31,7 +37,17 @@ from guest_coach import (
     record_episode_result,
 )
 from milestones import compute_milestones, format_milestone_context, save_milestone_log
-from opponent_stats import build_opponent_context
+from opponent_stats import get_opponent_brief
+from look_ahead import compute_look_ahead, format_look_ahead
+from lenses import (
+    eligible_lenses,
+    pick_lenses,
+    recent_lenses_used,
+    load_lens_descriptions,
+    format_featured_lenses,
+)
+from config_loader import load_rendered
+from episode_memory import load_recent_scripts, format_recent_scripts
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -124,7 +140,7 @@ def get_prior_meetings(schedule, opponent, before_game_id):
 
 def format_next_game_context(next_game, prior_meetings, opponent_stats_context=""):
     if not next_game:
-        return "## Next Game Preview\nThis is the last scheduled game of the season. Skip the next_game_preview segment entirely — do not include it in the script.\n"
+        return "## Next Game Preview\nThis is the last scheduled game of the season, so there is no next game. End the episode without a next-game preview.\n"
 
     dt_utc = datetime.fromisoformat(next_game["starts_at"])
     dt = dt_utc.astimezone(ZoneInfo("America/Winnipeg"))
@@ -152,9 +168,9 @@ def format_next_game_context(next_game, prior_meetings, opponent_stats_context="
         context += (
             "We have NOT played this opponent yet this season, so there is no prior-meeting "
             "data. Do not invent or guess at their roster or best players. The only real "
-            "information about their players is the opponent season leaders reference data below "
-            "(if present); if it is absent or says no data, keep the preview focused on the "
-            "date/time/location and general anticipation instead.\n"
+            "information about their players is the scouting report below (if present); if "
+            "it is absent, name no opposing players and keep the preview focused on the "
+            "date/time/location and what the season picture says about the matchup instead.\n"
         )
 
     if opponent_stats_context:
@@ -179,7 +195,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context=""):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -206,6 +222,15 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     guest_coach_block = f"\n---\n\n{guest_coach_context}\n" if guest_coach_context else ""
     milestone_block = f"\n---\n\n{milestone_context}\n" if milestone_context else ""
     opponent_recap_block = f"{opponent_stats_context}\n\n---\n\n" if opponent_stats_context else ""
+    recent_scripts_block = f"{recent_scripts_context}\n---\n\n" if recent_scripts_context else ""
+    look_ahead_block = f"\n---\n\n{look_ahead_context}\n" if look_ahead_context else ""
+
+    # The per-run task brief lives in config/episode-brief.md so it can be edited
+    # without touching Python. It fails loudly if the file or a placeholder is missing.
+    brief = load_rendered(
+        "episode-brief.md",
+        {"game_type": game_type, "featured_lenses": featured_lenses},
+    )
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
@@ -223,9 +248,6 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
 
 ## Script Construction
 {script_construction}
-
-Game Type for this episode: **{game_type}**
-Apply the corresponding rules from the "Segment Structure by Game Type" section above.
 {guest_coach_block}
 ---
 
@@ -235,7 +257,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 ---
 
 {season_stats_context}
-{recent_form_block}{relationship_block}{milestone_block}
+{recent_form_block}{relationship_block}{milestone_block}{look_ahead_block}
 ---
 
 ## Player Notes
@@ -251,7 +273,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 
 ---
 
-## Game Stats (JSON)
+{recent_scripts_block}## Game Stats (JSON)
 ```json
 {json.dumps(stats, indent=2)}
 ```
@@ -269,24 +291,7 @@ period at that moment — treat a low `time_remaining` value as late in the peri
 
 ---
 
-## Your Task
-
-Write a complete podcast script for this game following all guidelines above.
-
-Requirements:
-- Structure the episode around three fixed anchors: cold_open always first, next_game_preview always last (this now also carries the closing take — Casey's outlook and Gord's counterpoint), and season_storylines required somewhere in between at whatever position flows best. Beyond those three, choose which of game_recap, player_spotlight, and gord_corner to include and in what order — pick only the ones tonight's game actually supports, don't run all of them by default, and don't force one in when there's nothing there for it. Keep total spoken length around ~5 minutes (700-800 words) regardless of how many segments you pick — fewer segments means each one runs a bit longer, more segments means each stays tighter. If a "Special Segment: Guest Coach" section is present above, that segment takes the tactical-analysis slot gord_corner would otherwise fill, for this episode only — do not include both. If a "Milestones" section is present above, weave those real facts naturally into whichever segment genuinely fits — game_recap, player_spotlight, or season_storylines — rather than creating a separate segment for them.
-- Apply the Segment Structure by Game Type rule for **{game_type}** — flex segment length/emphasis as instructed, don't change the segment order itself
-- Casey always opens the Cold Open — this does not change episode to episode
-- The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Construction section's "Vary Delivery" guidance: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
-- In game_recap, don't recite exact clock times or walk through every period mechanically by default. Only call out a specific time or period when it's genuinely part of the story — a late-game winner, a goal in the final minute, multiple goals in a short span, a third-period collapse. Otherwise keep the recap focused on what happened and who was involved, not when down to the minute.
-- For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
-- Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
-- Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
-- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if they appear in the prior-meeting data or in the Opponent Season Leaders block for the NEXT opponent — never invent or guess at an opponent's roster or standout players. Opponent season leaders, if provided, are optional reference material: use them only if a real storyline gives you a reason (a hot scorer, a rematch, a contrast with our own season stats). Not mentioning any opposing player is completely normal — never include them just because the data is there. If there's no next game, omit this segment entirely.
-- If an Opponent Season Leaders block for tonight's opponent appears above, treat it as optional background, not a segment or a checklist item. Most episodes should not mention the opponent's players at all; reach for it only when something in tonight's game or the season story makes it genuinely interesting (e.g. their top scorer being shut down, or a duel with one of our own leaders), using only the real numbers given and only players that block lists
-- Do not invent any detail not present in the game stats JSON, the Next Game Preview data, or the Opponent Season Leaders blocks
-- If a Relationship Context section is present above, only use it if it genuinely fits — never force a callback or prediction check-in that doesn't naturally arise from tonight's episode
-- Target 700-800 words total
+{brief}
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
 
 CASEY: [dialogue]
@@ -297,20 +302,31 @@ Do not include anything before the first CASEY: line or after the last line of d
 
 ## Optional trailing tags (never spoken, not part of the script)
 
-After the last line of dialogue, you may — only if genuinely earned by this episode, never required — add one or both of the following on their own lines. These are never read aloud; they're stripped before the audio is generated and only used to track the hosts' relationship across the season.
+After the last line of dialogue, you may add any of the following, each on its own line, but only for something a host actually says on air in this script. These are never read aloud; they're stripped before the audio is generated and only used to track the hosts' relationship across the season.
 
-**PREDICTION** — only if a host makes a real, specific, checkable prediction in this episode (not vague hype):
+**PREDICTION** — only if a host makes a real, specific, checkable prediction in this episode (not vague hype) and the real data genuinely supports it:
 `PREDICTION: <casey|gord> | <type> | <details>`
 Valid types:
 - `team_result_streak | wins|losses | <window_games e.g. 3>` — e.g. a host predicts the team wins its next 3
 - `player_goal_count | <exact player name from this game's data> | <threshold>` — a host predicts a specific player reaches a goal total this season
 - `player_points_streak | <exact player name> | <threshold>` — a host predicts a player's point streak reaches N games
 - `penalty_trend | <exact player name> | <threshold>` — a host predicts a player's season penalty count reaches N
+- `next_game_result | win|loss|tie` — a host calls the result of the next game
+- `next_game_goals_for | <N>` — a host says the team scores at least N goals in the next game
+- `next_game_goals_against | <N>` — a host says the team holds the next opponent to N goals or fewer
+- `next_game_player_point | <exact player name>` — a host says a named player records at least a point in the next game
+- `next_game_player_goal | <exact player name>` — a host says a named player scores in the next game
+
+**THEORY** — only if a host floats a new season-long theory in this episode, framed as what he believes:
+`THEORY: <casey|gord> | <one-sentence thesis, no invented numbers>`
+
+**THEORY_UPDATE** — only if a host revisits an open theory listed in the Relationship Context section above. Use the theory's id:
+`THEORY_UPDATE: <theory id, e.g. T1> | <supports|complicates|dropped> | <one sentence on what tonight showed>`
 
 **MOMENT** — only if something distinct enough happened this episode that a future episode might genuinely want to reference it:
 `MOMENT: <casey|gord> | <one-sentence real summary of what they said, no invented detail> | <{game_type}>`
 
-Omit both entirely if nothing this episode genuinely earns them — this should be rare, not automatic.
+Leave out any tag that nothing in this episode genuinely earns. Never add a tag for something that wasn't said on air.
 """
 
 
@@ -340,20 +356,34 @@ def generate_script(game_id):
     past_episodes = load_past_episodes(season=current_season)
     print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
 
+    # Full text of the last few episodes, so the model can steer away from
+    # reusing their jokes, bits, and structure (it has no other memory of them).
+    recent_scripts = load_recent_scripts(schedule, game_id, current_season)
+    recent_scripts_context = format_recent_scripts(recent_scripts)
+    print(f"  Loaded {len(recent_scripts)} recent script(s) for avoid-reuse context.")
+
     next_game = get_next_game(schedule, game_id)
     prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
-    next_opp_stats_context = build_opponent_context(next_game["opponent"], "preview") if next_game else ""
+    next_opp_brief = get_opponent_brief(next_game["opponent"], "preview") if next_game else None
+    next_opp_stats_context = next_opp_brief["text"] if next_opp_brief else ""
     next_game_context = format_next_game_context(next_game, prior_meetings, next_opp_stats_context)
     if next_game:
         print(f"  Next game: vs {next_game['opponent']} ({len(prior_meetings)} prior meeting(s) this season).")
     else:
-        print("  No next game scheduled — skipping next_game_preview.")
+        print("  No next game scheduled — ending without a next-game preview.")
 
     # Compute real season stats (streaks, points leaders, assist pairs, penalty trends)
     season_stats = compute_season_stats(schedule, game_id)
     season_stats_context = format_season_stats(season_stats)
     if season_stats:
         print(f"  Season stats computed from {season_stats['games_counted']} game(s).")
+
+    # Forward-looking context (record, schedule, pace, next opponent) for predictions/speculation
+    look_ahead = compute_look_ahead(
+        schedule, game_id, season_stats,
+        next_opp_brief["record"] if next_opp_brief else None,
+    )
+    look_ahead_context = format_look_ahead(look_ahead)
 
     # Recent form (real results only) — drives the slow host-dynamic dial
     recent_form = compute_recent_form(schedule, game_id)
@@ -365,12 +395,35 @@ def generate_script(game_id):
     # and find any real prior moments relevant to tonight's opponent/result type
     relationship_log = load_relationship_log(current_season)
     newly_resolved = resolve_predictions(relationship_log, schedule, get_game_stats, compute_season_stats, game_id)
+    # Settled predictions stay queued until an episode containing them is published,
+    # so one the model skipped isn't lost.
+    callbacks = pending_callbacks(relationship_log)
+    theories_open = open_theories(relationship_log)
     moment_matches = match_notable_moments(relationship_log, stats["opponent"], game_type, game_id)
-    relationship_context = format_relationship_context(newly_resolved, moment_matches)
+    relationship_context = format_relationship_context(callbacks, moment_matches, theories_open)
     if newly_resolved:
         print(f"  {len(newly_resolved)} prediction(s) newly resolved this episode.")
+    if callbacks:
+        print(f"  {len(callbacks)} settled prediction(s) to raise on air.")
+    if theories_open:
+        print(f"  {len(theories_open)} open theory(ies) on the books.")
     if moment_matches:
         print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
+
+    # Lenses: the few angles on the season that tonight's middle is built around. Code
+    # picks only ones with real data behind them and rotates away from recent ones.
+    lens_ctx = {
+        "season_stats": season_stats,
+        "look_ahead": look_ahead,
+        "has_next_game": next_game is not None,
+        "prior_meetings": prior_meetings,
+        "pending_callbacks": callbacks,
+        "open_theories": theories_open,
+        "can_add_theory": can_add_theory(relationship_log),
+    }
+    lenses_chosen = pick_lenses(eligible_lenses(lens_ctx), recent_lenses_used(past_episodes), game_id)
+    featured_lenses = format_featured_lenses(lenses_chosen, load_lens_descriptions())
+    print(f"  Featured lenses: {', '.join(lenses_chosen)}")
 
     # Guest coach: automatic cadence, no manual config edits required.
     # Currently disabled via guest_coach.ENABLED — when off, skip entirely and
@@ -393,9 +446,10 @@ def generate_script(game_id):
 
     # Build prompt and call API
     # Real season leaders for tonight's opponent (totals include tonight's game)
-    recap_opp_stats_context = build_opponent_context(stats["opponent"], "recap")
+    recap_opp_stats_context = get_opponent_brief(stats["opponent"], "recap")["text"]
 
-    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context)
+    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context,
+                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
@@ -426,14 +480,22 @@ def generate_script(game_id):
     else:
         print("  TEST MODE: milestone cooldown log not saved.")
 
-    # Strip any optional PREDICTION:/MOMENT: tags (never spoken) and log them
-    script, new_predictions, new_moments = extract_relationship_tags(raw_script, game_id)
+    # Strip any optional PREDICTION:/MOMENT:/THEORY:/THEORY_UPDATE: tags (never spoken) and log them
+    script, new_predictions, new_moments, new_theories, theory_updates = extract_relationship_tags(
+        raw_script, game_id, context={"date": stats["date"], "opponent": stats["opponent"]}
+    )
     if new_predictions:
-        relationship_log["predictions"].extend(new_predictions)
+        add_predictions(relationship_log, new_predictions)
         print(f"  Logged {len(new_predictions)} new checkable prediction(s).")
     if new_moments:
         relationship_log["notable_moments"].extend(new_moments)
         print(f"  Logged {len(new_moments)} new notable moment(s).")
+    if new_theories or theory_updates:
+        added, updated = apply_theory_tags(relationship_log, new_theories, theory_updates, game_id)
+        print(f"  Theories: {added} new, {updated} updated.")
+    # The settled predictions we put in front of the model have now been offered in a
+    # published episode, so they leave the queue (test runs never save the log).
+    mark_surfaced(relationship_log, [p["id"] for p in callbacks])
     if not TEST_MODE:
         save_relationship_log(relationship_log)
     else:
@@ -452,7 +514,9 @@ def generate_script(game_id):
         "date": stats["date"],
         "opponent": stats["opponent"],
         "result_summary": f"{stats['result'].upper()} {stats['our_score']}-{stats['opp_score']}",
-        "storylines": extract_storylines(script)
+        "storylines": extract_storylines(script),
+        "game_type": game_type,
+        "lenses": lenses_chosen,
     }
     summary_path = episode_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2))

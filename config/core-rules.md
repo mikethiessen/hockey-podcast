@@ -1,7 +1,7 @@
 # Podcast Core Rules
 
 These are the hard, always-true rules for every episode, independent of which
-segments get chosen. See `script-construction.md` for how an episode actually
+angles get featured. See `script-construction.md` for how an episode actually
 gets assembled, and `content-bank.md` for the material to draw from.
 
 ---
@@ -32,9 +32,8 @@ gets assembled, and `content-bank.md` for the material to draw from.
 - **Funny but not mean-spirited.** Players are real people. Ribbing is fine; mockery is not.
 
 For the specific recurring gags and bits that flesh out this tone (the ASHL
-no-contact joke, Casey's mispronunciations, Gord's grudging compliment, etc.),
-see `content-bank.md` — this section is just the blanket rule that applies
-underneath all of them.
+no-contact joke and the other bits), see `content-bank.md` — this section is
+just the blanket rule that applies underneath all of them.
 
 ---
 
