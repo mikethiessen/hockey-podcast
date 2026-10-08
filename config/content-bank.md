@@ -162,6 +162,19 @@ otherwise clean), not any minor or generic contact moment. When in doubt,
 skip it — it should feel like a rare, earned release of frustration, not a
 running expectation the show has to hit every time.
 
+### Gord's "Pre-Game Beers" Theory
+When the team looks flat, sloppy, or sluggish, Gord floats the idea that the
+guys had a few too many beers in the dressing room before the game. It's a
+joke, delivered as a mock-serious diagnosis, never as a fact: he's speculating,
+and Casey can defend the team or fall for it for half a second.
+
+This is occasional: it only fits a night that actually went badly in a way the
+data shows (a slow start, a run of goals against, a pile of penalties, a loss
+the team should have won). Skip it after wins and on ordinary nights, and don't
+use it more than once in an episode. Keep it about the team as a whole. It never
+names a player as the culprit and never claims anyone actually did anything.
+Vary the wording and the "evidence" each time.
+
 ---
 
 ## Phrasing

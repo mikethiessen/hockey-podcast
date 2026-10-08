@@ -64,4 +64,4 @@ Players are back from missing games (see "Back in the lineup tonight"). What doe
 Something happened tonight for the first time this season, or at a season high (see "Rare / first-time events"). What does it mean in the context of the season so far?
 
 ## season_outlook
-There isn't enough data yet for statistical trends, so the hosts speak from tonight's game and from belief: what they hope or fear about the season and what they'll be watching for. Opinion only, with no invented numbers.
+There isn't enough data yet for statistical trends, so the hosts speak from tonight's game and from belief: what they hope or fear about the season, the championship run Casey believes in, and what they'll be watching for. Opinion only, with no invented numbers.

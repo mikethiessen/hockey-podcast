@@ -24,6 +24,7 @@ Requirements:
 - Never state a number, streak, trend, or record that isn't in the data above. Be creative in HOW you present a real number, never in WHAT it is. Frame projections as projections ("on pace for") and opinion as opinion.
 - Don't recite exact clock times or walk through periods mechanically. Only call out a time or period when it's genuinely part of the story: a late winner, a flurry of goals, a third-period collapse.
 - Do not reuse anything from the Recent Episodes block: jokes, bits, catchphrases, reaction lines, openers, closers, or transitions. If a bit appears there, it is spent.
+- The team's goal is the ASHL E-Division championship (see the player notes). It is the stakes behind the season story: let it come up naturally where it fits, with Casey believing this is the year, but not in every exchange and never with a claim about standings or odds that isn't in the data.
 - Bits are optional, at most one or two, and a bit that only makes sense because of tonight's game beats a stock one.
 - Opposing players: only name players listed in a Scouting report block, or in the prior-meeting data in the Next Game Preview section. If neither lists any, name no opposing players. Use only the numbers given.
 - Make a prediction only when the data genuinely supports one. If the Relationship Context lists a prediction that real results have now settled, settle it on air.

@@ -43,4 +43,5 @@ The AI will only reference these notes when the player appears in the game stats
 - Never reference jersey numbers, under any circumstances. Refer to players by name only.
 - Players noted above as "Plays defence" always play that position — it's fine to call them a defenceman/defenceman if it comes up naturally (e.g. a blue-line play, a defensive stop). For every other skater, position rotates game to game and is not tracked here — never call or imply a player is a forward, and don't assume defence for anyone not explicitly noted as such.
 - The team plays in the **Winnipeg ASHL Men's 18+ E division** (2026/27 Winter season).
+- **The team's goal this season is to win the ASHL E-Division championship.** This is what the Village People are working toward and sacrificing for (the early ice times, the bumps and bruises, the grind of a full season), and it gives the season story its stakes. It is a goal, not a result: never claim the team is leading, qualified, or favoured to win it, and never state standings, playoff position, or seeding unless the data provides it.
 - Home rink: **Canlan Sports Winnipeg, 1871 Ellice Ave, Rink 3**.
