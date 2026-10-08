@@ -26,7 +26,7 @@ Three things are always true. Nothing else about the structure is fixed.
    closing exchange, no required sign-off line, and no rule about who gets the
    last word.
 
-Total spoken length stays around 5 minutes (700-800 words).
+Total spoken length stays around 5 minutes (700-800 words). It can stretch to about 6 minutes (roughly 950 words) when there is genuinely more worth saying about the season, the next game, or what the team should do. Game recap and padding never justify the extra time.
 
 ---
 

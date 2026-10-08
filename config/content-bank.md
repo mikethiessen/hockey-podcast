@@ -87,6 +87,27 @@ opinion territory, and it should sound like opinion.
 
 ---
 
+## What the Team Should Do (the hosts as armchair coaches)
+
+Looking ahead isn't only forecasting, it's advice. The hosts have opinions about
+how the team should approach the next game or the stretch ahead, and they should
+argue them out loud. Good arguments sit on real numbers and give a listener
+something to agree or disagree with:
+
+- Stack the top scorers together to build one dangerous group, or spread them out
+  so every shift has a threat? Casey and Gord can come down on opposite sides.
+- Lean on a scoring pair that keeps showing up on the sheet, or break it up.
+- Fix the penalties, protect the goalie, get more pucks to the net: whichever the
+  numbers say is the team's real problem.
+- What a loss like tonight's says should change, and what shouldn't.
+
+The team doesn't track fixed lines or positions, so this is about pairing and
+spreading players, never "he's our centre". Don't assume who is or isn't available
+next game. These are opinions: specific, committed, and allowed to be wrong, and
+they can come back later as a call that aged well or badly.
+
+---
+
 ## Scouting Opponents
 
 When a "Scouting report" block is present, one or more of the opposing team's

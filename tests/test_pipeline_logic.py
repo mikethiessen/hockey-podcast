@@ -310,6 +310,17 @@ class LensTests(unittest.TestCase):
         self.assertNotIn("prediction", lenses.eligible_lenses(rich_ctx(has_next_game=False)))
         self.assertNotIn("rivalry", lenses.eligible_lenses(rich_ctx(prior_meetings=[])))
 
+    def test_game_plan_needs_next_game_and_two_scorers(self):
+        ctx = rich_ctx()
+        ctx["season_stats"]["points_leaders"] = [("A", {}), ("B", {})]
+        self.assertIn("game_plan", lenses.eligible_lenses(ctx))
+        self.assertNotIn("game_plan", lenses.eligible_lenses({**ctx, "has_next_game": False}))
+        ctx["season_stats"]["points_leaders"] = [("A", {})]
+        self.assertNotIn("game_plan", lenses.eligible_lenses(ctx))
+        ctx["season_stats"]["points_leaders"] = [("A", {}), ("B", {})]
+        ctx["season_stats"]["games_counted"] = 2
+        self.assertNotIn("game_plan", lenses.eligible_lenses(ctx))
+
     def test_predictions_need_a_few_games(self):
         ctx = rich_ctx()
         ctx["season_stats"]["games_counted"] = 2
