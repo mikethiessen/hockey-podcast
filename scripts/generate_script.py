@@ -33,6 +33,7 @@ from guest_coach import (
 from milestones import compute_milestones, format_milestone_context, save_milestone_log
 from opponent_stats import build_opponent_context
 from config_loader import load_rendered
+from episode_memory import load_recent_scripts, format_recent_scripts
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -180,7 +181,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context=""):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -207,6 +208,7 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     guest_coach_block = f"\n---\n\n{guest_coach_context}\n" if guest_coach_context else ""
     milestone_block = f"\n---\n\n{milestone_context}\n" if milestone_context else ""
     opponent_recap_block = f"{opponent_stats_context}\n\n---\n\n" if opponent_stats_context else ""
+    recent_scripts_block = f"{recent_scripts_context}\n---\n\n" if recent_scripts_context else ""
 
     # The per-run task brief lives in config/episode-brief.md so it can be edited
     # without touching Python. It fails loudly if the file or a placeholder is missing.
@@ -256,7 +258,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 
 ---
 
-## Game Stats (JSON)
+{recent_scripts_block}## Game Stats (JSON)
 ```json
 {json.dumps(stats, indent=2)}
 ```
@@ -328,6 +330,12 @@ def generate_script(game_id):
     past_episodes = load_past_episodes(season=current_season)
     print(f"  Loaded {len(past_episodes)} past episode(s) for context.")
 
+    # Full text of the last few episodes, so the model can steer away from
+    # reusing their jokes, bits, and structure (it has no other memory of them).
+    recent_scripts = load_recent_scripts(schedule, game_id, current_season)
+    recent_scripts_context = format_recent_scripts(recent_scripts)
+    print(f"  Loaded {len(recent_scripts)} recent script(s) for avoid-reuse context.")
+
     next_game = get_next_game(schedule, game_id)
     prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
     next_opp_stats_context = build_opponent_context(next_game["opponent"], "preview") if next_game else ""
@@ -383,7 +391,7 @@ def generate_script(game_id):
     # Real season leaders for tonight's opponent (totals include tonight's game)
     recap_opp_stats_context = build_opponent_context(stats["opponent"], "recap")
 
-    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context)
+    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
