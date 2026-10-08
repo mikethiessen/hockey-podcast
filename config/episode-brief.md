@@ -1,27 +1,33 @@
 <!--
 Editor notes (stripped before the model sees this file):
 - This is the per-run task brief sent at the end of every prompt.
-- {{game_type}} is filled in by generate_script.py (e.g. BLOWOUT_LOSS).
+- Placeholders filled in by generate_script.py:
+    {{game_type}}        e.g. BLOWOUT_LOSS (a tone cue only)
+    {{featured_lenses}}  the 2-3 angles chosen for tonight (see lenses.md / lenses.py)
 - The output format (CASEY:/GORD: lines) and the PREDICTION/MOMENT/THEORY tag
   grammar are NOT here on purpose: parsers depend on them, so they live in
   generate_script.py.
+- Structure rules live in script-construction.md. This file is the short list of
+  reminders for this particular run, so keep it from growing into a second copy.
 -->
 
 ## Your Task
 
-Write a complete podcast script for this game following all guidelines above.
+Write tonight's episode, following the Script Construction frame above. Game type: **{{game_type}}** (a tone cue only, not a structure).
+
+{{featured_lenses}}
 
 Requirements:
-- Structure the episode around three fixed anchors: cold_open always first, next_game_preview always last (this now also carries the closing take — Casey's outlook and Gord's counterpoint), and season_storylines required somewhere in between at whatever position flows best. Beyond those three, choose which of game_recap, player_spotlight, and gord_corner to include and in what order — pick only the ones tonight's game actually supports, don't run all of them by default, and don't force one in when there's nothing there for it. Keep total spoken length around ~5 minutes (700-800 words) regardless of how many segments you pick — fewer segments means each one runs a bit longer, more segments means each stays tighter. If a "Special Segment: Guest Coach" section is present above, that segment takes the tactical-analysis slot gord_corner would otherwise fill, for this episode only — do not include both. If a "Milestones" section is present above, weave those real facts naturally into whichever segment genuinely fits — game_recap, player_spotlight, or season_storylines — rather than creating a separate segment for them.
-- Apply the Segment Structure by Game Type rule for **{{game_type}}** — flex segment length/emphasis as instructed, don't change the segment order itself
-- Casey always opens the Cold Open — this does not change episode to episode
-- The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Construction section's "Vary Delivery" guidance: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
-- In game_recap, don't recite exact clock times or walk through every period mechanically by default. Only call out a specific time or period when it's genuinely part of the story — a late-game winner, a goal in the final minute, multiple goals in a short span, a third-period collapse. Otherwise keep the recap focused on what happened and who was involved, not when down to the minute.
-- For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
-- Apply the "Vary Delivery" guidance (Script Construction) and the "Phrasing" guidance (Content Bank) above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
-- Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
-- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if they appear in the prior-meeting data or in the Opponent Season Leaders block for the NEXT opponent — never invent or guess at an opponent's roster or standout players. Opponent season leaders, if provided, are optional reference material: use them only if a real storyline gives you a reason (a hot scorer, a rematch, a contrast with our own season stats). Not mentioning any opposing player is completely normal — never include them just because the data is there. If there's no next game, omit this segment entirely.
-- If an Opponent Season Leaders block for tonight's opponent appears above, treat it as optional background, not a segment or a checklist item. Most episodes should not mention the opponent's players at all; reach for it only when something in tonight's game or the season story makes it genuinely interesting (e.g. their top scorer being shut down, or a duel with one of our own leaders), using only the real numbers given and only players that block lists
-- Do not invent any detail not present in the game stats JSON, the Next Game Preview data, or the Opponent Season Leaders blocks
-- If a Relationship Context section is present above, only use it if it genuinely fits — never force a callback or prediction check-in that doesn't naturally arise from tonight's episode
-- Target 700-800 words total
+- The frame: Casey's very first line is a short welcome to the show by name (it plays under the tail of the intro music, so it must work as a standalone opener; vary the exact wording). The final score and who won come right after it. The episode ends on the next-game preview, using the Next Game Preview section above: date, time, opponent, and home or away. If that section says there is no next game, leave the preview out.
+- Everything between is yours. Spend most of it on the season: trends, predictions, speculation, and the hosts' own earlier claims. Give tonight's game only the time it earns and use it as evidence for the season story.
+- Keep total spoken length around 5 minutes (700-800 words).
+- Never state a number, streak, trend, or record that isn't in the data above. Be creative in HOW you present a real number, never in WHAT it is. Frame projections as projections ("on pace for") and opinion as opinion.
+- Don't recite exact clock times or walk through periods mechanically. Only call out a time or period when it's genuinely part of the story: a late winner, a flurry of goals, a third-period collapse.
+- Do not reuse anything from the Recent Episodes block: jokes, bits, catchphrases, reaction lines, openers, closers, or transitions. If a bit appears there, it is spent.
+- Bits are optional, at most one or two, and a bit that only makes sense because of tonight's game beats a stock one.
+- Opposing players: only name players listed in a Scouting report block, or in the prior-meeting data in the Next Game Preview section. If neither lists any, name no opposing players. Use only the numbers given.
+- Make a prediction only when the data genuinely supports one. If the Relationship Context lists a prediction that real results have now settled, settle it on air.
+- Never name the structure out loud: no segment labels or lens names ("our player spotlight", "the Gord Corner", "season storylines").
+- If a "Milestones" section is present, weave those real facts in wherever they fit. If a "Special Segment: Guest Coach" section is present, the guest takes over the tactical-analysis moment for this episode only.
+- If a Relationship Context section is present, use only what genuinely fits. Never force a callback.
+- Do not invent any detail not present in the game stats JSON, the Next Game Preview data, or the Scouting report blocks.

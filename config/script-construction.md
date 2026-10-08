@@ -1,102 +1,87 @@
 # Script Construction
 
-This is the decision layer: how an episode actually gets assembled from
-`content-bank.md`, given tonight's real game data. See `core-rules.md` for
-the hard rules that apply no matter what gets picked, and `content-bank.md`
-for what each segment/bit/gag actually contains.
+How an episode is put together. The aim is an episode a regular listener hasn't
+heard before: reliable where the show needs a fixed shape, and free everywhere
+else. See `core-rules.md` for the hard rules about facts, `content-bank.md` for
+the material and register to draw from, and `lenses.md` for the angles that get
+featured each episode.
 
 ---
 
-## Episode Structure
+## The Fixed Frame
 
-There are three fixed anchors. Everything else is a flexible bank — choose
-which of those to include and in what order based on what actually happened
-in tonight's game, not a fixed checklist run the same way every episode.
-Total spoken length should still land around ~5 minutes (700-800 words)
-regardless of how many segments you pick — an episode with fewer segments
-runs each one a bit longer; a busier episode with more segments keeps each
-one tighter. Don't pad a segment just to hit a word count, and don't force
-one in when tonight's game gives it nothing to say.
+Three things are always true. Nothing else about the structure is fixed.
 
-**Anchors (always present):**
-- `cold_open` — always first
-- `season_storylines` — required every episode, position among the others is flexible
-- `next_game_preview` — always last, also carries the closing take (Casey's
-  outlook + Gord's grumbling counterpoint)
+1. **Casey opens with a welcome.** His very first line welcomes listeners to the
+   show by name (e.g. "Welcome to Ice & Easy!"). It plays under the tail of the
+   intro music, so it has to work as a clean standalone opener. Vary the wording
+   from episode to episode.
+2. **The final score comes early.** Right after the welcome, within the first few
+   exchanges, the listener learns the final score and who won (or tied), plus a
+   one-line headline of the game. How the hosts get there is up to them: who says
+   it, what they lead with, and the tone can all change with the game.
+3. **The episode ends on the next-game preview.** Date, time, opponent, and home
+   or away, from the Next Game Preview section. Skip it only if that section says
+   there is no next game. What surrounds the preview is free: there is no required
+   closing exchange, no required sign-off line, and no rule about who gets the
+   last word.
 
-**Flexible bank (pick and order per episode, based on what tonight's game
-actually supports — not a fixed checklist):**
-- `game_recap`
-- `player_spotlight`
-- `gord_corner`
-- Any active special segment (e.g. `rivalry_alert`)
+Total spoken length stays around 5 minutes (700-800 words).
 
 ---
 
-## Segment Structure by Game Type
+## Everything Between Is Yours
 
-The game is auto-classified from the score margin and overtime flag. Use the
-type to guide which bank segments to include and how much room they get —
-this is guidance for the selection above, not a separate fixed structure:
+Between the score and the preview there are no required segments, no required
+order, and no checklist. The show's real subject is the season: where this team
+is heading, what the hosts believe about it, what they're predicting, and where
+they've been right or wrong. That is where the middle of the episode should spend
+most of its time.
 
-- **BLOWOUT_WIN** (won by 4+): `game_recap` can be brief or skipped — the
-  score tells most of the story. `player_spotlight` is usually worth
-  including since a blowout often means someone had a big game worth
-  dwelling on. `gord_corner` is optional and short if included; he's got
-  less to grumble about, though he can still find something.
-- **BLOWOUT_LOSS** (lost by 4+): `game_recap` stays brief and matter-of-fact
-  if included — don't dwell on every goal against. `gord_corner` is the
-  strongest candidate here; this is where his frustration gets the most
-  room. `player_spotlight` should usually be skipped unless there's one
-  genuine bright spot worth a short mention.
-- **CLOSE_OR_OVERTIME** (decided by 1 goal, or went to OT): `game_recap` is
-  almost always worth including and expanding — this is the version of the
-  show where the play-by-play tension matters most.
-- **SHUTOUT_WIN** (opponent scored 0): if `player_spotlight` is included, it
-  should lead with the goalie's performance before any skater.
-- **SHUTOUT_LOSS** (we scored 0): `gord_corner` is a strong candidate here;
-  `player_spotlight` should usually be skipped since there's no offensive
-  standout — don't force one focused on "effort" just to fill the slot.
-- **NORMAL**: No default weighting — pick freely based on what's genuinely
-  most interesting about tonight's game.
+- The game itself gets the time it earns, no more: the headline, the turning
+  point, who mattered. Then use it as evidence in the season story. A
+  goal-by-goal recap is almost never the right move.
+- Each episode features a few **lenses** (see `lenses.md`): angles on the season
+  that have real data behind them tonight. Build the middle mainly around them.
+- A few ideas explored well beat a tour of everything. Don't pad, and don't force
+  an angle that has nothing real behind it.
+- The shape is up to the hosts. One episode can be a single long argument;
+  another can bounce between several threads.
 
 ---
 
-## Vary Delivery
+## Variety Is the Point
 
-Selection and ordering aren't the only place variety matters — how a segment
-unfolds should vary too, on both of these axes:
+The show only works if listeners don't tire of it, so each episode should feel
+different from the ones before it.
 
-- **What opens the recap.** Casey's very first line is always the fixed
-  welcome-to-the-show opener (see `hosts.md`/`core-rules.md`) — that never
-  changes. But what comes immediately after it should vary game to game
-  based on what's actually notable in the data: a high-penalty game opens on
-  the penalty count/tone rather than the score; a standout assist chain
-  opens on the setup, then the score; a tight or low-event game just opens
-  on the score, since there's not much else to lead with; a blowout does the
-  same, since the score *is* the story. Pick whichever event type is most
-  distinctive for tonight's data rather than defaulting to score-first every
-  time.
-- **Who speaks first within a segment.** Casey always opens the Cold Open —
-  that's fixed. But within other segments (Game Recap, Player Spotlight,
-  Season Storylines), it doesn't have to always be "Casey says something,
-  then Gord reacts." Let Gord occasionally raise the point first, with Casey
-  reacting, as long as Casey still owns the top of the Cold Open.
+- Don't reuse anything from the Recent Episodes block: jokes, bits, catchphrases,
+  reaction lines, transitions, openers, or closers. If it has run once, it is
+  spent.
+- Mix who raises a point and who reacts. Either host can start a thread, and
+  either can be wrong.
+- Vary what comes right after the welcome and the score, based on what is
+  genuinely distinctive tonight: a penalty-heavy game, a standout assist chain, a
+  collapse, a quiet low-event night.
+- Never name the structure out loud. The hosts don't announce segments or lenses
+  ("our player spotlight", "now the Gord Corner", "season storylines").
 
 ---
 
-## Active Special Segments This Episode
+## Game Type (a tone cue)
 
-active_special_segments: []
+The game is classified from the score margin and overtime flag. Treat it as a cue
+for mood and weight only, never as a structure.
 
-<!--
-guest_coach is fully automatic (see content-bank.md) — do NOT add it here.
-milestone_watch is not a special segment at all — see content-bank.md's
-"Milestones" section; it's never added here.
-rivalry_alert is still manual for now: to activate it for the next episode,
-edit the list above, e.g.:
-active_special_segments: [rivalry_alert]
-Then add the required data to the game entry in data/schedule.json.
-After the episode generates, clear this list.
--->
-
+- **BLOWOUT_WIN** (won by 4+): the score tells most of the story, so keep the game
+  itself short. The interesting question is what it means for the season.
+- **BLOWOUT_LOSS** (lost by 4+): don't dwell on every goal against. The
+  interesting question is what, if anything, the season story survives. Gord has
+  the most to say here.
+- **CLOSE_OR_OVERTIME** (decided by 1 goal, or went to OT): the tension is the
+  story, and the game can earn more airtime than usual.
+- **SHUTOUT_WIN** (opponent scored 0): the goalie's night deserves mention before
+  any skater.
+- **SHUTOUT_LOSS** (we scored 0): no offence to praise. The hosts can wonder out
+  loud what it means that nothing came.
+- **NORMAL**: no particular cue. Follow whatever is most interesting.

@@ -145,8 +145,9 @@ def format_relationship_context(newly_resolved, moment_matches):
 
     lines = ["## Relationship Context (real, from prior episodes)"]
     lines.append(
-        "Everything below actually happened in a prior episode. Use it only if it "
-        "genuinely fits tonight's episode naturally — skip anything that doesn't.\n"
+        "Everything below actually happened in a prior episode. A settled prediction "
+        "is owed an on-air resolution. Prior moments are optional: use one only if it "
+        "genuinely fits tonight's episode naturally.\n"
     )
 
     if newly_resolved:

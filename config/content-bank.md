@@ -1,14 +1,15 @@
 # Content Bank
 
-Material to draw from when building an episode. It opens with the show's
-richest creative territory — the season-long theories the hosts develop and
-their accountability for past claims — because that's where an episode
-becomes worth listening to twice. What follows (segment contents, bits, gags,
-phrasing) is supporting material: examples of the register this show works
-in, not a checklist to work through.
+Material and register to draw from when building an episode. Nothing here is a
+checklist and nothing here is required. It opens with the show's richest
+creative territory — the season-long theories the hosts develop and their
+accountability for past claims — because that's where an episode becomes worth
+listening to twice. What follows (predictions, bits, gags, phrasing, data
+patterns) is supporting material: examples of the register this show works in.
 
-See `script-construction.md` for how an episode picks and orders from this
-bank, and `core-rules.md` for the hard rules that apply underneath all of it.
+See `script-construction.md` for the frame an episode fits in, `lenses.md` for the
+angles featured each episode, and `core-rules.md` for the hard rules that apply
+underneath all of it.
 
 ---
 
@@ -58,89 +59,41 @@ nothing concrete, skip it.
 
 ---
 
-## Segment Content
+## Predictions and Speculation
 
-What each segment actually contains. Whether it's an anchor (always present)
-or part of the flexible bank (picked per episode) is defined in
-`script-construction.md` — this section is just what goes in it once chosen.
+The show looks down the road as much as it looks back. Where this team is
+heading, who is on pace for what, who has the edge in the next game: this is
+opinion territory, and it should sound like opinion.
 
-- **Cold Open** — Casey's very first line always welcomes listeners
-  to the show by name (e.g. "Welcome to Ice & Easy!" — vary the exact
-  phrasing episode to episode) — this opening line plays under the tail of
-  the intro music, so it needs to work as a clean opener on its own. What
-  Casey and Gord lead on immediately after that welcome is NOT fixed — see
-  `script-construction.md`'s "Vary Delivery" section for choosing the
-  final score, penalty tone, an assist chain, etc. based on what's most
-  distinctive in tonight's game, rather than the score by default.
-- **Game Recap** — who scored, who assisted, how the game
-  unfolded. Keep this about *what happened and who was involved*, not a
-  period-by-period or clock-time-by-clock-time recitation — only call out a
-  specific time if it's genuinely part of the story (a last-minute goal, a
-  rapid flurry, a third-period collapse). Most episodes will want this, but
-  if the cold open or player spotlight already covers what happened, it's
-  fine to skip a separate recap rather than repeat it.
-- **Player Spotlight** — whatever real pattern in tonight's data is most
-  worth dwelling on. Often that's a single standout performer, but it can
-  just as easily be a pair who kept connecting, a goalie's night, a
-  defensive effort, or a team-wide trend the season stats surfaced — let the
-  data set the scope rather than forcing it into a fixed number of players.
-  Can be positive or negative. Skip this one entirely if nothing tonight
-  genuinely stood out — don't manufacture a spotlight out of an
-  unremarkable performance just to fill the slot.
-- **The Gord Corner** — Gord gives his "tactical analysis."
-- **Season Storylines** — the heart of the show's long-term
-  identity, and the single best place to be genuinely creative. The per-game
-  data is a closed set, but the season layer compounds: build the storyline
-  out of *change over time* — a rank that moved, a streak that broke, a
-  first that only counts as a first because of everything
-  before it — rather than reciting current standings. This is also where the
-  hosts' running theories and their own past claims come into play (see
-  "Season-Long Theories" and "Holding the Hosts Accountable" at the top of
-  this file). Be
-  creative in *how* a real pattern gets presented — but never state a number
-  that isn't in the provided season stats data.
-- **Next Game Preview** — date, time, and opponent for the next scheduled
-  game. If we've already played this opponent this season, recap the last
-  meeting using real data. This segment also carries the show's closing
-  beat: Casey's outlook heading into that next game, and Gord's grumbling
-  counterpoint — fold that into the same segment rather than treating it as
-  a separate goodbye. Skipped entirely if there's no game left on the
-  schedule.
+- Frame projections as projections: "on pace for", "if this keeps up", "I'd bet".
+  Never "will finish with". The numbers underneath must be real; the conclusion is
+  the host's belief.
+- The hosts should see it differently. A prediction one of them loves, the other
+  can fade. Neither should win every time.
+- A specific call is more fun than hype. "They win Sunday" or "he gets to ten
+  points by the break" gives the show something to come back to; "I like this
+  team's energy" doesn't.
+- Only make a prediction when the data genuinely supports one. If it doesn't,
+  speculate about the season instead, or skip it.
 
 ---
 
-## Special Segments
+## Scouting Opponents
 
-### guest_coach
-**Currently disabled** — set `ENABLED = True` at the top of `scripts/guest_coach.py`
-to turn it back on. The code and cadence tracking are untouched and ready to
-go; while disabled, `generate_script.py` skips this feature entirely and
-doesn't advance the cadence log, so it picks back up cleanly whenever it's
-re-enabled.
-
-A one-off guest coach character joins for one segment to offer tactical advice,
-taking the tactical-analysis slot in the bank that `gord_corner` would
-otherwise fill, for that episode only. When enabled, this is fully
-automatic — no manual config edit needed. `scripts/guest_coach.py` tracks a
-randomized 3-6 episode gap and triggers this segment on its own; when it
-fires, the model invents a brand new character on the spot (distinct from
-Casey and Gord, bound by the same no-invented-facts rules) and the result
-gets logged to `data/guest_coach_log.json` and mirrored into that game's
-`special_guest` field in `data/schedule.json` afterward, for reference only.
-
-### rivalry_alert
-Use when the opponent is a team the Village People have a notable record against.
-Requires: at least 2 prior games against this opponent in the season log.
-Slot: part of the flexible bank, placed wherever it fits best — but before `next_game_preview`, since that segment closes the episode.
+When a "Scouting report" block is present, one or more of the opposing team's
+players clearly outscore the rest of their team. That's worth the hosts' attention:
+a heads-up in the preview, or, for tonight's opponent, an explanation of how the
+game went. Use only the players and numbers listed. If no such block is present,
+the opponent has no standout scorers worth naming, so the hosts don't name any
+opposing player beyond those already given elsewhere in the prompt.
 
 ---
 
 ## Milestones (organic, not a segment)
 
-This is NOT a special segment and doesn't get its own slot — it's real material
-that should surface naturally inside whatever segment it fits, the same way
-Recurring Bits do. Fully automatic; no manual config edit needed.
-`scripts/milestones.py` detects two kinds of real, data-only events each
+This is real material that should surface naturally inside whatever the hosts are
+discussing, the same way a bit does. Fully automatic; no manual config edit
+needed. `scripts/milestones.py` detects two kinds of real, data-only events each
 episode:
 - A player becoming the sole new season leader in goals, assists, points, or
   penalties, but only when they recorded that stat in tonight's game — and
@@ -149,57 +102,37 @@ episode:
 - A player extending an active goal-scoring streak to 3+ consecutive games
   played.
 Nothing is invented; both checks run purely on real per-game stats. When
-something qualifies, it should be woven into game_recap, player_spotlight, or
-season_storylines — whichever the moment genuinely calls for — conversationally,
-not announced as its own segment. Results are logged to
-`data/milestone_log.json` and mirrored into that game's `milestones` field in
-`data/schedule.json` afterward, for reference only.
+something qualifies, weave it in conversationally wherever it genuinely fits, not
+announced on its own. Results are logged to `data/milestone_log.json` and mirrored
+into that game's `milestones` field in `data/schedule.json` afterward, for
+reference only.
 
 ---
 
-## Recurring Bits
+## Bits and Flavor
 
-Examples of the kind of bit that works on this show — not an exhaustive menu.
-Pick 1, occasionally 2, that fit this episode's data — don't force one in if
-nothing fits. Just as often, invent a genuinely new one-off bit that tonight's
-data suggests and the list below doesn't cover; a bit that only makes sense
-because of what happened in *this* game is usually better than reaching for a
-stock one. The examples exist to show the register, not to limit the options.
-These are separate from Gord's core "safe hockey league" running gag below —
-that gag is its own thing, situational and NOT on a fixed cadence.
+Examples of the kind of bit that works on this show — not a menu, and not
+required. Most episodes need at most one or two, and plenty need none. A bit that
+only makes sense because of what happened in *this* game is almost always better
+than a stock one, so invent new ones from tonight's data.
+
+The one firm rule: anything that has already run in a recent episode is spent.
+Check the Recent Episodes block and retire any bit, catchphrase, or reaction line
+that appears there. If a bit doesn't have real data to hang on, skip it rather
+than forcing it in.
 
 - **The Nickname Mill**: Casey tries out a nickname for a player who had a
-  notable moment (goal, key assist, big penalty kill) this game. Gord either
-  shoots it down instantly or, rarely, admits it's not bad.
-
-- **Back In My Day**: Gord compares something from this game to how it
-  "used to be played," always in a way that circles back to missing physical
-  play.
-
-- **The Standings Tangent**: If the schedule data or past results give any
-  real basis for it, Casey speculates enthusiastically about where this
-  result puts the team, and Gord deflates it. Skip entirely if there's no
-  real data to speculate from — do not invent a standing or record.
-
-- **Callback to Last Episode**: Reference something specific that happened in
-  the immediately preceding episode (a storyline, a Gord prediction, a bit)
-  using the past-episode context provided, and follow up on it — did it hold
-  up, did Gord jinx it, etc. Only use when there IS a specific prior detail
-  worth returning to; skip if the past episode gave nothing concrete to
-  callback to.
-
-- **Casey's Disco Detour**: Casey makes a Village People / disco-era reference
-  tied to something that happened in the game (a player's name, a play style,
-  the final score). Keep it quick — one line, not a tangent.
-
-- **Gord's Grudging Compliment**: Gord is walked, reluctantly, into admitting
-  a specific player or play was genuinely good — but immediately undercuts
-  the compliment with a complaint about something unrelated. Use it when it
-  fits the data, same as any other bit in this bank, not as a mandatory
-  once-per-episode beat.
-
-Usage note: these are flavor, not filler. If a bit doesn't have real data to
-hang on, skip it rather than forcing it in generically.
+  notable moment this game. Gord shoots it down, or rarely admits it's not bad.
+- **Back In My Day**: Gord compares something from this game to how it "used to
+  be played," in a way that circles back to missing physical play.
+- **The Standings Tangent**: Casey speculates enthusiastically about where a
+  result puts the team, and Gord deflates it. Only with real data to speculate
+  from; never invent a standing or record.
+- **Callback to Last Episode**: reference something specific that happened in a
+  recent episode and follow up on it: did it hold up, did Gord jinx it? Only when
+  there is a specific prior detail worth returning to.
+- **Casey's Disco Detour**: a quick Village People / disco-era reference tied to
+  something in the game. One line, not a tangent.
 
 ---
 
@@ -229,7 +162,7 @@ the data contains — so the language describing them has to carry the variety
 the events themselves don't.
 
 Don't reuse the same verb or construction for an event type across a script,
-and avoid repeating phrasing from the previous episode's summary. Casey and
+and avoid repeating phrasing from the recent episodes. Casey and
 Gord should also describe the same *kind* of event differently from each
 other; they're different people, and a goal Casey calls one thing Gord would
 describe another way entirely. Reach for whatever fits the moment and the
@@ -242,6 +175,23 @@ speaker rather than a house style for each event type.
 Gord can push back on penalty calls specifically — was it fair, harsh, a good
 call — since that's commentary on real data, not invented fact. This should feel
 like genuine analyst disagreement, not forced conflict.
+
+---
+
+## Guest Coach (currently disabled)
+
+Set `ENABLED = True` at the top of `scripts/guest_coach.py` to turn it back on.
+The code and cadence tracking are untouched and ready to go; while disabled,
+`generate_script.py` skips this feature entirely and doesn't advance the cadence
+log, so it picks back up cleanly whenever it's re-enabled.
+
+When enabled, it is fully automatic. `scripts/guest_coach.py` tracks a randomized
+3-6 episode gap and, when it fires, a "Special Segment: Guest Coach" section
+appears in the prompt: the model invents a brand new character on the spot
+(distinct from Casey and Gord, bound by the same no-invented-facts rules) who
+takes over the tactical-analysis moment for that episode only. The result is
+logged to `data/guest_coach_log.json` and mirrored into that game's
+`special_guest` field in `data/schedule.json`, for reference only.
 
 ---
 

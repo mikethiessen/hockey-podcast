@@ -9,8 +9,13 @@ division schedule and every game payload (goals, assists, penalties, rosters)
 are public. So we do for opponents what season_stats.py does for our own team.
 
 Used two ways by generate_script.py:
-  - next_game_preview: the team we play NEXT (season leaders to watch)
-  - game_recap: the team we JUST played (their season leaders, incl. tonight)
+  - "preview": the team we play NEXT (players to watch for)
+  - "recap": the team we JUST played (their standouts, incl. tonight)
+
+A scouting block is only produced when 1-3 of the opponent's players clearly
+outscore the rest of their team (see find_standouts and the STANDOUT_*
+constants). Otherwise the model is not given any opposing players to talk
+about. The opponent's record is always returned alongside, for matchup context.
 
 Never invents anything: if the opponent can't be resolved, has no completed
 games, or the API fails, a plain "no data" note is returned that explicitly
@@ -36,7 +41,14 @@ HEADERS = {
 }
 OUR_TEAM_ID = "Nz7BgbzbxfrhWtft"  # Village People
 FINAL_STATUS_ID = 9  # game_status_id 9 == final
-TOP_N = 5
+
+# What counts as a "standout" scorer. A group of 1-3 players is a standout group
+# when the weakest of them has at least STANDOUT_MIN_POINTS points AND at least
+# STANDOUT_RATIO times as many points as the best of the remaining scorers.
+# Tune these here; they are deliberately code, not prose.
+STANDOUT_MAX_PLAYERS = 3
+STANDOUT_MIN_POINTS = 3
+STANDOUT_RATIO = 1.75
 MAX_PAGES = 20  # safety stop on pagination
 
 
@@ -175,71 +187,122 @@ def get_opponent_season_stats(team_name):
     return {"team_id": team_id, "record": record, "players": players}
 
 
-def format_opponent_stats(team_name, stats, purpose):
-    """Prompt-ready text. purpose is 'preview' (next opponent) or 'recap' (team we
-    just played; totals include tonight's game)."""
-    header = (
-        f"## Reference data (optional): opponent season leaders — {team_name} "
-        + ("(team we play next)" if purpose == "preview" else "(team we played tonight)")
+def find_standouts(players):
+    """Return the 1-3 players who clearly outscore the rest of their team, or [].
+
+    Looks for the smallest group of top scorers (up to STANDOUT_MAX_PLAYERS)
+    whose weakest member has at least STANDOUT_MIN_POINTS points and at least
+    STANDOUT_RATIO x the points of the best scorer outside the group. A flat
+    scoring distribution (no one stands apart) returns [].
+    """
+    scorers = sorted(
+        (p for p in players if p.get("points", 0) > 0),
+        key=lambda p: (-p["points"], -p.get("goals", 0), -p.get("assists", 0), p.get("name") or ""),
     )
-    guard = (
-        "Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, "
-        "or backstory for these players, and do not name any other opposing players."
+    points = [p["points"] for p in scorers]
+    for k in range(1, STANDOUT_MAX_PLAYERS + 1):
+        if len(points) < k:
+            break
+        weakest_in_group = points[k - 1]
+        best_outside = points[k] if len(points) > k else 0
+        if weakest_in_group >= STANDOUT_MIN_POINTS and weakest_in_group >= STANDOUT_RATIO * best_outside:
+            return scorers[:k]
+    return []
+
+
+def _no_data_text(team_name, reason):
+    return (
+        f"## Scouting report — {team_name}\n{reason} Do not invent players, "
+        "stats, or standings for this team."
     )
-    if stats is None:
-        return (
-            f"{header}\nNo season data could be found for {team_name}. Do not invent "
-            "players, stats, or standings for this team."
+
+
+def _scouting_text(team_name, rec, standouts, purpose):
+    if purpose == "recap":
+        header = f"## Scouting report — {team_name} (the team we played tonight)"
+        scope = "Season totals through their last completed game, which includes tonight's game against us."
+        use = (
+            "Use this only if it helps explain tonight's game or the season story "
+            "(for example a standout who was held down, or one who beat us)."
         )
-    rec, players = stats["record"], stats["players"]
-    if rec["gp"] == 0:
-        return (
-            f"{header}\n{team_name} has no completed games this season yet, so there are "
-            "no season totals. Do not invent players or stats for this team."
+    else:
+        header = f"## Scouting report — {team_name} (the team we play next): players to watch for"
+        scope = "Season totals through their last completed game."
+        use = (
+            "Work a quick heads-up about these players into the next-game preview, in whatever "
+            "voice fits the hosts. They are here because they produce far more than the rest "
+            "of their team's scorers."
         )
-    scorers = [p for p in players if p["points"] > 0]
-    scope = (
-        "Season totals through their last completed game, which includes tonight's game against us."
-        if purpose == "recap"
-        else "Season totals through their last completed game."
-    )
     lines = [
         header,
         f"{scope} Record: {rec['w']}-{rec['l']}-{rec['t']} in {rec['gp']} game(s), "
         f"goals for {rec['gf']}, goals against {rec['ga']}.",
+        "Standouts:",
     ]
-    if not scorers:
-        lines.append("No opposing player has recorded a point yet this season.")
-    else:
-        lines.append(f"Their top {min(TOP_N, len(scorers))} by points:")
-        for i, p in enumerate(scorers[:TOP_N], 1):
-            lines.append(
-                f"{i}. {p['name']} — {p['points']} pts ({p['goals']} G, {p['assists']} A) "
-                f"in {p['gp']} GP, {p['penalties']} penalties"
-            )
-        if len(scorers) > 1 and rec["gp"] <= 2:
-            lines.append("(Small sample — only a game or two played, so treat these as early-season numbers.)")
-    lines.append(guard)
+    for i, p in enumerate(standouts, 1):
+        lines.append(
+            f"{i}. {p['name']} — {p['points']} pts ({p['goals']} G, {p['assists']} A) "
+            f"in {p['gp']} GP, {p['penalties']} penalties"
+        )
+    if rec["gp"] <= 2:
+        lines.append("(Small sample — only a game or two played, so treat these as early-season numbers.)")
+    lines.append(use)
+    lines.append(
+        "Use ONLY the real numbers listed here. Do not add stats, positions, nicknames, or "
+        "backstory for these players, and do not name any other opposing players."
+    )
     return "\n".join(lines)
 
 
-def build_opponent_context(team_name, purpose):
-    """Safe wrapper for generate_script.py: never raises, never invents."""
+def get_opponent_brief(team_name, purpose):
+    """Safe wrapper for generate_script.py: never raises, never invents.
+
+    Returns {"text": str, "record": dict | None, "standouts": list}.
+      - text: the scouting block for the prompt, or "" when the opponent has real
+        data but no standout scorers (the model then gets no opposing players).
+        When data is missing or the fetch failed, text is a short "no data" note.
+      - record: the opponent's season record {gp,w,l,t,gf,ga}, or None.
+      - standouts: the 1-3 standout players, or [].
+    """
     if not team_name:
-        return ""
+        return {"text": "", "record": None, "standouts": []}
     try:
         stats = get_opponent_season_stats(team_name)
     except Exception as e:  # network/API/shape problems must not break episode generation
         print(f"  Warning: opponent stats unavailable for {team_name}: {e}")
-        return (
-            f"## Reference data (optional): opponent season leaders — {team_name}\n"
-            "Real season stats for this team could not be fetched this run. Do not invent "
-            "players, stats, or standings for this team."
-        )
-    return format_opponent_stats(team_name, stats, purpose)
+        return {
+            "text": _no_data_text(team_name, "Real season stats for this team could not be fetched this run."),
+            "record": None,
+            "standouts": [],
+        }
+
+    if stats is None:
+        return {
+            "text": _no_data_text(team_name, f"No season data could be found for {team_name}."),
+            "record": None,
+            "standouts": [],
+        }
+
+    rec = stats["record"]
+    if rec["gp"] == 0:
+        return {
+            "text": _no_data_text(team_name, f"{team_name} has no completed games this season yet."),
+            "record": rec,
+            "standouts": [],
+        }
+
+    standouts = find_standouts(stats["players"])
+    text = _scouting_text(team_name, rec, standouts, purpose) if standouts else ""
+    return {"text": text, "record": rec, "standouts": standouts}
+
+
+def build_opponent_context(team_name, purpose):
+    """Just the prompt text from get_opponent_brief (kept for callers and the CLI)."""
+    return get_opponent_brief(team_name, purpose)["text"]
 
 
 if __name__ == "__main__":
     name = sys.argv[1] if len(sys.argv) > 1 else "Slap Nuts"
     purpose = sys.argv[2] if len(sys.argv) > 2 else "preview"
-    print(build_opponent_context(name, purpose))
+    brief = get_opponent_brief(name, purpose)
+    print(brief["text"] or "(no standout scorers: no scouting block would be sent)")

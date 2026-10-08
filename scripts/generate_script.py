@@ -31,7 +31,15 @@ from guest_coach import (
     record_episode_result,
 )
 from milestones import compute_milestones, format_milestone_context, save_milestone_log
-from opponent_stats import build_opponent_context
+from opponent_stats import get_opponent_brief
+from look_ahead import compute_look_ahead, format_look_ahead
+from lenses import (
+    eligible_lenses,
+    pick_lenses,
+    recent_lenses_used,
+    load_lens_descriptions,
+    format_featured_lenses,
+)
 from config_loader import load_rendered
 from episode_memory import load_recent_scripts, format_recent_scripts
 
@@ -126,7 +134,7 @@ def get_prior_meetings(schedule, opponent, before_game_id):
 
 def format_next_game_context(next_game, prior_meetings, opponent_stats_context=""):
     if not next_game:
-        return "## Next Game Preview\nThis is the last scheduled game of the season. Skip the next_game_preview segment entirely — do not include it in the script.\n"
+        return "## Next Game Preview\nThis is the last scheduled game of the season, so there is no next game. End the episode without a next-game preview.\n"
 
     dt_utc = datetime.fromisoformat(next_game["starts_at"])
     dt = dt_utc.astimezone(ZoneInfo("America/Winnipeg"))
@@ -154,9 +162,9 @@ def format_next_game_context(next_game, prior_meetings, opponent_stats_context="
         context += (
             "We have NOT played this opponent yet this season, so there is no prior-meeting "
             "data. Do not invent or guess at their roster or best players. The only real "
-            "information about their players is the opponent season leaders reference data below "
-            "(if present); if it is absent or says no data, keep the preview focused on the "
-            "date/time/location and general anticipation instead.\n"
+            "information about their players is the scouting report below (if present); if "
+            "it is absent, name no opposing players and keep the preview focused on the "
+            "date/time/location and what the season picture says about the matchup instead.\n"
         )
 
     if opponent_stats_context:
@@ -181,7 +189,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context=""):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -209,10 +217,14 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     milestone_block = f"\n---\n\n{milestone_context}\n" if milestone_context else ""
     opponent_recap_block = f"{opponent_stats_context}\n\n---\n\n" if opponent_stats_context else ""
     recent_scripts_block = f"{recent_scripts_context}\n---\n\n" if recent_scripts_context else ""
+    look_ahead_block = f"\n---\n\n{look_ahead_context}\n" if look_ahead_context else ""
 
     # The per-run task brief lives in config/episode-brief.md so it can be edited
     # without touching Python. It fails loudly if the file or a placeholder is missing.
-    brief = load_rendered("episode-brief.md", {"game_type": game_type})
+    brief = load_rendered(
+        "episode-brief.md",
+        {"game_type": game_type, "featured_lenses": featured_lenses},
+    )
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
@@ -230,9 +242,6 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
 
 ## Script Construction
 {script_construction}
-
-Game Type for this episode: **{game_type}**
-Apply the corresponding rules from the "Segment Structure by Game Type" section above.
 {guest_coach_block}
 ---
 
@@ -242,7 +251,7 @@ Apply the corresponding rules from the "Segment Structure by Game Type" section 
 ---
 
 {season_stats_context}
-{recent_form_block}{relationship_block}{milestone_block}
+{recent_form_block}{relationship_block}{milestone_block}{look_ahead_block}
 ---
 
 ## Player Notes
@@ -338,18 +347,26 @@ def generate_script(game_id):
 
     next_game = get_next_game(schedule, game_id)
     prior_meetings = get_prior_meetings(schedule, next_game["opponent"], game_id) if next_game else []
-    next_opp_stats_context = build_opponent_context(next_game["opponent"], "preview") if next_game else ""
+    next_opp_brief = get_opponent_brief(next_game["opponent"], "preview") if next_game else None
+    next_opp_stats_context = next_opp_brief["text"] if next_opp_brief else ""
     next_game_context = format_next_game_context(next_game, prior_meetings, next_opp_stats_context)
     if next_game:
         print(f"  Next game: vs {next_game['opponent']} ({len(prior_meetings)} prior meeting(s) this season).")
     else:
-        print("  No next game scheduled — skipping next_game_preview.")
+        print("  No next game scheduled — ending without a next-game preview.")
 
     # Compute real season stats (streaks, points leaders, assist pairs, penalty trends)
     season_stats = compute_season_stats(schedule, game_id)
     season_stats_context = format_season_stats(season_stats)
     if season_stats:
         print(f"  Season stats computed from {season_stats['games_counted']} game(s).")
+
+    # Forward-looking context (record, schedule, pace, next opponent) for predictions/speculation
+    look_ahead = compute_look_ahead(
+        schedule, game_id, season_stats,
+        next_opp_brief["record"] if next_opp_brief else None,
+    )
+    look_ahead_context = format_look_ahead(look_ahead)
 
     # Recent form (real results only) — drives the slow host-dynamic dial
     recent_form = compute_recent_form(schedule, game_id)
@@ -367,6 +384,19 @@ def generate_script(game_id):
         print(f"  {len(newly_resolved)} prediction(s) newly resolved this episode.")
     if moment_matches:
         print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
+
+    # Lenses: the few angles on the season that tonight's middle is built around. Code
+    # picks only ones with real data behind them and rotates away from recent ones.
+    lens_ctx = {
+        "season_stats": season_stats,
+        "look_ahead": look_ahead,
+        "has_next_game": next_game is not None,
+        "prior_meetings": prior_meetings,
+        "pending_callbacks": newly_resolved,
+    }
+    lenses_chosen = pick_lenses(eligible_lenses(lens_ctx), recent_lenses_used(past_episodes), game_id)
+    featured_lenses = format_featured_lenses(lenses_chosen, load_lens_descriptions())
+    print(f"  Featured lenses: {', '.join(lenses_chosen)}")
 
     # Guest coach: automatic cadence, no manual config edits required.
     # Currently disabled via guest_coach.ENABLED — when off, skip entirely and
@@ -389,9 +419,10 @@ def generate_script(game_id):
 
     # Build prompt and call API
     # Real season leaders for tonight's opponent (totals include tonight's game)
-    recap_opp_stats_context = build_opponent_context(stats["opponent"], "recap")
+    recap_opp_stats_context = get_opponent_brief(stats["opponent"], "recap")["text"]
 
-    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context)
+    prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context,
+                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
@@ -448,7 +479,9 @@ def generate_script(game_id):
         "date": stats["date"],
         "opponent": stats["opponent"],
         "result_summary": f"{stats['result'].upper()} {stats['our_score']}-{stats['opp_score']}",
-        "storylines": extract_storylines(script)
+        "storylines": extract_storylines(script),
+        "game_type": game_type,
+        "lenses": lenses_chosen,
     }
     summary_path = episode_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2))
