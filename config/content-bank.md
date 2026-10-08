@@ -38,6 +38,12 @@ Don't force a theory into every episode, and don't invent one where the data
 gives nothing to build on. But when a real season-long pattern is there, it's
 almost always more interesting than restating who leads in points.
 
+The show remembers theories between episodes. When the Relationship Context lists
+open theories, one can be revisited whenever tonight's result gives a reason, and
+a new one can be floated when the real numbers support it. There's room for only
+a few open at a time, so a theory that has run its course should be dropped
+openly rather than left to die quietly.
+
 ---
 
 ## Holding the Hosts Accountable
@@ -75,6 +81,9 @@ opinion territory, and it should sound like opinion.
   team's energy" doesn't.
 - Only make a prediction when the data genuinely supports one. If it doesn't,
   speculate about the season instead, or skip it.
+- Predictions get settled. When real results have decided an earlier call, it comes
+  back on air. Owning a miss is half the fun, and being right is never a license
+  to gloat for long.
 
 ---
 

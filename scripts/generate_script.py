@@ -17,6 +17,12 @@ from relationship_log import (
     load_relationship_log,
     save_relationship_log,
     resolve_predictions,
+    pending_callbacks,
+    mark_surfaced,
+    add_predictions,
+    open_theories,
+    can_add_theory,
+    apply_theory_tags,
     match_notable_moments,
     format_relationship_context,
     extract_relationship_tags,
@@ -296,20 +302,31 @@ Do not include anything before the first CASEY: line or after the last line of d
 
 ## Optional trailing tags (never spoken, not part of the script)
 
-After the last line of dialogue, you may — only if genuinely earned by this episode, never required — add one or both of the following on their own lines. These are never read aloud; they're stripped before the audio is generated and only used to track the hosts' relationship across the season.
+After the last line of dialogue, you may add any of the following, each on its own line, but only for something a host actually says on air in this script. These are never read aloud; they're stripped before the audio is generated and only used to track the hosts' relationship across the season.
 
-**PREDICTION** — only if a host makes a real, specific, checkable prediction in this episode (not vague hype):
+**PREDICTION** — only if a host makes a real, specific, checkable prediction in this episode (not vague hype) and the real data genuinely supports it:
 `PREDICTION: <casey|gord> | <type> | <details>`
 Valid types:
 - `team_result_streak | wins|losses | <window_games e.g. 3>` — e.g. a host predicts the team wins its next 3
 - `player_goal_count | <exact player name from this game's data> | <threshold>` — a host predicts a specific player reaches a goal total this season
 - `player_points_streak | <exact player name> | <threshold>` — a host predicts a player's point streak reaches N games
 - `penalty_trend | <exact player name> | <threshold>` — a host predicts a player's season penalty count reaches N
+- `next_game_result | win|loss|tie` — a host calls the result of the next game
+- `next_game_goals_for | <N>` — a host says the team scores at least N goals in the next game
+- `next_game_goals_against | <N>` — a host says the team holds the next opponent to N goals or fewer
+- `next_game_player_point | <exact player name>` — a host says a named player records at least a point in the next game
+- `next_game_player_goal | <exact player name>` — a host says a named player scores in the next game
+
+**THEORY** — only if a host floats a new season-long theory in this episode, framed as what he believes:
+`THEORY: <casey|gord> | <one-sentence thesis, no invented numbers>`
+
+**THEORY_UPDATE** — only if a host revisits an open theory listed in the Relationship Context section above. Use the theory's id:
+`THEORY_UPDATE: <theory id, e.g. T1> | <supports|complicates|dropped> | <one sentence on what tonight showed>`
 
 **MOMENT** — only if something distinct enough happened this episode that a future episode might genuinely want to reference it:
 `MOMENT: <casey|gord> | <one-sentence real summary of what they said, no invented detail> | <{game_type}>`
 
-Omit both entirely if nothing this episode genuinely earns them — this should be rare, not automatic.
+Leave out any tag that nothing in this episode genuinely earns. Never add a tag for something that wasn't said on air.
 """
 
 
@@ -378,10 +395,18 @@ def generate_script(game_id):
     # and find any real prior moments relevant to tonight's opponent/result type
     relationship_log = load_relationship_log(current_season)
     newly_resolved = resolve_predictions(relationship_log, schedule, get_game_stats, compute_season_stats, game_id)
+    # Settled predictions stay queued until an episode containing them is published,
+    # so one the model skipped isn't lost.
+    callbacks = pending_callbacks(relationship_log)
+    theories_open = open_theories(relationship_log)
     moment_matches = match_notable_moments(relationship_log, stats["opponent"], game_type, game_id)
-    relationship_context = format_relationship_context(newly_resolved, moment_matches)
+    relationship_context = format_relationship_context(callbacks, moment_matches, theories_open)
     if newly_resolved:
         print(f"  {len(newly_resolved)} prediction(s) newly resolved this episode.")
+    if callbacks:
+        print(f"  {len(callbacks)} settled prediction(s) to raise on air.")
+    if theories_open:
+        print(f"  {len(theories_open)} open theory(ies) on the books.")
     if moment_matches:
         print(f"  {len(moment_matches)} prior moment(s) matched to tonight's game.")
 
@@ -392,7 +417,9 @@ def generate_script(game_id):
         "look_ahead": look_ahead,
         "has_next_game": next_game is not None,
         "prior_meetings": prior_meetings,
-        "pending_callbacks": newly_resolved,
+        "pending_callbacks": callbacks,
+        "open_theories": theories_open,
+        "can_add_theory": can_add_theory(relationship_log),
     }
     lenses_chosen = pick_lenses(eligible_lenses(lens_ctx), recent_lenses_used(past_episodes), game_id)
     featured_lenses = format_featured_lenses(lenses_chosen, load_lens_descriptions())
@@ -453,14 +480,22 @@ def generate_script(game_id):
     else:
         print("  TEST MODE: milestone cooldown log not saved.")
 
-    # Strip any optional PREDICTION:/MOMENT: tags (never spoken) and log them
-    script, new_predictions, new_moments = extract_relationship_tags(raw_script, game_id)
+    # Strip any optional PREDICTION:/MOMENT:/THEORY:/THEORY_UPDATE: tags (never spoken) and log them
+    script, new_predictions, new_moments, new_theories, theory_updates = extract_relationship_tags(
+        raw_script, game_id, context={"date": stats["date"], "opponent": stats["opponent"]}
+    )
     if new_predictions:
-        relationship_log["predictions"].extend(new_predictions)
+        add_predictions(relationship_log, new_predictions)
         print(f"  Logged {len(new_predictions)} new checkable prediction(s).")
     if new_moments:
         relationship_log["notable_moments"].extend(new_moments)
         print(f"  Logged {len(new_moments)} new notable moment(s).")
+    if new_theories or theory_updates:
+        added, updated = apply_theory_tags(relationship_log, new_theories, theory_updates, game_id)
+        print(f"  Theories: {added} new, {updated} updated.")
+    # The settled predictions we put in front of the model have now been offered in a
+    # published episode, so they leave the queue (test runs never save the log).
+    mark_surfaced(relationship_log, [p["id"] for p in callbacks])
     if not TEST_MODE:
         save_relationship_log(relationship_log)
     else:

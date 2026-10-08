@@ -15,6 +15,15 @@ Editor notes (stripped before the model sees this file):
 ## accountability
 A prediction one of the hosts made in an earlier episode has now been settled by real results (see "Relationship Context"). Settle it on air. The host who made it owns the result, the other host gets to react, and how each handles being right or wrong should come from who they are. Make it a moment, not a scoreboard read-out.
 
+## theory_check
+One of the hosts' open theories (see "Relationship Context") deserves a revisit against tonight's real result. Does tonight support it, complicate it, or blow it up? The host who floated it reacts honestly: doubling down, hedging, and quietly dropping it are all fair. Record the verdict with a THEORY_UPDATE tag.
+
+## new_theory
+One host floats a new season-long theory, built only on the real numbers in the season stats and framed as what he believes, not what the data proves. The other host pushes back. Make it specific enough that a later episode can test it, and record it with a THEORY tag.
+
+## prediction
+One host calls a specific, checkable shot about the next game, backed by the real numbers (the season stats, the Season Outlook block, the matchup), and the other host fades it. Record it with a PREDICTION tag. If the data doesn't really support a call, skip this and speculate instead.
+
 ## trajectory
 Someone is climbing or sliding in the productivity order compared with a few games ago. What changed, and is it real or a blip? The hosts should disagree about whether it lasts. Use only the ranks and numbers listed in the season stats.
 

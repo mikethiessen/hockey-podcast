@@ -22,11 +22,18 @@ LENS_COUNT = 3
 RECENT_LENS_LOOKBACK = 2   # avoid lenses used in this many most-recent episodes
 MIN_GAMES_FOR_STATS = 2    # below this, statistical lenses are off the table
 MIN_GAMES_FOR_SPLITS = 3   # home/road splits need a few games each way to mean much
+MIN_GAMES_FOR_CALLS = 3    # predictions and new theories need a few games of data behind them
 TEAM_STREAK_TO_FEATURE = 3
 
 # Chosen first whenever eligible, because dropping them would let the show's
 # accountability slip (a settled prediction only gets one chance to be raised).
 FORCED_LENSES = ("accountability",)
+
+# Revisiting theories and calling shots are what make the show worth following
+# week to week, but picking them at random from a pool this size would feature
+# them only occasionally. So when eligible, ONE of these is added right after the
+# forced lenses, unless it was used in the most recent episodes.
+PRIORITY_LENSES = ("theory_check", "prediction")
 
 # Only used to fill empty slots when too few data lenses are eligible.
 FALLBACK_LENSES = ("season_outlook",)
@@ -49,6 +56,10 @@ def _home_road_ok(ctx):
     return bool(home and away and home["gp"] and away["gp"]) and games >= MIN_GAMES_FOR_SPLITS
 
 
+def _enough_for_calls(ctx):
+    return (ctx.get("season_stats") or {}).get("games_counted", 0) >= MIN_GAMES_FOR_CALLS
+
+
 def _team_streak_ok(ctx):
     st = (ctx.get("look_ahead") or {}).get("streak") or {}
     return st.get("length", 0) >= TEAM_STREAK_TO_FEATURE
@@ -65,6 +76,9 @@ def _matchup_ok(ctx):
 # Order here is the order ties are broken in before shuffling, so keep it stable.
 ELIGIBILITY = {
     "accountability": lambda c: bool(c.get("pending_callbacks")),
+    "theory_check": lambda c: bool(c.get("open_theories")),
+    "new_theory": lambda c: _stats_ok(c) and _enough_for_calls(c) and bool(c.get("can_add_theory")),
+    "prediction": lambda c: _stats_ok(c) and _enough_for_calls(c) and bool(c.get("has_next_game")),
     "trajectory": lambda c: _stats_ok(c) and bool(c["season_stats"].get("trajectories")),
     "chemistry": lambda c: _stats_ok(c) and bool(c["season_stats"].get("top_assist_pairs")),
     "streaks": lambda c: _stats_ok(c) and (bool(c["season_stats"].get("streaks")) or _team_streak_ok(c)),
@@ -104,12 +118,18 @@ def recent_lenses_used(past_episodes, lookback=RECENT_LENS_LOOKBACK):
 def pick_lenses(eligible, recently_used, seed, count=LENS_COUNT):
     """Choose up to `count` lenses.
 
-    Order of preference: forced lenses, then data lenses not used recently, then
-    data lenses that were used recently, then fallback lenses. Within each tier
-    the order is shuffled using `seed` so the choice is varied but repeatable.
+    Order of preference: forced lenses, then at most one priority lens (if not
+    used recently), then data lenses not used recently, then data lenses that were
+    used recently, then fallback lenses. Within each tier the order is shuffled
+    using `seed` so the choice is varied but repeatable.
     """
     rng = random.Random(str(seed))
     chosen = [l for l in FORCED_LENSES if l in eligible]
+
+    priority = [l for l in PRIORITY_LENSES if l in eligible and l not in recently_used]
+    rng.shuffle(priority)
+    if priority and len(chosen) < count:
+        chosen.append(priority[0])
 
     pool = [l for l in eligible if l not in chosen and l not in FALLBACK_LENSES]
     fresh = [l for l in pool if l not in recently_used]
