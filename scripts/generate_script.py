@@ -32,6 +32,7 @@ from guest_coach import (
 )
 from milestones import compute_milestones, format_milestone_context, save_milestone_log
 from opponent_stats import build_opponent_context
+from config_loader import load_rendered
 
 # Paths relative to the scripts/ directory
 ROOT = Path(__file__).parent.parent
@@ -207,6 +208,10 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     milestone_block = f"\n---\n\n{milestone_context}\n" if milestone_context else ""
     opponent_recap_block = f"{opponent_stats_context}\n\n---\n\n" if opponent_stats_context else ""
 
+    # The per-run task brief lives in config/episode-brief.md so it can be edited
+    # without touching Python. It fails loudly if the file or a placeholder is missing.
+    brief = load_rendered("episode-brief.md", {"game_type": game_type})
+
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
 
 ---
@@ -269,24 +274,7 @@ period at that moment — treat a low `time_remaining` value as late in the peri
 
 ---
 
-## Your Task
-
-Write a complete podcast script for this game following all guidelines above.
-
-Requirements:
-- Structure the episode around three fixed anchors: cold_open always first, next_game_preview always last (this now also carries the closing take — Casey's outlook and Gord's counterpoint), and season_storylines required somewhere in between at whatever position flows best. Beyond those three, choose which of game_recap, player_spotlight, and gord_corner to include and in what order — pick only the ones tonight's game actually supports, don't run all of them by default, and don't force one in when there's nothing there for it. Keep total spoken length around ~5 minutes (700-800 words) regardless of how many segments you pick — fewer segments means each one runs a bit longer, more segments means each stays tighter. If a "Special Segment: Guest Coach" section is present above, that segment takes the tactical-analysis slot gord_corner would otherwise fill, for this episode only — do not include both. If a "Milestones" section is present above, weave those real facts naturally into whichever segment genuinely fits — game_recap, player_spotlight, or season_storylines — rather than creating a separate segment for them.
-- Apply the Segment Structure by Game Type rule for **{game_type}** — flex segment length/emphasis as instructed, don't change the segment order itself
-- Casey always opens the Cold Open — this does not change episode to episode
-- The very first CASEY line of the whole script must be a short welcome to the show by name (e.g. "Welcome to Ice & Easy!") — vary the exact wording episode to episode, but it needs to work as a standalone opener since it plays under the tail of the intro music. This welcome line is fixed and always comes first, every episode. What follows it is NOT fixed — see the Script Construction section's "Vary Delivery" guidance: choose the final score, the penalty tone, an assist chain, etc. based on what's most distinctive in tonight's data, rather than defaulting to the score every time.
-- In game_recap, don't recite exact clock times or walk through every period mechanically by default. Only call out a specific time or period when it's genuinely part of the story — a late-game winner, a goal in the final minute, multiple goals in a short span, a third-period collapse. Otherwise keep the recap focused on what happened and who was involved, not when down to the minute.
-- For season_storylines, lead with the real computed Season Stats above where they're genuinely interesting — a streak, a points leader, a frequent scoring connection, a penalty trend. Be creative in HOW you present a real stat (a nickname, a bit, a comparison) but never state a number or trend that isn't in the Season Stats data. If nothing there is interesting for tonight, fall back to carrying forward last episode's storyline instead of forcing a stat in.
-- Apply the Script Variety Guidelines above: rotate phrasing for goals/assists/penalties, choose what the recap leads on based on what's distinctive in this game's data, vary reaction order within non-Cold-Open segments, call out multi-point games and assist chains where the data supports it, group penalties by period when there's a clear cluster, and use a quick-hits treatment for busy/low-impact events
-- Work in 1, occasionally 2, Recurring Bits from the bank above if they genuinely fit this game's data — skip any that don't, and never repeat the same bit as the immediately preceding episode
-- For next_game_preview: use the Next Game Preview section above. Always include the date, time, and opponent if a next game exists. Only mention specific opposing players if they appear in the prior-meeting data or in the Opponent Season Leaders block for the NEXT opponent — never invent or guess at an opponent's roster or standout players. Opponent season leaders, if provided, are optional reference material: use them only if a real storyline gives you a reason (a hot scorer, a rematch, a contrast with our own season stats). Not mentioning any opposing player is completely normal — never include them just because the data is there. If there's no next game, omit this segment entirely.
-- If an Opponent Season Leaders block for tonight's opponent appears above, treat it as optional background, not a segment or a checklist item. Most episodes should not mention the opponent's players at all; reach for it only when something in tonight's game or the season story makes it genuinely interesting (e.g. their top scorer being shut down, or a duel with one of our own leaders), using only the real numbers given and only players that block lists
-- Do not invent any detail not present in the game stats JSON, the Next Game Preview data, or the Opponent Season Leaders blocks
-- If a Relationship Context section is present above, only use it if it genuinely fits — never force a callback or prediction check-in that doesn't naturally arise from tonight's episode
-- Target 700-800 words total
+{brief}
 - Use ONLY the exact format below — no stage directions, no headers, no segment labels:
 
 CASEY: [dialogue]
