@@ -1,0 +1,29 @@
+{
+  "id": 19943104,
+  "title": "vs. The Pylons \u2014 October 11",
+  "audio_url": "https://www.buzzsprout.com/2623895/episodes/19943104-vs-the-pylons-october-11.mp3",
+  "artwork_url": "https://storage.buzzsprout.com/nsmiylc7xxjwmpktrwz7eskzg548",
+  "media_type": "audio",
+  "video_thumbnail_url": null,
+  "description": "Ice & Easy, the Village People Hockey Podcast \u2014 let's get into it.",
+  "summary": null,
+  "artist": null,
+  "tags": null,
+  "published_at": "2026-10-11T13:00:00.000-04:00",
+  "duration": -1,
+  "hq": false,
+  "magic_mastering": false,
+  "guid": "Buzzsprout-19943104",
+  "inactive_at": null,
+  "custom_url": null,
+  "episode_number": null,
+  "season_number": null,
+  "episode_type": "full",
+  "explicit": false,
+  "private": false,
+  "total_downloads": 0,
+  "warning": {
+    "param": "audio_file",
+    "message": "There's a new way to upload files through the API. Check the documentation for details: https://github.com/Buzzsprout/buzzsprout-api."
+  }
+}

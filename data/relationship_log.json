@@ -11,7 +11,37 @@
       },
       "resolved": true,
       "outcome": "missed",
-      "outcome_detail": "LOSS"
+      "outcome_detail": "LOSS",
+      "surfaced": true,
+      "id": "P1"
+    },
+    {
+      "game_id": "YE7szzNOkPPelGpD",
+      "made_by": "casey",
+      "checkable_type": "next_game_player_point",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-10-11",
+      "opponent": "The Pylons",
+      "checkable_target": {
+        "player": "Darren Stevenson"
+      },
+      "id": "P2"
+    },
+    {
+      "game_id": "YE7szzNOkPPelGpD",
+      "made_by": "gord",
+      "checkable_type": "next_game_result",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-10-11",
+      "opponent": "The Pylons",
+      "checkable_target": {
+        "result": "loss"
+      },
+      "id": "P3"
     }
   ],
   "notable_moments": [
@@ -94,6 +124,26 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "YE7szzNOkPPelGpD",
+      "who": "casey",
+      "summary": "Casey argued the team is building toward something despite an 0-5-1 record and noted Darren Stevenson's three-game point streak as the main evidence.",
+      "match_keys": {
+        "score_margin_bucket": "CLOSE_OR_OVERTIME"
+      }
+    }
+  ],
+  "theories": [
+    {
+      "game_id": "YE7szzNOkPPelGpD",
+      "made_by": "gord",
+      "thesis": "The Village People are more dangerous on the road than at home because comfort breeds complacency, and their only non-loss of the season came away from home ice.",
+      "status": "open",
+      "history": [],
+      "date": "2026-10-11",
+      "opponent": "The Pylons",
+      "id": "T1"
     }
   ]
 }
