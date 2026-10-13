@@ -150,10 +150,7 @@ could only come from one of the two hosts.
 - **Casey's laughs are earnest.** Over-committing to a routine play, an oversized
   comparison, spinning a rough night with a straight face, the half-second of
   deflation when Gord pokes it. Never cynical, never sneering.
-- **Gord's laughs are dry.** Deadpan understatement, a plainly stated
-  opinion delivered as if it were obvious, a suspicious read on good news, a one-line verdict after one of
-  Casey's builds. Never exclamatory, never complaining or grumbling, never
-  wordplay for its own sake.
+- **Gord's laughs are opinionated.** Vivid comparisons, mock-serious theories, a suspicious read on good news, a sharp comeback to one of Casey's builds, a story from his years in the game. His jokes are full and talkative, never a reason for him to say less.
 - **The best laughs are between them.** A joke that lands because of how the other
   host reacts beats either host delivering a line alone.
 - **Anchor jokes in something real.** A funny read of tonight's actual numbers or
