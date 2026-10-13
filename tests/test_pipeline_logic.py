@@ -21,10 +21,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import config_loader  # noqa: E402
 import episode_memory  # noqa: E402
+import formats  # noqa: E402
 import look_ahead  # noqa: E402
 import lenses  # noqa: E402
 import opponent_stats  # noqa: E402
 import relationship_log as rl  # noqa: E402
+import repeat_check  # noqa: E402
 import season_stats  # noqa: E402
 
 
@@ -85,15 +87,19 @@ class ConfigLoaderTests(unittest.TestCase):
 
     def test_real_config_files_all_load(self):
         for name in ("hosts.md", "core-rules.md", "content-bank.md", "players.md",
-                     "script-construction.md", "episode-brief.md", "lenses.md"):
+                     "script-construction.md", "episode-brief.md", "lenses.md", "formats.md"):
             self.assertTrue(config_loader.load_config(name))
 
     def test_episode_brief_renders_with_expected_placeholders(self):
         text = config_loader.load_rendered(
-            "episode-brief.md", {"game_type": "NORMAL", "featured_lenses": "LENSES-HERE"}
+            "episode-brief.md",
+            {"game_type": "NORMAL", "featured_lenses": "LENSES-HERE",
+             "format_guidance": "FORMAT-HERE", "length_guidance": "LENGTH-HERE"},
         )
         self.assertIn("NORMAL", text)
         self.assertIn("LENSES-HERE", text)
+        self.assertIn("FORMAT-HERE", text)
+        self.assertIn("LENGTH-HERE", text)
         self.assertNotRegex(text, r"\{\{\w+\}\}")
 
 
@@ -675,6 +681,157 @@ class PromptAssemblyTests(unittest.TestCase):
                       "next_game_preview", "cold_open", "rivalry_alert", "active_special_segments",
                       "Script Variety Guidelines"):
             self.assertNotIn(stale, prompt, f"stale reference: {stale}")
+
+
+# ---------------------------------------------------------------------------
+# formats (shape, host dynamic, length)
+# ---------------------------------------------------------------------------
+
+class FormatsTests(unittest.TestCase):
+    def test_every_id_has_a_description_in_formats_md(self):
+        desc = formats.load_format_descriptions()
+        ids = list(formats.SHAPES) + list(formats.DYNAMICS) + [l for l, _ in formats.LENGTH_WEIGHTS]
+        for i in ids:
+            self.assertTrue(desc.get(i), f"formats.md is missing a description for {i}")
+
+    def test_pick_is_repeatable_and_complete(self):
+        a = formats.pick_format([], "game-1")
+        b = formats.pick_format([], "game-1")
+        self.assertEqual(a, b)
+        self.assertIn(a["shape"], formats.SHAPES)
+        self.assertIn(a["dynamic"], formats.DYNAMICS)
+        self.assertIn(a["length"], [l for l, _ in formats.LENGTH_WEIGHTS])
+
+    def test_avoids_recent_shape_dynamic_and_length(self):
+        for n in range(60):
+            past = [{"shape": "shape_debate", "dynamic": "dynamic_sparring", "length": "length_standard"}]
+            got = formats.pick_format(past, f"game-{n}")
+            self.assertNotEqual(got["shape"], "shape_debate")
+            self.assertNotEqual(got["dynamic"], "dynamic_sparring")
+            self.assertNotEqual(got["length"], "length_standard")
+
+    def test_two_back_shape_is_also_avoided(self):
+        past = [{"shape": "shape_debate"}, {"shape": "shape_what_if"}]
+        for n in range(60):
+            self.assertNotIn(formats.pick_format(past, f"g{n}")["shape"], ("shape_debate", "shape_what_if"))
+
+    def test_short_episodes_skip_shapes_that_need_room(self):
+        for n in range(200):
+            got = formats.pick_format([], f"g{n}")
+            if got["length"] == "length_short":
+                self.assertNotIn(got["shape"], formats._NEEDS_ROOM)
+
+    def test_choices_actually_vary_across_games(self):
+        picks = [formats.pick_format([], f"game-{n}") for n in range(60)]
+        self.assertGreater(len({p["shape"] for p in picks}), 3)
+        self.assertGreater(len({p["dynamic"] for p in picks}), 2)
+        self.assertEqual({p["length"] for p in picks}, {l for l, _ in formats.LENGTH_WEIGHTS})
+
+    def test_falls_back_when_everything_is_recent(self):
+        past = [{"shape": s} for s in formats.SHAPES]
+        self.assertIn(formats.pick_format(past, "g")["shape"], formats.SHAPES)
+
+    def test_guidance_text_fills_both_placeholders(self):
+        desc = formats.load_format_descriptions()
+        chosen = formats.pick_format([], "g")
+        self.assertIn(desc[chosen["shape"]], formats.format_format_guidance(chosen, desc))
+        self.assertIn(desc[chosen["dynamic"]], formats.format_format_guidance(chosen, desc))
+        self.assertEqual(formats.format_length_guidance(chosen, desc), desc[chosen["length"]])
+
+    def test_off_their_game_dynamic_is_gone(self):
+        self.assertNotIn("dynamic_off_their_game", formats.DYNAMICS)
+        self.assertNotIn("dynamic_off_their_game", formats.load_format_descriptions())
+
+    def test_spoken_word_count_ignores_labels_and_tags(self):
+        script = "CASEY: one two three\n\nGORD: four five\n\nPREDICTION: casey | next_game_result | win\n"
+        self.assertEqual(formats.spoken_word_count(script), 5)
+
+    def test_length_issue_only_fires_over_the_ceiling(self):
+        ok = "CASEY: " + " ".join(["word"] * formats.MAX_SPOKEN_WORDS)
+        long = "CASEY: " + " ".join(["word"] * (formats.MAX_SPOKEN_WORDS + 1))
+        self.assertIsNone(formats.length_issue(ok))
+        self.assertIn(str(formats.MAX_SPOKEN_WORDS + 1), formats.length_issue(long))
+
+    def test_longest_length_option_fits_under_the_ceiling(self):
+        # The long option promises up to 900 words; the ceiling must leave room for it.
+        self.assertGreaterEqual(formats.MAX_SPOKEN_WORDS, 900)
+        self.assertLessEqual(formats.MAX_SPOKEN_WORDS / 160, 6.0)  # at ~160 words a minute
+
+    def test_missing_description_raises(self):
+        with self.assertRaises(KeyError):
+            formats.format_length_guidance(
+                {"shape": "shape_debate", "dynamic": "dynamic_sparring", "length": "length_short"}, {}
+            )
+
+
+# ---------------------------------------------------------------------------
+# repeat_check
+# ---------------------------------------------------------------------------
+
+OLD_SCRIPT = (
+    "CASEY: Welcome to Ice & Easy, where every Tuesday feels like a championship run!\n\n"
+    "GORD: Back in my day we skated uphill both ways and still lost on penalties.\n\n"
+    "CASEY: Next up, Saturday at 9:15 against the Zamboni Drivers, away.\n"
+)
+
+
+class RepeatCheckTests(unittest.TestCase):
+    def test_clean_script_passes(self):
+        new = (
+            "CASEY: Hey everybody, Ice & Easy is on the air and the boys are rolling.\n\n"
+            "GORD: Three assists from one guy and I still found something to complain about.\n\n"
+            "CASEY: Sunday at 8:00 against the Pylons, home game.\n"
+        )
+        self.assertFalse(repeat_check.find_repeats(new, [OLD_SCRIPT])["has_repeats"])
+
+    def test_same_opener_is_flagged(self):
+        new = (
+            "CASEY: Welcome to Ice & Easy, where every Tuesday feels like a championship run!\n\n"
+            "GORD: Fine.\n\n"
+            "CASEY: Sunday at 8:00 against the Pylons, home game.\n"
+        )
+        result = repeat_check.find_repeats(new, [OLD_SCRIPT])
+        self.assertTrue(result["has_repeats"])
+        self.assertTrue(any("opening line" in i for i in result["issues"]))
+
+    def test_reused_joke_is_flagged_even_in_a_new_line(self):
+        new = (
+            "CASEY: Hey everybody, Ice & Easy is on the air.\n\n"
+            "GORD: Back in my day we skated uphill both ways and still lost on penalties, "
+            "and nobody wrote a podcast about it.\n\n"
+            "CASEY: Sunday at 8:00 against the Pylons, home game.\n"
+        )
+        # One shared 7-word run is a coincidence, two or more is a reused joke.
+        result = repeat_check.find_repeats(new, [OLD_SCRIPT])
+        self.assertTrue(result["has_repeats"])
+        self.assertTrue(any("reuses wording" in i for i in result["issues"]))
+
+    def test_numbers_dates_and_scores_never_count_as_reuse(self):
+        old = "CASEY: Saturday at 9:15 against the Zamboni Drivers, away, final score 5-3 for us.\n"
+        new = "CASEY: Saturday at 9:15 against the Zamboni Drivers, away, final score 5-3 for us.\n"
+        issues = repeat_check.find_repeats(new, [old])["issues"]
+        self.assertFalse(any("reuses wording" in i for i in issues))
+
+    def test_show_name_and_spelled_out_dates_are_not_reuse(self):
+        old = ("CASEY: Welcome to Ice & Easy, the Village People Hockey Podcast, where we talk hockey.\n\n"
+               "CASEY: Next up, Friday, September twenty-fifth, eight-twenty PM, on the road against the Bombers.\n")
+        new = ("CASEY: Ice & Easy, the Village People Hockey Podcast, is rolling tonight with a brand new lead.\n\n"
+               "CASEY: Next up, Friday, September twenty-fifth, eight-twenty PM, on the road against the Bombers.\n")
+        self.assertFalse(repeat_check.find_repeats(new, [old])["has_repeats"])
+
+    def test_tags_and_blank_lines_are_not_dialogue(self):
+        script = "CASEY: One.\n\nGORD: Two.\n\nPREDICTION: casey | next_game_result | win\n"
+        self.assertEqual(repeat_check.dialogue_lines(script), [("CASEY", "One."), ("GORD", "Two.")])
+
+    def test_nothing_to_compare_means_no_repeats(self):
+        self.assertFalse(repeat_check.find_repeats(OLD_SCRIPT, [])["has_repeats"])
+        self.assertFalse(repeat_check.find_repeats("", [OLD_SCRIPT])["has_repeats"])
+
+    def test_rewrite_request_lists_every_issue(self):
+        msg = repeat_check.format_rewrite_request(["Issue one.", "Issue two."])
+        self.assertIn("- Issue one.", msg)
+        self.assertIn("- Issue two.", msg)
+        self.assertIn("next-game preview last", msg)
 
 
 if __name__ == "__main__":

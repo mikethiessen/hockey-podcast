@@ -46,6 +46,14 @@ from lenses import (
     load_lens_descriptions,
     format_featured_lenses,
 )
+from formats import (
+    pick_format,
+    load_format_descriptions,
+    format_format_guidance,
+    format_length_guidance,
+    length_issue,
+)
+from repeat_check import find_repeats, format_rewrite_request
 from config_loader import load_rendered
 from episode_memory import load_recent_scripts, format_recent_scripts
 
@@ -195,7 +203,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses=""):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses="", format_guidance="", length_guidance=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -229,7 +237,12 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     # without touching Python. It fails loudly if the file or a placeholder is missing.
     brief = load_rendered(
         "episode-brief.md",
-        {"game_type": game_type, "featured_lenses": featured_lenses},
+        {
+            "game_type": game_type,
+            "featured_lenses": featured_lenses,
+            "format_guidance": format_guidance,
+            "length_guidance": length_guidance,
+        },
     )
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
@@ -425,6 +438,15 @@ def generate_script(game_id):
     featured_lenses = format_featured_lenses(lenses_chosen, load_lens_descriptions())
     print(f"  Featured lenses: {', '.join(lenses_chosen)}")
 
+    # Format: the shape of the middle, the host dynamic and the length. Code picks
+    # these (rotating away from recent episodes) so episodes vary in how they move,
+    # not only in what they cover. Seeded by game id, so re-runs are repeatable.
+    format_chosen = pick_format(past_episodes, game_id)
+    format_descriptions = load_format_descriptions()
+    format_guidance = format_format_guidance(format_chosen, format_descriptions)
+    length_guidance = format_length_guidance(format_chosen, format_descriptions)
+    print(f"  Format: {format_chosen['shape']}, {format_chosen['dynamic']}, {format_chosen['length']}")
+
     # Guest coach: automatic cadence, no manual config edits required.
     # Currently disabled via guest_coach.ENABLED — when off, skip entirely and
     # leave the cadence log untouched so it resumes cleanly once re-enabled.
@@ -449,16 +471,53 @@ def generate_script(game_id):
     recap_opp_stats_context = get_opponent_brief(stats["opponent"], "recap")["text"]
 
     prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context,
-                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses)
+                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses,
+                          format_guidance=format_guidance, length_guidance=length_guidance)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
+    messages = [{"role": "user", "content": prompt}]
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2000,
-        messages=[{"role": "user", "content": prompt}]
+        messages=messages
     )
     raw_script = message.content[0].text.strip()
+
+    # Repeat and length check: the prompt asks the model to avoid reusing recent
+    # episodes and to stay under 6 minutes, but nothing enforces either. If the
+    # draft reuses an opener, closer or phrasing, or runs over the word ceiling,
+    # ask for ONE rewrite and keep the better version.
+    recent_texts = [ep["script"] for ep in recent_scripts]
+
+    def check(script):
+        found = find_repeats(script, recent_texts)["issues"]
+        too_long = length_issue(script)
+        return found + ([too_long] if too_long else [])
+
+    issues = check(raw_script)
+    if issues:
+        print(f"  Check: {len(issues)} issue(s); asking for one rewrite.")
+        retry = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=2000,
+            messages=messages + [
+                {"role": "assistant", "content": raw_script},
+                {"role": "user", "content": format_rewrite_request(issues)},
+            ]
+        )
+        retry_script = retry.content[0].text.strip()
+        retry_issues = check(retry_script)
+        # Never keep a version that is still over length if the draft was not.
+        if length_issue(retry_script) and not length_issue(raw_script):
+            print("  Rewrite ran too long; keeping the original.")
+        elif len(retry_issues) <= len(issues):
+            raw_script = retry_script
+            print(f"  Rewrite kept ({len(retry_issues)} issue(s) remaining).")
+        else:
+            print("  Rewrite had more issues than the draft; keeping the original.")
+    else:
+        print("  Check: clean.")
 
     # Strip the optional GUEST_COACH: tag (never spoken) and log the invented character
     if GUEST_COACH_ENABLED:
@@ -517,6 +576,9 @@ def generate_script(game_id):
         "storylines": extract_storylines(script),
         "game_type": game_type,
         "lenses": lenses_chosen,
+        "shape": format_chosen["shape"],
+        "dynamic": format_chosen["dynamic"],
+        "length": format_chosen["length"],
     }
     summary_path = episode_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2))

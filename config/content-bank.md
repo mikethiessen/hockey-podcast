@@ -139,9 +139,35 @@ reference only.
 
 ---
 
+## Humor
+
+The show should be a little funnier than a straight stats show, but only when a
+laugh is really there. Never force one: a few good ones beat many strained ones,
+and an episode or a stretch of one with none is fine. Most of the humor is not a
+bit at all: it is a line, a reaction, an understatement or an exaggeration that
+could only come from one of the two hosts.
+
+- **Casey's laughs are earnest.** Over-committing to a routine play, an oversized
+  comparison, spinning a rough night with a straight face, the half-second of
+  deflation when Gord pokes it. Never cynical, never sneering.
+- **Gord's laughs are opinionated.** Vivid comparisons, mock-serious theories, a suspicious read on good news, a sharp comeback to one of Casey's builds, a story from his years in the game. His jokes are full and talkative, never a reason for him to say less.
+- **The best laughs are between them.** A joke that lands because of how the other
+  host reacts beats either host delivering a line alone.
+- **Anchor jokes in something real.** A funny read of tonight's actual numbers or
+  moments beats a generic hockey joke. Exaggerating how a host feels is fine;
+  inventing a fact is not.
+- **Ribbing, not mockery.** The team, the league, the situation and the hosts
+  themselves are fair game. A named player is only teased affectionately for
+  something real in the data, never put down. See `core-rules.md`.
+- **Don't recycle.** A joke or a joke's structure that ran in a recent episode is
+  spent, even reworded.
+
+---
+
 ## Bits and Flavor
 
-Examples of the kind of bit that works on this show — not a menu, and not
+Bits are named, recurring routines (as opposed to the everyday humor described
+above). Examples of the kind that works on this show — not a menu, and not
 required. Most episodes need at most one or two, and plenty need none. A bit that
 only makes sense because of what happened in *this* game is almost always better
 than a stock one, so invent new ones from tonight's data.
