@@ -141,10 +141,11 @@ reference only.
 
 ## Humor
 
-The show should be a little funnier than a straight stats show, and the laughs
-should be small and frequent rather than saved for set pieces. Most of the humor
-is not a bit at all: it is a line, a reaction, an understatement or an
-exaggeration that could only come from one of the two hosts.
+The show should be a little funnier than a straight stats show, but only when a
+laugh is really there. Never force one: a few good ones beat many strained ones,
+and an episode or a stretch of one with none is fine. Most of the humor is not a
+bit at all: it is a line, a reaction, an understatement or an exaggeration that
+could only come from one of the two hosts.
 
 - **Casey's laughs are earnest.** Over-committing to a routine play, an oversized
   comparison, spinning a rough night with a straight face, the half-second of
