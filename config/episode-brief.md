@@ -4,6 +4,8 @@ Editor notes (stripped before the model sees this file):
 - Placeholders filled in by generate_script.py:
     {{game_type}}        e.g. BLOWOUT_LOSS (a tone cue only)
     {{featured_lenses}}  the 2-3 angles chosen for tonight (see lenses.md / lenses.py)
+    {{format_guidance}}  tonight's shape and host dynamic (see formats.md / formats.py)
+    {{length_guidance}}  tonight's length target (see formats.md / formats.py)
 - The output format (CASEY:/GORD: lines) and the PREDICTION/MOMENT/THEORY tag
   grammar are NOT here on purpose: parsers depend on them, so they live in
   generate_script.py.
@@ -17,10 +19,12 @@ Write tonight's episode, following the Script Construction frame above. Game typ
 
 {{featured_lenses}}
 
+{{format_guidance}}
+
 Requirements:
 - The frame: Casey's very first line is a short welcome to the show by name (it plays under the tail of the intro music, so it must work as a standalone opener; vary the exact wording). The final score and who won come right after it. The episode ends on the next-game preview, using the Next Game Preview section above: date, time, opponent, and home or away. If that section says there is no next game, leave the preview out.
 - Everything between is yours. Spend most of it on the season: trends, predictions, speculation, and the hosts' own earlier claims. Give tonight's game only the time it earns and use it as evidence for the season story.
-- Keep total spoken length around 5 minutes (700-800 words). If there is genuinely more worth saying about the season, the next game, or what the team should do, it can run to about 6 minutes (up to roughly 950 words). Never stretch for time: recapping the game or padding is not a reason to go longer, and a tight episode is fine.
+- Length for tonight: {{length_guidance}} Never stretch for time: recapping the game or padding is not a reason to go longer, and a tight episode is fine.
 - Never state a number, streak, trend, or record that isn't in the data above. Be creative in HOW you present a real number, never in WHAT it is. Frame projections as projections ("on pace for") and opinion as opinion.
 - Don't recite exact clock times or walk through periods mechanically. Only call out a time or period when it's genuinely part of the story: a late winner, a flurry of goals, a third-period collapse.
 - Do not reuse anything from the Recent Episodes block: jokes, bits, catchphrases, reaction lines, openers, closers, or transitions. If a bit appears there, it is spent.

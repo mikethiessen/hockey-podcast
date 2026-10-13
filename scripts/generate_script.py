@@ -46,6 +46,13 @@ from lenses import (
     load_lens_descriptions,
     format_featured_lenses,
 )
+from formats import (
+    pick_format,
+    load_format_descriptions,
+    format_format_guidance,
+    format_length_guidance,
+)
+from repeat_check import find_repeats, format_rewrite_request
 from config_loader import load_rendered
 from episode_memory import load_recent_scripts, format_recent_scripts
 
@@ -195,7 +202,7 @@ def classify_game(stats):
     return "NORMAL"
 
 
-def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses=""):
+def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, opponent_stats_context="", recent_scripts_context="", look_ahead_context="", featured_lenses="", format_guidance="", length_guidance=""):
     past_context = ""
     if past_episodes:
         past_context = "## Past Episode Summaries (for season storylines)\n\n"
@@ -229,7 +236,12 @@ def build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players,
     # without touching Python. It fails loudly if the file or a placeholder is missing.
     brief = load_rendered(
         "episode-brief.md",
-        {"game_type": game_type, "featured_lenses": featured_lenses},
+        {
+            "game_type": game_type,
+            "featured_lenses": featured_lenses,
+            "format_guidance": format_guidance,
+            "length_guidance": length_guidance,
+        },
     )
 
     return f"""You are writing a podcast script for "Ice & Easy: The Village People Hockey Podcast."
@@ -425,6 +437,15 @@ def generate_script(game_id):
     featured_lenses = format_featured_lenses(lenses_chosen, load_lens_descriptions())
     print(f"  Featured lenses: {', '.join(lenses_chosen)}")
 
+    # Format: the shape of the middle, the host dynamic and the length. Code picks
+    # these (rotating away from recent episodes) so episodes vary in how they move,
+    # not only in what they cover. Seeded by game id, so re-runs are repeatable.
+    format_chosen = pick_format(past_episodes, game_id)
+    format_descriptions = load_format_descriptions()
+    format_guidance = format_format_guidance(format_chosen, format_descriptions)
+    length_guidance = format_length_guidance(format_chosen, format_descriptions)
+    print(f"  Format: {format_chosen['shape']}, {format_chosen['dynamic']}, {format_chosen['length']}")
+
     # Guest coach: automatic cadence, no manual config edits required.
     # Currently disabled via guest_coach.ENABLED — when off, skip entirely and
     # leave the cadence log untouched so it resumes cleanly once re-enabled.
@@ -449,16 +470,44 @@ def generate_script(game_id):
     recap_opp_stats_context = get_opponent_brief(stats["opponent"], "recap")["text"]
 
     prompt = build_prompt(stats, past_episodes, hosts, core_rules, content_bank, players, script_construction, next_game_context, game_type, season_stats_context, relationship_context, recent_form_context, guest_coach_context, milestone_context, recap_opp_stats_context, recent_scripts_context,
-                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses)
+                          look_ahead_context=look_ahead_context, featured_lenses=featured_lenses,
+                          format_guidance=format_guidance, length_guidance=length_guidance)
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     print("  Calling Anthropic API...")
+    messages = [{"role": "user", "content": prompt}]
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2000,
-        messages=[{"role": "user", "content": prompt}]
+        messages=messages
     )
     raw_script = message.content[0].text.strip()
+
+    # Repeat check: the prompt asks the model to avoid reusing recent episodes, but
+    # nothing enforces it. If the draft reuses an opener, closer or phrasing, ask for
+    # ONE rewrite and keep whichever version repeats less.
+    repeats = find_repeats(raw_script, [ep["script"] for ep in recent_scripts])
+    repeat_issues_found = len(repeats["issues"])
+    if repeats["has_repeats"]:
+        print(f"  Repeat check: {repeat_issues_found} issue(s); asking for one rewrite.")
+        retry_messages = messages + [
+            {"role": "assistant", "content": raw_script},
+            {"role": "user", "content": format_rewrite_request(repeats["issues"])},
+        ]
+        retry = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=2000,
+            messages=retry_messages
+        )
+        retry_script = retry.content[0].text.strip()
+        retry_repeats = find_repeats(retry_script, [ep["script"] for ep in recent_scripts])
+        if len(retry_repeats["issues"]) <= repeat_issues_found:
+            raw_script = retry_script
+            print(f"  Rewrite kept ({len(retry_repeats['issues'])} issue(s) remaining).")
+        else:
+            print("  Rewrite repeated more than the draft; keeping the original.")
+    else:
+        print("  Repeat check: clean.")
 
     # Strip the optional GUEST_COACH: tag (never spoken) and log the invented character
     if GUEST_COACH_ENABLED:
@@ -517,6 +566,9 @@ def generate_script(game_id):
         "storylines": extract_storylines(script),
         "game_type": game_type,
         "lenses": lenses_chosen,
+        "shape": format_chosen["shape"],
+        "dynamic": format_chosen["dynamic"],
+        "length": format_chosen["length"],
     }
     summary_path = episode_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2))
