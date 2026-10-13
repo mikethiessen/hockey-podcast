@@ -51,6 +51,7 @@ from formats import (
     load_format_descriptions,
     format_format_guidance,
     format_length_guidance,
+    length_issue,
 )
 from repeat_check import find_repeats, format_rewrite_request
 from config_loader import load_rendered
@@ -483,31 +484,40 @@ def generate_script(game_id):
     )
     raw_script = message.content[0].text.strip()
 
-    # Repeat check: the prompt asks the model to avoid reusing recent episodes, but
-    # nothing enforces it. If the draft reuses an opener, closer or phrasing, ask for
-    # ONE rewrite and keep whichever version repeats less.
-    repeats = find_repeats(raw_script, [ep["script"] for ep in recent_scripts])
-    repeat_issues_found = len(repeats["issues"])
-    if repeats["has_repeats"]:
-        print(f"  Repeat check: {repeat_issues_found} issue(s); asking for one rewrite.")
-        retry_messages = messages + [
-            {"role": "assistant", "content": raw_script},
-            {"role": "user", "content": format_rewrite_request(repeats["issues"])},
-        ]
+    # Repeat and length check: the prompt asks the model to avoid reusing recent
+    # episodes and to stay under 6 minutes, but nothing enforces either. If the
+    # draft reuses an opener, closer or phrasing, or runs over the word ceiling,
+    # ask for ONE rewrite and keep the better version.
+    recent_texts = [ep["script"] for ep in recent_scripts]
+
+    def check(script):
+        found = find_repeats(script, recent_texts)["issues"]
+        too_long = length_issue(script)
+        return found + ([too_long] if too_long else [])
+
+    issues = check(raw_script)
+    if issues:
+        print(f"  Check: {len(issues)} issue(s); asking for one rewrite.")
         retry = client.messages.create(
             model="claude-sonnet-4-6",
             max_tokens=2000,
-            messages=retry_messages
+            messages=messages + [
+                {"role": "assistant", "content": raw_script},
+                {"role": "user", "content": format_rewrite_request(issues)},
+            ]
         )
         retry_script = retry.content[0].text.strip()
-        retry_repeats = find_repeats(retry_script, [ep["script"] for ep in recent_scripts])
-        if len(retry_repeats["issues"]) <= repeat_issues_found:
+        retry_issues = check(retry_script)
+        # Never keep a version that is still over length if the draft was not.
+        if length_issue(retry_script) and not length_issue(raw_script):
+            print("  Rewrite ran too long; keeping the original.")
+        elif len(retry_issues) <= len(issues):
             raw_script = retry_script
-            print(f"  Rewrite kept ({len(retry_repeats['issues'])} issue(s) remaining).")
+            print(f"  Rewrite kept ({len(retry_issues)} issue(s) remaining).")
         else:
-            print("  Rewrite repeated more than the draft; keeping the original.")
+            print("  Rewrite had more issues than the draft; keeping the original.")
     else:
-        print("  Repeat check: clean.")
+        print("  Check: clean.")
 
     # Strip the optional GUEST_COACH: tag (never spoken) and log the invented character
     if GUEST_COACH_ENABLED:

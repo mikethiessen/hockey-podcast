@@ -159,8 +159,8 @@ def format_rewrite_request(issues):
     """The follow-up message asking the model to rewrite its own draft."""
     listed = "\n".join(f"- {i}" for i in issues)
     return (
-        "Your draft reuses material from the recent episodes. Rewrite the whole script "
-        "so that these are replaced with fresh wording, fresh jokes and a fresh angle:\n\n"
+        "Your draft needs a rewrite. Fix each of these (for anything reused from recent "
+        "episodes, use fresh wording, fresh jokes and a fresh angle):\n\n"
         f"{listed}\n\n"
         "Keep everything else that works: the facts, the featured lenses, the fixed frame "
         "(welcome, score early, next-game preview last), the length target, and any "

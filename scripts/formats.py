@@ -37,7 +37,6 @@ DYNAMICS = (
     "dynamic_gord_drives",
     "dynamic_sparring",
     "dynamic_in_sync",
-    "dynamic_off_their_game",
 )
 
 # Standard is the default feel of the show, so it gets the most weight. A short
@@ -47,6 +46,11 @@ LENGTH_WEIGHTS = (
     ("length_standard", 5),
     ("length_long", 2),
 )
+
+# Hard ceiling on spoken length: 950 words is just under 6 minutes at a podcast
+# pace (about 160 words a minute). generate_script.py asks for a trim when a
+# draft goes over it, whatever length was picked.
+MAX_SPOKEN_WORDS = 950
 
 # How many most-recent episodes a knob avoids repeating.
 SHAPE_LOOKBACK = 2
@@ -151,3 +155,29 @@ def format_format_guidance(chosen, descriptions):
 def format_length_guidance(chosen, descriptions):
     """Text for the brief's {{length_guidance}} placeholder."""
     return _describe(chosen, descriptions)["length"]
+
+
+def spoken_word_count(script):
+    """Words that will actually be read aloud: the text after each CASEY:/GORD:
+    label. Trailing tags (PREDICTION: and friends) are not spoken and not counted."""
+    total = 0
+    for line in script.splitlines():
+        line = line.strip()
+        for label in ("CASEY:", "GORD:"):
+            if line.startswith(label):
+                total += len(line[len(label):].split())
+                break
+    return total
+
+
+def length_issue(script):
+    """A sentence to paste into a rewrite request when the script is over the
+    ceiling, or None when it fits."""
+    words = spoken_word_count(script)
+    if words <= MAX_SPOKEN_WORDS:
+        return None
+    return (
+        f"The script is about {words} words, which runs past 6 minutes. Cut it to "
+        f"{MAX_SPOKEN_WORDS - 100} words or fewer by dropping the weakest threads, "
+        "not by rushing the ones that matter."
+    )

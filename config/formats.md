@@ -48,9 +48,6 @@ Neither host drives. They disagree, a lot, and the back-and-forth itself is the 
 ## dynamic_in_sync
 The hosts are unusually on the same page tonight and build on each other's points, finishing each other's thoughts. The tension comes from the team, not from them.
 
-## dynamic_off_their_game
-One host is a little off tonight (distracted, tired, over-caffeinated, a step behind) in a way that fits his character, and the other notices and has fun with it. Keep it light and never at the expense of the facts.
-
 # Lengths
 
 ## length_short
@@ -60,4 +57,4 @@ A tight episode of roughly 3.5 to 4 minutes (about 450-600 words). Fewer threads
 Around 5 minutes (700-800 words).
 
 ## length_long
-Up to about 6 minutes (roughly 850-950 words), only because there is genuinely more worth saying. Do not stretch to fill it: if the material runs out sooner, stop sooner.
+Up to about 5.5 minutes (roughly 800-900 words), never more than 6 minutes, only because there is genuinely more worth saying. Do not stretch to fill it: if the material runs out sooner, stop sooner.

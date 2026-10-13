@@ -738,6 +738,25 @@ class FormatsTests(unittest.TestCase):
         self.assertIn(desc[chosen["dynamic"]], formats.format_format_guidance(chosen, desc))
         self.assertEqual(formats.format_length_guidance(chosen, desc), desc[chosen["length"]])
 
+    def test_off_their_game_dynamic_is_gone(self):
+        self.assertNotIn("dynamic_off_their_game", formats.DYNAMICS)
+        self.assertNotIn("dynamic_off_their_game", formats.load_format_descriptions())
+
+    def test_spoken_word_count_ignores_labels_and_tags(self):
+        script = "CASEY: one two three\n\nGORD: four five\n\nPREDICTION: casey | next_game_result | win\n"
+        self.assertEqual(formats.spoken_word_count(script), 5)
+
+    def test_length_issue_only_fires_over_the_ceiling(self):
+        ok = "CASEY: " + " ".join(["word"] * formats.MAX_SPOKEN_WORDS)
+        long = "CASEY: " + " ".join(["word"] * (formats.MAX_SPOKEN_WORDS + 1))
+        self.assertIsNone(formats.length_issue(ok))
+        self.assertIn(str(formats.MAX_SPOKEN_WORDS + 1), formats.length_issue(long))
+
+    def test_longest_length_option_fits_under_the_ceiling(self):
+        # The long option promises up to 900 words; the ceiling must leave room for it.
+        self.assertGreaterEqual(formats.MAX_SPOKEN_WORDS, 900)
+        self.assertLessEqual(formats.MAX_SPOKEN_WORDS / 160, 6.0)  # at ~160 words a minute
+
     def test_missing_description_raises(self):
         with self.assertRaises(KeyError):
             formats.format_length_guidance(
