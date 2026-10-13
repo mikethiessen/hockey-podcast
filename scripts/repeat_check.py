@@ -27,6 +27,7 @@ MIN_SHARED_SHINGLES = 2    # how many distinct shared runs before we call it a r
 OPENER_SIMILARITY = 0.6
 CLOSER_SIMILARITY = 0.85
 
+PREVIEW_DATA_TOKENS = 3    # a closing line with this many date/time/venue words is the preview
 MIN_OPENER_WORDS = 4       # an opener shorter than this (after the show name) can't be varied much
 
 _SPEAKER = re.compile(r"^(CASEY|GORD):\s*(.*)$")
@@ -77,8 +78,22 @@ def _shingles(text):
     return runs
 
 
-def _similarity(a, b):
-    wa, wb = _words(a), _words(b)
+def _content_words(text):
+    """Words with the data words (dates, times, numbers, home/away) removed, so a
+    required next-game preview line is not mistaken for a reused sign-off."""
+    return [w for w in _words(text)
+            if w not in _DATA_WORDS and not any(ch.isdigit() for ch in w)]
+
+
+def _is_preview_line(text):
+    """A line heavy with dates, times and venue is the required next-game preview,
+    not a sign-off, so it isn't held to the sign-off rule."""
+    n = sum(1 for w in _words(text) if w in _DATA_WORDS or any(ch.isdigit() for ch in w))
+    return n >= PREVIEW_DATA_TOKENS
+
+
+def _similarity(a, b, words=_words):
+    wa, wb = words(a), words(b)
     if not wa or not wb:
         return 0.0
     return SequenceMatcher(None, wa, wb).ratio()
@@ -108,7 +123,8 @@ def find_repeats(script, recent_scripts):
             issues.append(
                 f'The opening line ("{new_open}") is nearly the same as a recent episode\'s opener.'
             )
-        if _similarity(new_close, old_lines[-1][1]) >= CLOSER_SIMILARITY:
+        if not _is_preview_line(new_close) and len(_content_words(new_close)) >= MIN_OPENER_WORDS and \
+                _similarity(new_close, old_lines[-1][1], _content_words) >= CLOSER_SIMILARITY:
             issues.append(
                 f'The closing line ("{new_close}") is nearly the same as a recent episode\'s closer.'
             )
