@@ -161,6 +161,9 @@ could only come from one of the two hosts.
   something real in the data, never put down. See `core-rules.md`.
 - **Don't recycle.** A joke or a joke's structure that ran in a recent episode is
   spent, even reworded.
+- **Humor is not a reason to use the Safe League gag.** Wanting a joke never
+  justifies it. The gag stays a rare, earned exception (see its own rules below),
+  and there are plenty of other things for the hosts to be funny about.
 
 ---
 
