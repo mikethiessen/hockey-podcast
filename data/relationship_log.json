@@ -19,29 +19,45 @@
       "game_id": "YE7szzNOkPPelGpD",
       "made_by": "casey",
       "checkable_type": "next_game_player_point",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "missed",
+      "surfaced": true,
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "checkable_target": {
         "player": "Darren Stevenson"
       },
-      "id": "P2"
+      "id": "P2",
+      "outcome_detail": "LOSS 5-7 vs Puckin Clowns; Darren Stevenson had 0 point(s)"
     },
     {
       "game_id": "YE7szzNOkPPelGpD",
       "made_by": "gord",
       "checkable_type": "next_game_result",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "confirmed",
+      "surfaced": true,
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "checkable_target": {
         "result": "loss"
       },
-      "id": "P3"
+      "id": "P3",
+      "outcome_detail": "LOSS 5-7 vs Puckin Clowns"
+    },
+    {
+      "game_id": "8fvii4yDzvQ55lcY",
+      "made_by": "casey",
+      "checkable_type": "next_game_player_point",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-10-16",
+      "opponent": "Puckin Clowns",
+      "checkable_target": {
+        "player": "Michael van Reede"
+      },
+      "id": "P4"
     }
   ],
   "notable_moments": [
@@ -132,6 +148,14 @@
       "match_keys": {
         "score_margin_bucket": "CLOSE_OR_OVERTIME"
       }
+    },
+    {
+      "game_id": "8fvii4yDzvQ55lcY",
+      "who": "gord",
+      "summary": "Gord correctly predicted a loss against the Puckin Clowns and collected on Casey's missed Stevenson prediction simultaneously.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ],
   "theories": [
@@ -140,10 +164,17 @@
       "made_by": "gord",
       "thesis": "The Village People are more dangerous on the road than at home because comfort breeds complacency, and their only non-loss of the season came away from home ice.",
       "status": "open",
-      "history": [],
+      "history": [
+        {
+          "game_id": "8fvii4yDzvQ55lcY",
+          "verdict": "supports",
+          "note": "The road-vs-home production gap persisted again \u2014 12 goals on the road versus 3 at home on the season \u2014 though the road record remains losing."
+        }
+      ],
       "date": "2026-10-11",
       "opponent": "The Pylons",
-      "id": "T1"
+      "id": "T1",
+      "last_touched_game_id": "8fvii4yDzvQ55lcY"
     }
   ]
 }
