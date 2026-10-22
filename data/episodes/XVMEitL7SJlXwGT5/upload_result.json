@@ -1,0 +1,29 @@
+{
+  "id": 20001145,
+  "title": "vs. CFH Hockey Club \u2014 October 22",
+  "audio_url": "https://www.buzzsprout.com/2623895/episodes/20001145-vs-cfh-hockey-club-october-22.mp3",
+  "artwork_url": "https://storage.buzzsprout.com/nsmiylc7xxjwmpktrwz7eskzg548",
+  "media_type": "audio",
+  "video_thumbnail_url": null,
+  "description": "Ice & Easy, the Village People Hockey Podcast \u2014 final score eight to five, CFH Hockey Club wins, and Gord, I know you have things to say.",
+  "summary": null,
+  "artist": null,
+  "tags": null,
+  "published_at": "2026-10-21T21:00:00.000-04:00",
+  "duration": -1,
+  "hq": false,
+  "magic_mastering": false,
+  "guid": "Buzzsprout-20001145",
+  "inactive_at": null,
+  "custom_url": null,
+  "episode_number": null,
+  "season_number": null,
+  "episode_type": "full",
+  "explicit": false,
+  "private": false,
+  "total_downloads": 0,
+  "warning": {
+    "param": "audio_file",
+    "message": "There's a new way to upload files through the API. Check the documentation for details: https://github.com/Buzzsprout/buzzsprout-api."
+  }
+}

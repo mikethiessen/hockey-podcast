@@ -49,15 +49,30 @@
       "game_id": "8fvii4yDzvQ55lcY",
       "made_by": "casey",
       "checkable_type": "next_game_player_point",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "void",
+      "surfaced": true,
       "date": "2026-10-16",
       "opponent": "Puckin Clowns",
       "checkable_target": {
         "player": "Michael van Reede"
       },
-      "id": "P4"
+      "id": "P4",
+      "outcome_detail": "Michael van Reede did not play (LOSS 5-8 vs CFH Hockey Club)"
+    },
+    {
+      "game_id": "XVMEitL7SJlXwGT5",
+      "made_by": "casey",
+      "checkable_type": "next_game_player_goal",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-10-22",
+      "opponent": "CFH Hockey Club",
+      "checkable_target": {
+        "player": "Justin Gomien"
+      },
+      "id": "P5"
     }
   ],
   "notable_moments": [
@@ -156,6 +171,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "XVMEitL7SJlXwGT5",
+      "who": "gord",
+      "summary": "Gord argued for keeping Gomien and McKinley as the offensive hub going forward, pointing to four of the team's five goals tonight flowing through those two players.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ],
   "theories": [
@@ -169,12 +192,17 @@
           "game_id": "8fvii4yDzvQ55lcY",
           "verdict": "supports",
           "note": "The road-vs-home production gap persisted again \u2014 12 goals on the road versus 3 at home on the season \u2014 though the road record remains losing."
+        },
+        {
+          "game_id": "XVMEitL7SJlXwGT5",
+          "verdict": "complicates",
+          "note": "The team led five-three at home through forty minutes before a five-goal third-period collapse, muddying the road-vs-home edge Gord's theory rested on."
         }
       ],
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "id": "T1",
-      "last_touched_game_id": "8fvii4yDzvQ55lcY"
+      "last_touched_game_id": "XVMEitL7SJlXwGT5"
     }
   ]
 }

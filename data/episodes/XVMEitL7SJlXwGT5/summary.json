@@ -1,0 +1,16 @@
+{
+  "game_id": "XVMEitL7SJlXwGT5",
+  "date": "2026-10-22",
+  "opponent": "CFH Hockey Club",
+  "result_summary": "LOSS 5-8",
+  "storylines": "GORD: I want a dangerous group, not four equal mediocre groups. Spread the jam too thin and you've got nobody who actually scares anybody. CASEY: We both want the same thing, I just think the insurance matters. The Wolfpack Friday \u2014 I'm going to say Gomien finds the net again. He's in form, he's making plays, and I like him in a road environment. GORD: I'll say the third period has to change before anything else does. One thing at a time. Friday, October thirtieth, ten-fifty PM, road game against the Wolfpack. That's where we find out if tonight was a wake-up call or just another night we talk about and forget. CASEY: Ice & Easy \u2014 we'll see you Friday.",
+  "game_type": "NORMAL",
+  "lenses": [
+    "game_plan",
+    "period_splits",
+    "streaks"
+  ],
+  "shape": "shape_what_if",
+  "dynamic": "dynamic_gord_drives",
+  "length": "length_long"
+}
