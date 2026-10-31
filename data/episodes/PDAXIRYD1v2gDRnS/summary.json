@@ -1,0 +1,16 @@
+{
+  "game_id": "PDAXIRYD1v2gDRnS",
+  "date": "2026-10-31",
+  "opponent": "The Wolfpack",
+  "result_summary": "WIN 7-2",
+  "storylines": "GORD: It's not nothing. It's also one game. I'll say this much \u2014 the Flyers are four and four with a plus-one goal differential. We're one and seven and one, minus sixteen. On paper this is not a matchup that favors us. But this team has beaten expectations before on the road, and if van Reede and McKinley are running like they were tonight, I wouldn't want to be the team telling them it can't happen. CASEY: That might be the nicest thing you've ever said about this group. GORD: Don't push it. CASEY: Village People, Sunday November 8th, ten-twenty in the morning, Canlan, home ice. The win column is open. Ice & Easy \u2014 we'll see you Sunday.",
+  "game_type": "BLOWOUT_WIN",
+  "lenses": [
+    "prediction",
+    "matchup",
+    "goaltending"
+  ],
+  "shape": "shape_single_thread",
+  "dynamic": "dynamic_sparring",
+  "length": "length_standard"
+}

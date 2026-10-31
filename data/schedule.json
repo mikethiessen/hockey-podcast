@@ -96,9 +96,11 @@
       "starts_at": "2026-10-31T03:50:00+00:00",
       "opponent": "The Wolfpack",
       "home_or_away": "away",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
-      "milestones": [],
+      "milestones": [
+        "Michael van Reede is now the season's sole leader in goals (5), after recording a goal tonight."
+      ],
       "season": "2026/27 Winter"
     },
     {

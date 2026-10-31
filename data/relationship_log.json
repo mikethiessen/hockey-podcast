@@ -64,15 +64,30 @@
       "game_id": "XVMEitL7SJlXwGT5",
       "made_by": "casey",
       "checkable_type": "next_game_player_goal",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "void",
+      "surfaced": true,
       "date": "2026-10-22",
       "opponent": "CFH Hockey Club",
       "checkable_target": {
         "player": "Justin Gomien"
       },
-      "id": "P5"
+      "id": "P5",
+      "outcome_detail": "Justin Gomien did not play (WIN 7-2 vs The Wolfpack)"
+    },
+    {
+      "game_id": "PDAXIRYD1v2gDRnS",
+      "made_by": "casey",
+      "checkable_type": "next_game_player_goal",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-10-31",
+      "opponent": "The Wolfpack",
+      "checkable_target": {
+        "player": "Michael van Reede"
+      },
+      "id": "P6"
     }
   ],
   "notable_moments": [
@@ -197,12 +212,17 @@
           "game_id": "XVMEitL7SJlXwGT5",
           "verdict": "complicates",
           "note": "The team led five-three at home through forty minutes before a five-goal third-period collapse, muddying the road-vs-home edge Gord's theory rested on."
+        },
+        {
+          "game_id": "PDAXIRYD1v2gDRnS",
+          "verdict": "supports",
+          "note": "The team's first win came on the road seven-two while the home record sits at zero and four, extending the road-is-better pattern Gord's theory rests on."
         }
       ],
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "id": "T1",
-      "last_touched_game_id": "XVMEitL7SJlXwGT5"
+      "last_touched_game_id": "PDAXIRYD1v2gDRnS"
     }
   ]
 }
