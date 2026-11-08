@@ -79,15 +79,30 @@
       "game_id": "PDAXIRYD1v2gDRnS",
       "made_by": "casey",
       "checkable_type": "next_game_player_goal",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "missed",
+      "surfaced": true,
       "date": "2026-10-31",
       "opponent": "The Wolfpack",
       "checkable_target": {
         "player": "Michael van Reede"
       },
-      "id": "P6"
+      "id": "P6",
+      "outcome_detail": "WIN 3-1 vs Winnipeg Flyers; Michael van Reede scored 0 goal(s)"
+    },
+    {
+      "game_id": "6GCXup5ByLMtwyoD",
+      "made_by": "casey",
+      "checkable_type": "next_game_result",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-11-08",
+      "opponent": "Winnipeg Flyers",
+      "checkable_target": {
+        "result": "win"
+      },
+      "id": "P7"
     }
   ],
   "notable_moments": [
@@ -194,6 +209,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "6GCXup5ByLMtwyoD",
+      "who": "gord",
+      "summary": "Gord said the E-Division championship goal requires a lot more than two wins in a row, hinting at his private investment in it without saying so directly.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ],
   "theories": [
@@ -217,12 +240,17 @@
           "game_id": "PDAXIRYD1v2gDRnS",
           "verdict": "supports",
           "note": "The team's first win came on the road seven-two while the home record sits at zero and four, extending the road-is-better pattern Gord's theory rests on."
+        },
+        {
+          "game_id": "6GCXup5ByLMtwyoD",
+          "verdict": "complicates",
+          "note": "The Village People won at home tonight for the first time all season, which doesn't kill the road-is-better theory but introduces enough doubt that Gord openly hedged rather than doubling down."
         }
       ],
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "id": "T1",
-      "last_touched_game_id": "PDAXIRYD1v2gDRnS"
+      "last_touched_game_id": "6GCXup5ByLMtwyoD"
     }
   ]
 }

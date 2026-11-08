@@ -1,0 +1,16 @@
+{
+  "game_id": "6GCXup5ByLMtwyoD",
+  "date": "2026-11-08",
+  "opponent": "Winnipeg Flyers",
+  "result_summary": "WIN 3-1",
+  "storylines": "GORD: They have pieces. Three games left in the season. Two wins in a row. And the goal \u2014 the actual goal, the one we don't say out loud because we don't want to jinx it \u2014 requires a lot more from this group than two wins in a row. CASEY: Then let's get the third one. Saturday night, on the road, Bench Warmers. Ten-thirty PM, and I am not going to pretend this isn't winnable, because two weeks ago we were looking at a team that had one win and a tie all season. GORD: Two weeks ago we were also pretending the road was their safe harbor. So I'll take the wins and I'll stay skeptical about what they mean until there are three in a row and I can't argue with it anymore. CASEY: I'll take that bet. Saturday, November fourteenth, ten-thirty PM, away. Ice & Easy \u2014 we'll see you there.",
+  "game_type": "NORMAL",
+  "lenses": [
+    "accountability",
+    "theory_check",
+    "firsts"
+  ],
+  "shape": "shape_debate",
+  "dynamic": "dynamic_gord_drives",
+  "length": "length_long"
+}

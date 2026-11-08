@@ -108,9 +108,11 @@
       "starts_at": "2026-11-08T15:20:00+00:00",
       "opponent": "Winnipeg Flyers",
       "home_or_away": "home",
-      "episode_generated": false,
+      "episode_generated": true,
       "special_guest": null,
-      "milestones": [],
+      "milestones": [
+        "Mike Thiessen has scored a goal in 3 straight games played, extending an active goal-scoring streak."
+      ],
       "season": "2026/27 Winter"
     },
     {
