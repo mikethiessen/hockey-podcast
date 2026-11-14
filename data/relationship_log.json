@@ -94,15 +94,30 @@
       "game_id": "6GCXup5ByLMtwyoD",
       "made_by": "casey",
       "checkable_type": "next_game_result",
-      "resolved": false,
-      "outcome": null,
-      "surfaced": false,
+      "resolved": true,
+      "outcome": "missed",
+      "surfaced": true,
       "date": "2026-11-08",
       "opponent": "Winnipeg Flyers",
       "checkable_target": {
         "result": "win"
       },
-      "id": "P7"
+      "id": "P7",
+      "outcome_detail": "LOSS 5-7 vs Bench Warmers (Men's)"
+    },
+    {
+      "game_id": "SBWoca7fUtUvO3hf",
+      "made_by": "casey",
+      "checkable_type": "next_game_player_goal",
+      "resolved": false,
+      "outcome": null,
+      "surfaced": false,
+      "date": "2026-11-14",
+      "opponent": "Bench Warmers (Men's)",
+      "checkable_target": {
+        "player": "Kenny Moore"
+      },
+      "id": "P8"
     }
   ],
   "notable_moments": [
@@ -217,6 +232,14 @@
       "match_keys": {
         "score_margin_bucket": "NORMAL"
       }
+    },
+    {
+      "game_id": "SBWoca7fUtUvO3hf",
+      "who": "gord",
+      "summary": "Gord argued for concentrating McKinley, Moore, and Thiessen as a scoring core rather than spreading the team's production thin, pointing to McKinley's nine-point season lead and Thiessen's four-game point streak as the foundation.",
+      "match_keys": {
+        "score_margin_bucket": "NORMAL"
+      }
     }
   ],
   "theories": [
@@ -245,12 +268,17 @@
           "game_id": "6GCXup5ByLMtwyoD",
           "verdict": "complicates",
           "note": "The Village People won at home tonight for the first time all season, which doesn't kill the road-is-better theory but introduces enough doubt that Gord openly hedged rather than doubling down."
+        },
+        {
+          "game_id": "SBWoca7fUtUvO3hf",
+          "verdict": "complicates",
+          "note": "The team lost on the road tonight, which on the surface fits Gord's road-is-better theory, but the collapse came in the third regardless of venue, leaving the home-vs-road distinction feeling less meaningful than the period-by-period problem underneath it."
         }
       ],
       "date": "2026-10-11",
       "opponent": "The Pylons",
       "id": "T1",
-      "last_touched_game_id": "6GCXup5ByLMtwyoD"
+      "last_touched_game_id": "SBWoca7fUtUvO3hf"
     }
   ]
 }

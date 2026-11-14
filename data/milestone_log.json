@@ -1,8 +1,8 @@
 {
   "leader_cooldowns": {
-    "goals": 2,
+    "goals": 1,
     "assists": 0,
-    "points": 0,
+    "points": 3,
     "penalties": 0
   }
 }
